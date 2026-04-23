@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CYANOGEN | DATABASE ACCESS</title>
+    <title>TITO HOBS | DATABASE ACCESS</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -34,6 +34,9 @@
             flex-direction: column;
             border: 1px solid var(--border-color);
             z-index: 10;
+			 overflow-y: auto; 
+			 max-height: 100vh;
+
         }
 
         .sidebar h2 { 
@@ -205,20 +208,41 @@
         }
         .status-header { font-size: 10px; color: var(--accent-gundam); letter-spacing: 1px; font-weight: bold; margin-bottom: 5px; text-transform: uppercase; }
         .status-val { font-size: 18px; font-weight: bold; margin-bottom: 15px; display: block; }
+		.sidebar a {
+    color: #8b949e; /* Matches your normal text color */
+    text-decoration: none; /* Removes the underline */
+    display: block; /* Makes the whole line clickable */
+}
+
+.sidebar a:hover {
+    color: var(--accent-gundam); /* Turns green when you hover, just like before */
     </style>
 </head>
 <body>
 
     <!-- LEFT SIDEBAR -->
     <aside class="sidebar">
-        <h2>CYANOGEN</h2>
+        <h2>TITO HOBS</h2>
         <div class="tagline">MOBILE SUIT DATABASE // LEVEL 5 ACCESS</div>
         
         <h3>⚙ FACTION</h3>
-        <ul><li>Earth Federation</li><li>Zeon</li><li>AEUG</li><li>Titans</li><li>Crossbone</li></ul>
+        <ul><li><a href="earth-federation.html">Earth Federation</a></li>
+		
+		<li><a href="zeon.html">Zeon</a></li>
+		
+		
+		<li><a href="aeug.html">AEUG</a></li>
+		<li><a href="titans.html">Titans</a></li>
+		<li><a href="crossbone.html">Crossbone</a></li>
+		</ul>
 
         <h3>📦 SERIES</h3>
-        <ul><li>UC / Universal Century</li><li>SEED</li><li>00</li><li>Iron-Blooded Orphans</li><li>Wing</li></ul>
+        <ul><li><a href="uc.html">UC / Universal Century</a></li>
+		<li><a href="ce.html">CE / Cosmic Era</a></li>
+		<li><a href="oo.html">00</a></li>
+		<li><a href="iron-blooded-orphans.html">Iron-Blooded Orphans</a></li>
+		<li><a href="after-colony.html">AC / After Colony</a></li>
+		</ul>
 
         <h3>📏 GRADE</h3>
         <ul><li>Master Grade (MG)</li><li>Real Grade (RG)</li><li>Perfect Grade (PG)</li><li>High Grade (HG)</li></ul>
