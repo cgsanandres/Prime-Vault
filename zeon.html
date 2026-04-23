@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZEON FORCES | ARCHIVE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vault-bg: #05070a;
+            --panel-bg: #0d1117;
+            --accent-gundam: #39d353; /* V-Fin Green */
+            --accent-zeon: #e63946;   /* Zeon Red */
+            --accent-white: #f1faee;
+            --border-color: #30363d;
+        }
+
+        body {
+            background-color: var(--vault-bg);
+            color: var(--accent-white);
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- SIDEBARS --- */
+        .sidebar {
+            width: 220px;
+            background: var(--panel-bg);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            z-index: 10;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+
+        .sidebar h2 { 
+            font-family: 'Rajdhani', sans-serif; 
+            color: var(--accent-zeon); 
+            margin: 0; 
+            font-size: 28px; 
+            letter-spacing: 2px; 
+            text-transform: uppercase;
+        }
+        .tagline { 
+            font-size: 10px; 
+            color: #8b949e; 
+            letter-spacing: 2px; 
+            margin-bottom: 25px; 
+            font-weight: 600; 
+        }
+        .sidebar h3 { 
+            font-family: 'Rajdhani', sans-serif; 
+            font-size: 12px; 
+            color: var(--accent-zeon); 
+            letter-spacing: 2px; 
+            margin-top: 35px; 
+            text-transform: uppercase; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
+        .sidebar ul { list-style: none; padding: 0; margin: 15px 0 0; }
+        .sidebar li { 
+            font-size: 14px; 
+            padding: 6px 0; 
+            color: #8b949e; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            border-left: 2px solid transparent;
+            padding-left: 10px;
+        }
+        .sidebar li:hover { color: var(--accent-zeon); border-left: 2px solid var(--accent-zeon); }
+
+        /* --- LINK STYLING --- */
+        .sidebar a {
+            color: #8b949e;
+            text-decoration: none;
+            display: block;
+        }
+        .sidebar a:hover {
+            color: var(--accent-zeon);
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-hub {
+            flex-grow: 1;
+            padding: 0 40px;
+            overflow-y: auto;
+            border-left: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+        }
+
+        /* --- HEADER BANNER --- */
+        .faction-banner {
+            height: 180px;
+            margin-top: 20px;
+            background: linear-gradient(90deg, rgba(60,0,0,0.7) 0%, rgba(0,0,0,0) 100%), url('https://images.unsplash.com/photo-1591788001606-8511966dd930?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            position: relative;
+        }
+        .banner-text h1 {
+            font-size: 4rem;
+            margin: 0;
+            letter-spacing: 5px;
+            color: #f5eaea;
+            text-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+        }
+        .banner-text p {
+            font-size: 14px;
+            color: #ffaaaa;
+            letter-spacing: 3px;
+            margin-top: -10px;
+        }
+
+        /* --- SECTION TITLE --- */
+        .section-title {
+            font-size: 20px;
+            color: var(--accent-zeon);
+            margin: 30px 0 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        /* --- UNIT GRID --- */
+        .unit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding-bottom: 50px;
+        }
+        .unit-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+        .unit-card:hover {
+            border-color: var(--accent-zeon);
+        }
+        .unit-img {
+            height: 150px;
+            background: #000;
+        }
+        .unit-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .unit-info {
+            padding: 15px;
+        }
+        .unit-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--accent-white);
+        }
+        .unit-model {
+            font-size: 12px;
+            color: #8b949e;
+            margin-bottom: 10px;
+        }
+        .unit-specs {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #8b949e;
+            border-top: 1px solid #222;
+            padding-top: 10px;
+        }
+        .spec-value {
+            color: var(--accent-zeon);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+        <h2>TITO HOBS</h2>
+        <div class="tagline">MOBILE SUIT DATABASE // LEVEL 5 ACCESS</div>
+        
+        <h3>⚙ FACTION</h3>
+        <ul>
+            <li><a href="earth-federation.html">Earth Federation</a></li>
+            <li style="color: var(--accent-zeon); border-left: 2px solid var(--accent-zeon); padding-left: 10px;">Zeon</li>
+            <li><a href="aeug.html">AEUG</a></li>
+            <li><a href="titans.html">Titans</a></li>
+            <li><a href="crossbone.html">Crossbone</a></li>
+        </ul>
+
+        <h3>📦 SERIES</h3>
+        <ul><li><a href="uc.html">UC / Universal Century</a></li><li><a href="seed.html">SEED</a></li><li><a href="oo.html">00</a></li><li><a href="ibo.html">Iron-Blooded Orphans</a></li><li><a href="wing.html">Wing</a></li></ul>
+
+        <h3>📏 GRADE</h3>
+        <ul><li><a href="mg.html">Master Grade (MG)</a></li><li><a href="rg.html">Real Grade (RG)</a></li><li><a href="pg.html">Perfect Grade (PG)</a></li><li><a href="hg.html">High Grade (HG)</a></li></ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-hub">
+        <div class="faction-banner">
+            <div class="banner-text">
+                <h1>ZEON</h1>
+                <p>GLORY ZEON | INDEPENDENCE</p>
+            </div>
+        </div>
+
+        <div class="section-title">PRIMARY MOBILE SUITS</div>
+        <div class="unit-grid">
+            <div class="unit-card">
+                <div class="unit-img"><img src="https://images.unsplash.com/photo-1591788001606-8511966dd930?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Zaku II"></div>
+                <div class="unit-info">
+                    <div class="unit-name">MS-06F ZAKU II</div>
+                    <div class="unit-model">Mass Production General Purpose Mobile Suit</div>
+                    <div class="unit-specs">
+                        <span>HEIGHT: <span class="spec-value">17.5m</span></span>
+                        <span>WEIGHT: <span class="spec-value">58.1t</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="unit-card">
+                <div class="unit-img"><img src="https://images.unsplash.com/photo-1612408708611-47d30013665c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Gouf"></div>
+                <div class="unit-info">
+                    <div class="unit-name">MS-07B GOUF</div>
+                    <div class="unit-model">Close Combat Mobile Suit</div>
+                    <div class="unit-specs">
+                        <span>HEIGHT: <span class="spec-value">18.2m</span></span>
+                        <span>WEIGHT: <span class="spec-value">61.2t</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="unit-card">
+                <div class="unit-img"><img src="https://images.unsplash.com/photo-1581858730638-2127b045e83c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Dom"></div>
+                <div class="unit-info">
+                    <div class="unit-name">MS-09 DOM</div>
+                    <div class="unit-model">High Mobility Assault Mobile Suit</div>
+                    <div class="unit-specs">
+                        <span>HEIGHT: <span class="spec-value">18.5m</span></span>
+                        <span>WEIGHT: <span class="spec-value">62.8t</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="unit-card">
+                <div class="unit-img"><img src="https://images.unsplash.com/photo-1581858830638-2127b045e83c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Z'Gok"></div>
+                <div class="unit-info">
+                    <div class="unit-name">MSM-08 Z'GOK</div>
+                    <div class="unit-model">Amphibious Mobile Suit</div>
+                    <div class="unit-specs">
+                        <span>HEIGHT: <span class="spec-value">16.9m</span></span>
+                        <span>WEIGHT: <span class="spec-value">78.5t</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="sidebar">
+        <h3 style="margin:0; color:var(--accent-zeon)">FACTION DATA</h3>
+        <div class="status-card">
+            <div class="status-header">IDENTIFICATION</div>
+            <span class="status-val">ZEON</span>
+            <div style="font-size:10px; color:#8b949e; display:flex; justify-content:space-between">
+                <span>Founded:</span><span style="color:var(--accent-white)">UC 0069</span>
+            </div>
+            <div style="font-size:10px; color:#8b949e; display:flex; justify-content:space-between; margin-top:5px;">
+                <span>Headquarters:</span><span style="color:var(--accent-white)">Side 3</span>
+            </div>
+        </div>
+
+        <ul style="margin-top:30px;">
+            <li><a href="index.html"><i class="fa fa-home"></i> Return to Hangar</a></li>
+            <li><i class="fa fa-file-alt"></i> History Logs</li>
+            <li><i class="fa fa-bolt"></i> Weapon Systems</li>
+        </ul>
+    </aside>
+
+</body>
+</html>
