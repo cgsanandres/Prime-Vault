@@ -315,29 +315,31 @@
         </div>
     </main>
 
-    <!-- RIGHT SIDEBAR -->
+       <!-- RIGHT SIDEBAR -->
     <aside class="sidebar">
-        <h3 style="margin:0; color:var(--accent-gundam)">BRIDGE CONTROL</h3>
+        <h3 style="margin:0; color:var(--accent-zeon)">FACTION DATA</h3>
         <div class="status-card">
-            <div class="status-header">PILOT RANK</div>
-            <span class="status-val">ACE PILOT</span>
+            <div class="status-header">IDENTIFICATION</div>
+            <span class="status-val">ZEON</span>
             <div style="font-size:10px; color:#8b949e; display:flex; justify-content:space-between">
-                <span>Total MS:</span><span style="color:var(--accent-gundam)">42 Units</span>
+                <span>Founded:</span><span style="color:var(--accent-white)">UC 0069</span>
             </div>
             <div style="font-size:10px; color:#8b949e; display:flex; justify-content:space-between; margin-top:5px;">
-                <span>Build Status:</span><span style="color:var(--accent-zeon)">3 In Progress</span>
+                <span>Headquarters:</span><span style="color:var(--accent-white)">Side 3</span>
             </div>
         </div>
 
         <ul style="margin-top:30px;">
-            <li style="color:var(--accent-gundam)"><i class="fa fa-th-large"></i> Hangar Deck</li>
-            <li><i class="fa fa-file-alt"></i> Operation Logs</li>
-            <li><i class="fa fa-box"></i> Supply Depot</li>
-            <li><i class="fa fa-cog"></i> System Settings</li>
-            <li><i class="fa fa-star"></i> Favorites List</li>
+            <li><a href="index.html"><i class="fa fa-home"></i> Return to Hangar</a></li>
+            <!-- MODIFIED LINE BELOW -->
+            <li style="color: var(--accent-zeon); border-left: 2px solid var(--accent-zeon); padding-left: 10px;"><a href="operation-logs.html"><i class="fa fa-file-alt"></i> Operation Logs</a></li>
+            <!-- END MODIFIED LINE -->
+            <li><a href="supply-depot.html"><i class="fa fa-box"></i> Supply Depot</a></li>
+            <li><a href="system-settings.html"><i class="fa fa-cog"></i> System Settings</a></li>
+            <li><a href="favorites-list.html"><i class="fa fa-star"></i> Favorites List</a></li>
             <li style="margin-top:40px; color:#e63946;"><i class="fa fa-sign-out-alt"></i> Eject Cockpit</li>
         </ul>
-   </aside>
+    </aside>
 
     <script>
         const slides = [
