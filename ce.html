@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COSMIC ERA | TIMELINE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vault-bg: #05070a;
+            --panel-bg: #0d1117;
+            --accent-ce: #e63946;       /* CE Red */
+            --accent-ce-white: #f1faee; /* CE White */
+            --accent-white: #f1faee;
+            --border-color: #30363d;
+        }
+
+        body {
+            background-color: var(--vault-bg);
+            color: var(--accent-white);
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- SIDEBARS --- */
+        .sidebar {
+            width: 220px;
+            background: var(--panel-bg);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            z-index: 10;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+
+        .sidebar h2 { 
+            font-family: 'Rajdhani', sans-serif; 
+            color: var(--accent-ce); 
+            margin: 0; 
+            font-size: 28px; 
+            letter-spacing: 2px; 
+            text-transform: uppercase;
+        }
+        .tagline { 
+            font-size: 10px; 
+            color: #8b949e; 
+            letter-spacing: 2px; 
+            margin-bottom: 25px; 
+            font-weight: 600; 
+        }
+        .sidebar h3 { 
+            font-family: 'Rajdhani', sans-serif; 
+            font-size: 12px; 
+            color: var(--accent-ce); 
+            letter-spacing: 2px; 
+            margin-top: 35px; 
+            text-transform: uppercase; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
+        .sidebar ul { list-style: none; padding: 0; margin: 15px 0 0; }
+        .sidebar li { 
+            font-size: 14px; 
+            padding: 6px 0; 
+            color: #8b949e; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            border-left: 2px solid transparent;
+            padding-left: 10px;
+        }
+        .sidebar li:hover { color: var(--accent-ce); border-left: 2px solid var(--accent-ce); }
+
+        /* --- LINK STYLING --- */
+        .sidebar a {
+            color: #8b949e;
+            text-decoration: none;
+            display: block;
+        }
+        .sidebar a:hover {
+            color: var(--accent-ce);
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-hub {
+            flex-grow: 1;
+            padding: 0 40px;
+            overflow-y: auto;
+            border-left: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+        }
+
+        /* --- HEADER BANNER --- */
+        .faction-banner {
+            height: 180px;
+            margin-top: 20px;
+            background: linear-gradient(90deg, rgba(230,57,70,0.2) 0%, rgba(0,0,0,0) 100%), url('https://images.unsplash.com/photo-1581858730638-2127b045e83c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            position: relative;
+        }
+        .banner-text h1 {
+            font-size: 4rem;
+            margin: 0;
+            letter-spacing: 5px;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(230, 57, 70, 0.6);
+        }
+        .banner-text p {
+            font-size: 14px;
+            color: #ffcccc;
+            letter-spacing: 3px;
+            margin-top: -10px;
+        }
+
+        /* --- SECTION TITLE --- */
+        .section-title {
+            font-size: 20px;
+            color: var(--accent-ce);
+            margin: 30px 0 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        /* --- UNIT GRID --- */
+        .unit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding-bottom: 50px;
+        }
+        .unit-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+        .unit-card:hover {
+            border-color: var(--accent-ce);
+        }
+        .unit-img {
+            height: 150px;
+            background: #000;
+        }
+        .unit-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .unit-info {
+            padding: 15px;
+        }
+        .unit-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--accent-white);
+        }
+        .unit-model {
+            font-size: 12px;
+            color: #8b949e;
+            margin-bottom: 10px;
+        }
+        .unit-specs {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #8b949e;
+            border-top: 1px solid #222;
+            padding-top: 10px;
+        }
+        .spec-value {
+            color: var(--accent-ce);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+        <h2>CYANOGEN</h2>
+        <div class="tagline">MOBILE SUIT DATABASE // LEVEL 5 ACCESS</div>
+        
+        <h3>⚙ FACTION</h3>
+        <ul>
+            <li><a href="earth-federation.html">Earth Federation</a></li>
+            <li><a href="zeon.html">Zeon</a></li>
+            <li><a href="aeug.html">AEUG</a></li>
+            <li><a href="titans.html">Titans</a></li>
+            <li><a href="crossbone.html">Crossbone</a></li>
+        </ul>
+
+        <h3>📦 SERIES</h3>
+        <ul>
+            <li><a href="uc.html">UC / Universal Century</a></li>
+            <li style="color: var(--accent-ce); border-left: 2px solid var(--accent-ce); padding-left: 10px;">CE / Cosmic Era</li>
+            <li><a href="oo.html">00</a></li>
+            <li><a href="ibo.html">Iron-Blooded Orphans</a></li>
+            <li><a href="ac.html">AC / After Colony</a></li>
+        </ul>
+
+        <h3>📏 GRADE</h3>
+        <ul><li><a href="mg.html">Master Grade (MG)</a></li><li><a href="rg.html">Real Grade (RG)</a></li><li><a href="pg.html">Perfect Grade (PG)</a></li><li><a href="hg.html">High Grade (HG)</a></li></ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-hub">
+        <div class="faction-banner">
+            <div class="banner-text">
+                <h1>COSMIC ERA</h1>
+                <p>GENESIS • DESTINY</p>
+            </div>
+        </div>
+
+        <div class="section-title">ICONIC UNITS</div>
+        <div class="unit-grid">
+            <div class="unit-card">
+                <div class="unit-img"><img src="https://images.unsplash.com/photo-1581858730638-2127b045e83c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Strike"></div>
+                <div class="unit-info">
+                    <div class="unit-name">GAT-X105 STRIKE</div>
+                    <div class="unit-model">CE 71 | Heliopolis Incident</div>
+                    <div class="unit-specs">
+                        <span>PILOT: <span class="spec-value">KIRA YAMATO</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="unit-card">
+                <div class="unit-img"><img src="https://images.unsplash.com/photo-1612408708611-47d30013665c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Freedom"></div>
+                <div class="unit-info">
+                    <div class="unit-name">ZGMF-X10A FREEDOM</div>
+                    <div class="unit-model">CE 71 | Second Stage</div>
+                    <div class="unit-specs">
+                        <span>PILOT: <span class="spec-value">ATHRUN ZALA</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="unit-card">
+                <div class="unit-img"><img src="https://images.unsplash.com/photo-1591788001606-8511966dd930?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Destiny"></div>
+                <div class="unit-info">
+                    <div class="unit-name">ZGMF-X42S DESTINY</div>
+                    <div class="unit-model">CE 73 | Destiny War</div>
+                    <div class="unit-specs">
+                        <span>PILOT: <span class="spec-value">SHINN ASUKA</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="unit-card">
+                <div class="unit-img"><img src="https://images.unsplash.com/photo-1581858830638-2127b045e83c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Justice"></div>
+                <div class="unit-info">
+                    <div class="unit-name">ZGMF-X09A JUSTICE</div>
+                    <div class="unit-model">CE 71 | ZAFT Elite</div>
+                    <div class="unit-specs">
+                        <span>PILOT: <span class="spec-value">ATHRUN ZALA</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="sidebar">
+        <h3 style="margin:0; color:var(--accent-ce)">TIMELINE DATA</h3>
+        <div class="status-card">
+            <div class="status-header">CHRONOLOGY</div>
+            <span class="status-val">CE 1 - CE 75</span>
+            <div style="font-size:10px; color:#8b949e; display:flex; justify-content:space-between">
+                <span>Major War:</span><span style="color:var(--accent-white)">Bloody Valentine</span>
+            </div>
+            <div style="font-size:10px; color:#8b949e; display:flex; justify-content:space-between; margin-top:5px;">
+                <span>Key Tech:</span><span style="color:var(--accent-white)">Nuclear & Mirage</span>
+            </div>
+        </div>
+
+        <ul style="margin-top:30px;">
+            <li><a href="index.html"><i class="fa fa-home"></i> Return to Hangar</a></li>
+            <li><i class="fa fa-users"></i> Coordinators</li>
+            <li><i class="fa fa-ship"></i> Mobile Armors</li>
+        </ul>
+    </aside>
+
+</body>
+</html>
+
