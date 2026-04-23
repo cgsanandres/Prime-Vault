@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tito Hobs | Classified Access</title>
-    <link href="https://googleapis.com" rel="stylesheet">
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <title>CYANOGEN | DATABASE ACCESS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --vault-bg: #080808;
-            --panel-bg: #121212;
-            --accent-cyan: #00f2ff;
-            --accent-orange: #FF4500;
-            --border-color: #1a1a1a;
+            --vault-bg: #05070a;
+            --panel-bg: #0d1117;
+            --accent-gundam: #39d353; /* V-Fin Green */
+            --accent-zeon: #e63946;   /* Zeon Red */
+            --accent-white: #f1faee;
+            --border-color: #30363d;
         }
 
         body {
             background-color: var(--vault-bg);
-            color: white;
-            font-family: 'Inter', sans-serif;
+            color: var(--accent-white);
+            font-family: 'Rajdhani', sans-serif;
             margin: 0;
             display: flex;
             height: 100vh;
@@ -36,12 +36,43 @@
             z-index: 10;
         }
 
-        .sidebar h2 { font-family: 'Oswald', sans-serif; color: var(--accent-cyan); margin: 0; font-size: 26px; letter-spacing: 1px; }
-        .tagline { font-size: 9px; color: #444; letter-spacing: 1.5px; margin-bottom: 25px; font-weight: 700; }
-        .sidebar h3 { font-family: 'Oswald', sans-serif; font-size: 13px; color: var(--accent-cyan); letter-spacing: 2px; margin-top: 35px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+        .sidebar h2 { 
+            font-family: 'Rajdhani', sans-serif; 
+            color: var(--accent-gundam); 
+            margin: 0; 
+            font-size: 28px; 
+            letter-spacing: 2px; 
+            text-transform: uppercase;
+        }
+        .tagline { 
+            font-size: 10px; 
+            color: #8b949e; 
+            letter-spacing: 2px; 
+            margin-bottom: 25px; 
+            font-weight: 600; 
+        }
+        .sidebar h3 { 
+            font-family: 'Rajdhani', sans-serif; 
+            font-size: 12px; 
+            color: var(--accent-gundam); 
+            letter-spacing: 2px; 
+            margin-top: 35px; 
+            text-transform: uppercase; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
         .sidebar ul { list-style: none; padding: 0; margin: 15px 0 0; }
-        .sidebar li { font-size: 13px; padding: 8px 0; color: #888; cursor: pointer; transition: 0.2s; }
-        .sidebar li:hover { color: var(--accent-cyan); }
+        .sidebar li { 
+            font-size: 14px; 
+            padding: 6px 0; 
+            color: #8b949e; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            border-left: 2px solid transparent;
+            padding-left: 10px;
+        }
+        .sidebar li:hover { color: var(--accent-gundam); border-left: 2px solid var(--accent-gundam); }
 
         /* --- MAIN CONTENT --- */
         .main-hub {
@@ -52,7 +83,7 @@
             border-right: 1px solid var(--border-color);
         }
 
-        /* --- VAULT INGEST (Animated) --- */
+        /* --- DATA STREAM (Animated) --- */
         .ingest-container {
             height: 100px;
             margin-top: 20px;
@@ -61,18 +92,18 @@
             overflow: hidden;
             border-bottom: 1px solid var(--border-color);
         }
-        .ingest-label { color: var(--accent-cyan); font-size: 10px; font-weight: bold; width: 80px; padding-top: 5px; }
+        .ingest-label { color: var(--accent-gundam); font-size: 11px; font-weight: bold; width: 100px; padding-top: 5px; }
         .ticker-window { flex-grow: 1; position: relative; overflow: hidden; }
         .ticker-list {
             position: absolute;
             animation: ingestScroll 15s infinite linear;
-            font-size: 11px;
-            color: #888;
+            font-size: 12px;
+            color: #8b949e;
             line-height: 2;
         }
         @keyframes ingestScroll { 0% { top: 0; } 100% { top: -200px; } }
 
-        /* --- INTERACTIVE CAROUSEL --- */
+        /* --- HANGAR BAY --- */
         .carousel {
             height: 320px;
             margin: 30px 0;
@@ -87,54 +118,92 @@
         }
 
         .slide-content { text-align: center; z-index: 2; transition: opacity 0.4s ease; }
-        .slide-content h1 { font-family: 'Oswald', sans-serif; font-size: 4rem; margin: 0; letter-spacing: 10px; text-transform: uppercase; }
-        .slide-content p { color: var(--accent-cyan); font-size: 16px; letter-spacing: 2px; margin-top: 10px; }
+        .slide-content h1 { 
+            font-family: 'Rajdhani', sans-serif; 
+            font-size: 4.5rem; 
+            margin: 0; 
+            letter-spacing: 8px; 
+            text-transform: uppercase; 
+            text-shadow: 0 0 15px rgba(57, 211, 83, 0.5);
+        }
+        .slide-content p { color: var(--accent-gundam); font-size: 16px; letter-spacing: 3px; margin-top: 10px; }
 
         /* Navigation Arrows */
         .nav-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(0,0,0,0.6); border: 1px solid #333;
-            color: var(--accent-cyan); padding: 15px 12px; cursor: pointer;
+            background: rgba(0,0,0,0.6); border: 1px solid var(--border-color);
+            color: var(--accent-gundam); padding: 15px 12px; cursor: pointer;
             z-index: 5; transition: 0.2s;
         }
-        .nav-btn:hover { background: var(--accent-cyan); color: black; }
+        .nav-btn:hover { background: var(--accent-gundam); color: #000; font-weight: bold; }
         .btn-prev { left: 15px; }
         .btn-next { right: 15px; }
 
-        /* Carousel Dots */
+        /* Dots */
         .dots { position: absolute; bottom: 20px; display: flex; gap: 8px; }
-        .dot { width: 12px; height: 4px; background: #333; cursor: pointer; }
-        .dot.active { background: var(--accent-cyan); }
+        .dot { width: 15px; height: 4px; background: #30363d; cursor: pointer; }
+        .dot.active { background: var(--accent-gundam); box-shadow: 0 0 8px var(--accent-gundam); }
 
-        /* --- PRODUCT GRID --- */
-        .grid-title { font-family: 'Oswald', sans-serif; font-size: 18px; margin-bottom: 20px; letter-spacing: 1px; }
+        /* --- INVENTORY GRID --- */
+        .grid-title { 
+            font-family: 'Rajdhani', sans-serif; 
+            font-size: 20px; 
+            margin-bottom: 20px; 
+            letter-spacing: 2px; 
+            color: var(--accent-white);
+        }
         .inventory-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
             padding-bottom: 50px;
         }
-        .card { background: var(--panel-bg); border: 1px solid var(--border-color); position: relative; }
+        .card { 
+            background: var(--panel-bg); 
+            border: 1px solid var(--border-color); 
+            position: relative; 
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gundam);
+        }
         .card-img { height: 210px; background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .card-img img { width: 100%; height: 100%; object-fit: cover; }
         .card-body { padding: 15px; }
-        .card-body h4 { font-size: 12px; margin: 0; font-weight: 400; color: #eee; height: 32px; overflow: hidden; }
-        .price { color: var(--accent-cyan); font-weight: 700; margin-top: 10px; display: block; }
-        .btn-buy { width: 100%; padding: 12px; background: var(--accent-cyan); border: none; font-weight: bold; cursor: pointer; font-size: 11px; margin-top: 10px; }
+        .card-body h4 { font-size: 14px; margin: 0; font-weight: 600; color: #f1faee; height: 40px; }
+        .price { color: var(--accent-gundam); font-weight: 700; margin-top: 10px; display: block; font-size: 16px;}
+        .btn-buy { 
+            width: 100%; 
+            padding: 12px; 
+            background: transparent; 
+            border: 1px solid var(--accent-gundam); 
+            color: var(--accent-gundam);
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 11px; 
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-buy:hover {
+            background: var(--accent-gundam);
+            color: #000;
+        }
 
         /* Badges */
-        .badge { position: absolute; top: 10px; font-size: 8px; padding: 3px 8px; font-weight: bold; }
-        .badge-orange { background: var(--accent-orange); left: 10px; }
-        .badge-collector { border: 1px solid var(--accent-orange); color: var(--accent-orange); left: 70px; background: rgba(0,0,0,0.7); }
+        .badge { position: absolute; top: 10px; font-size: 9px; padding: 3px 8px; font-weight: bold; text-transform: uppercase;}
+        .badge-red { background: var(--accent-zeon); left: 10px; }
+        .badge-limited { border: 1px solid var(--accent-zeon); color: var(--accent-zeon); left: 70px; background: rgba(0,0,0,0.7); }
 
-        /* --- COMMAND CENTER (Right) --- */
+        /* --- BRIDGE (Right Sidebar) --- */
         .status-card {
-            background: rgba(0, 242, 255, 0.03);
-            border: 1px solid var(--accent-cyan);
+            background: rgba(57, 211, 83, 0.05);
+            border: 1px solid var(--accent-gundam);
             padding: 15px;
             margin-top: 20px;
         }
-        .status-header { font-size: 10px; color: var(--accent-cyan); letter-spacing: 1px; font-weight: bold; margin-bottom: 5px; }
+        .status-header { font-size: 10px; color: var(--accent-gundam); letter-spacing: 1px; font-weight: bold; margin-bottom: 5px; text-transform: uppercase; }
         .status-val { font-size: 18px; font-weight: bold; margin-bottom: 15px; display: block; }
     </style>
 </head>
@@ -142,45 +211,45 @@
 
     <!-- LEFT SIDEBAR -->
     <aside class="sidebar">
-        <h2>PRIME VAULT</h2>
-        <div class="tagline">THE VAULT // CLASSIFIED ACCESS</div>
+        <h2>CYANOGEN</h2>
+        <div class="tagline">MOBILE SUIT DATABASE // LEVEL 5 ACCESS</div>
         
-        <h3><i class="fa fa-th-large"></i> BRAND</h3>
-        <ul><li>Hasbro</li><li>NECA</li><li>Hot Toys</li><li>Sideshow</li><li>Mezco</li></ul>
+        <h3>⚙ FACTION</h3>
+        <ul><li>Earth Federation</li><li>Zeon</li><li>AEUG</li><li>Titans</li><li>Crossbone</li></ul>
 
-        <h3><i class="fa fa-crosshairs"></i> FRANCHISE</h3>
-        <ul><li>Marvel</li><li>Star Wars</li><li>DC Comics</li><li>Transformers</li><li>Horror</li></ul>
+        <h3>📦 SERIES</h3>
+        <ul><li>UC / Universal Century</li><li>SEED</li><li>00</li><li>Iron-Blooded Orphans</li><li>Wing</li></ul>
 
-        <h3><i class="fa fa-ruler-vertical"></i> SCALE</h3>
-        <ul><li>1/6 Scale</li><li>1/12 Scale</li><li>1/4 Scale</li><li>1/10 Scale</li></ul>
+        <h3>📏 GRADE</h3>
+        <ul><li>Master Grade (MG)</li><li>Real Grade (RG)</li><li>Perfect Grade (PG)</li><li>High Grade (HG)</li></ul>
     </aside>
 
-    <!-- MAIN HUB -->
+    <!-- MAIN HANGAR -->
     <main class="main-hub">
         <div class="ingest-container">
-            <div class="ingest-label">> VAULT INGEST</div>
+            <div class="ingest-label">> DATA STREAM</div>
             <div class="ticker-window">
                 <div class="ticker-list">
-                    Marvel Legends Ghost Rider - SECURED by User77 in Los Angeles<br>
-                    Hot Toys Spider-Man - PRE-ORDERED by Collector42 in NYC<br>
-                    NECA Ultimate Predator - STASHED by VaultAgent99 in Chicago<br>
-                    Hasbro Megatron G1 - SECURED by Decepticon88 in Miami<br>
-                    Hot Toys Iron Man Mark 85 - PRE-ORDERED by StarkFan in Seattle<br>
-                    Marvel Legends Wolverine - SECURED by MutantX in Portland
+                    RX-78-2 Gundam Ver.2.0 - DEPLOYED by Pilot_01<br>
+                    Sazabi Metal Structure - CONFIRMED by Collector_99<br>
+                    Perfect Grade Unicorn - ASSEMBLED by Engineer_42<br>
+                    Barbatos Lupus Rex - ARRIVING at Dock 4<br>
+                    Freedom Gundam - LAUNCH SEQUENCE INITIATED<br>
+                    Hi-Nu Gundam - CALIBRATION COMPLETE
                 </div>
             </div>
         </div>
 
-        <!-- THE INTERACTIVE CAROUSEL -->
+        <!-- THE HANGAR DISPLAY -->
         <section class="carousel" id="mainCarousel">
-            <button class="nav-btn btn-prev" onclick="changeSlide(-1)"><i class="fa fa-chevron-left"></i></button>
+            <button class="nav-btn btn-prev" onclick="changeSlide(-1)">&lt;</button>
             
             <div class="slide-content" id="slideText">
-                <h1 id="mainTitle">PRE-ORDER DROPS</h1>
-                <p id="subTitle">Secure Your Position Now</p>
+                <h1 id="mainTitle">MOBILE SUIT</h1>
+                <p id="subTitle">ARMORY CATALOG</p>
             </div>
 
-            <button class="nav-btn btn-next" onclick="changeSlide(1)"><i class="fa fa-chevron-right"></i></button>
+            <button class="nav-btn btn-next" onclick="changeSlide(1)">&gt;</button>
 
             <div class="dots">
                 <div class="dot active" onclick="setSlide(0)"></div>
@@ -189,50 +258,68 @@
             </div>
         </section>
 
-        <div class="grid-title">THE INVENTORY GRID</div>
+        <div class="grid-title">CURRENT DEPLOYMENT</div>
         <div class="inventory-grid">
             <div class="card">
-                <span class="badge badge-orange">PRE-ORDER</span>
-                <span class="badge badge-collector">COLLECTOR GRADE</span>
-                <div class="card-img"><img src="https://unsplash.com"></div>
+                <span class="badge badge-red">New Arrival</span>
+                <span class="badge badge-limited">Limited Run</span>
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1581858730638-2127b045e83c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Gundam"></div>
                 <div class="card-body">
-                    <h4>Iron Man Mark 85 (Avengers)</h4>
-                    <span class="price">$429.99</span>
+                    <h4>RX-93 Nu Gundam</h4>
+                    <span class="price">¥ 12,800</span>
                 </div>
-                <button class="btn-buy">+ SECURE NOW</button>
+                <button class="btn-buy">+ DEPLOY UNIT</button>
+            </div>
+             <div class="card">
+                <span class="badge badge-red">Pre-Order</span>
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1591788001606-8511966dd930?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Barbatos"></div>
+                <div class="card-body">
+                    <h4>ASW-G-08 Barbatos</h4>
+                    <span class="price">¥ 4,500</span>
+                </div>
+                <button class="btn-buy">+ RESERVE UNIT</button>
+            </div>
+             <div class="card">
+                <span class="badge badge-red">In Stock</span>
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1612408708611-47d30013665c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Sazabi"></div>
+                <div class="card-body">
+                    <h4>MSN-04 Sazabi</h4>
+                    <span class="price">¥ 18,900</span>
+                </div>
+                <button class="btn-buy">+ DEPLOY UNIT</button>
             </div>
         </div>
     </main>
 
     <!-- RIGHT SIDEBAR -->
     <aside class="sidebar">
-        <h3 style="margin:0; color:var(--accent-orange)">COMMAND CENTER</h3>
+        <h3 style="margin:0; color:var(--accent-gundam)">BRIDGE CONTROL</h3>
         <div class="status-card">
-            <div class="status-header">COLLECTOR STATUS</div>
-            <span class="status-val">Elite Operative</span>
-            <div style="font-size:10px; color:#555; display:flex; justify-content:space-between">
-                <span>Vault Value:</span><span style="color:var(--accent-cyan)">$24,567</span>
+            <div class="status-header">PILOT RANK</div>
+            <span class="status-val">ACE PILOT</span>
+            <div style="font-size:10px; color:#8b949e; display:flex; justify-content:space-between">
+                <span>Total MS:</span><span style="color:var(--accent-gundam)">42 Units</span>
             </div>
-            <div style="font-size:10px; color:#555; display:flex; justify-content:space-between; margin-top:5px;">
-                <span>Pre-Orders:</span><span style="color:var(--accent-orange)">7 Active</span>
+            <div style="font-size:10px; color:#8b949e; display:flex; justify-content:space-between; margin-top:5px;">
+                <span>Build Status:</span><span style="color:var(--accent-zeon)">3 In Progress</span>
             </div>
         </div>
 
         <ul style="margin-top:30px;">
-            <li style="color:var(--accent-cyan)"><i class="fa fa-th-large"></i> My Dashboard</li>
-            <li><i class="fa fa-file-alt"></i> The Manifest</li>
-            <li><i class="fa fa-box"></i> The Pile of Loot</li>
-            <li><i class="fa fa-cog"></i> Vault Settings</li>
-            <li><i class="fa fa-star"></i> The Armory</li>
-            <li style="margin-top:40px; color:#ff4444;"><i class="fa fa-sign-out-alt"></i> Logout</li>
+            <li style="color:var(--accent-gundam)"><i class="fa fa-th-large"></i> Hangar Deck</li>
+            <li><i class="fa fa-file-alt"></i> Operation Logs</li>
+            <li><i class="fa fa-box"></i> Supply Depot</li>
+            <li><i class="fa fa-cog"></i> System Settings</li>
+            <li><i class="fa fa-star"></i> Favorites List</li>
+            <li style="margin-top:40px; color:#e63946;"><i class="fa fa-sign-out-alt"></i> Eject Cockpit</li>
         </ul>
-    </aside>
+   </aside>
 
     <script>
         const slides = [
-            { title: "PRE-ORDER DROPS", sub: "Secure Your Position Now", bg: "linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://unsplash.com')" },
-            { title: "SECTOR 7: NEW ARRIVALS", sub: "Fresh Intel from the Supply Chain", bg: "linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://unsplash.com')" },
-            { title: "VAULT EXCLUSIVES", sub: "Limited Access Only", bg: "linear-gradient(to right, #000, #200030, #000)" }
+            { title: "MOBILE SUIT", sub: "ARMORY CATALOG", bg: "linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1581858730638-2127b045e83c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80')" },
+            { title: "NEW DEPLOYMENT", sub: "REINFORCEMENTS ARRIVING", bg: "linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1591788001606-8511966dd930?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80')" },
+            { title: "ELITE UNITS", sub: "MASTER GRADE COLLECTION", bg: "linear-gradient(to right, #05070a, #102815, #05070a)" }
         ];
 
         let currentIdx = 0;
@@ -268,4 +355,3 @@
 </body>
 </html>
 
-</html>
