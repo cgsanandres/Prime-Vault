@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AEUG | FORCES ARCHIVE</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- Added Font Awesome -->
     <style>
         :root {
             --vault-bg: #05070a;
@@ -13,6 +14,7 @@
             --accent-aeug-blue: #4cc9f0; /* AEUG Blue */
             --accent-zeon: #e63946;
             --border-color: #30363d;
+            --accent-gundam: #39d353; 
         }
 
         body {
@@ -25,7 +27,6 @@
             overflow: hidden;
         }
 
-        /* --- SIDEBARS --- */
         .sidebar {
             width: 220px;
             background: var(--panel-bg);
@@ -40,7 +41,7 @@
 
         .sidebar h2 { 
             font-family: 'Rajdhani', sans-serif; 
-            color: var(--accent-aeug-blue); 
+            color: var(--accent-gundam);
             margin: 0; 
             font-size: 28px; 
             letter-spacing: 2px; 
@@ -76,7 +77,7 @@
         }
         .sidebar li:hover { color: var(--accent-aeug-blue); border-left: 2px solid var(--accent-aeug-blue); }
 
-        /* --- LINK STYLING --- */
+        
         .sidebar a {
             color: #8b949e;
             text-decoration: none;
@@ -86,7 +87,7 @@
             color: var(--accent-aeug-blue);
         }
 
-        /* --- MAIN CONTENT --- */
+      
         .main-hub {
             flex-grow: 1;
             padding: 0 40px;
@@ -95,11 +96,11 @@
             border-right: 1px solid var(--border-color);
         }
 
-        /* --- HEADER BANNER --- */
+     
         .faction-banner {
             height: 180px;
             margin-top: 20px;
-            background: linear-gradient(90deg, rgba(76,201,240,0.3) 0%, rgba(0,0,0,0) 100%), url('https://images.unsplash.com/photo-1581858730638-2127b045e83c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(90deg, rgba(76,201,240,0.3) 0%, rgba(0,0,0,0) 100%), url('https://images.unsplash.com/photo-1581858730638-2127b045e83c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80'); /* Adjusted banner image */
             background-size: cover;
             background-position: center;
             border: 1px solid var(--border-color);
@@ -122,7 +123,7 @@
             margin-top: -10px;
         }
 
-        /* --- SECTION TITLE --- */
+     
         .section-title {
             font-size: 20px;
             color: var(--accent-aeug-blue);
@@ -133,7 +134,7 @@
             padding-bottom: 5px;
         }
 
-        /* --- UNIT GRID --- */
+       
         .unit-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -145,6 +146,9 @@
             border: 1px solid var(--border-color);
             overflow: hidden;
             transition: border-color 0.2s;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
         }
         .unit-card:hover {
             border-color: var(--accent-aeug-blue);
@@ -160,6 +164,7 @@
         }
         .unit-info {
             padding: 15px;
+            flex-grow: 1; 
         }
         .unit-name {
             font-size: 18px;
@@ -182,22 +187,35 @@
         .spec-value {
             color: var(--accent-aeug-blue);
         }
-		.btn-buy { 
-            width: 100%; 
-            padding: 12px; 
-            background: transparent; 
-            border: 1px solid var(--accent-gundam); 
-            color: var(--accent-gundam);
-            font-weight: bold; 
-            cursor: pointer; 
-            font-size: 11px; 
-            margin-top: 10px;
+        
+        .action-btn {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 0 0 4px 4px; 
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
             text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            display: block; 
             letter-spacing: 1px;
+            width: 100%; 
+            box-sizing: border-box; 
+        .add-cart {
+            background-color: var(--accent-aeug-blue); 
+            color: #05070a; 
         }
-        .btn-buy:hover {
-            background: var(--accent-gundam);
-            color: #000;
+        .add-cart:hover {
+            background-color: #5ac8fa; 
+        }
+        .reserve {
+            background-color: #ffc107; 
+            color: #05070a;
+        }
+        .reserve:hover {
+            background-color: #ffb300;
         }
     </style>
 </head>
@@ -217,12 +235,21 @@
             <li><a href="crossbone.html">Crossbone</a></li>
         </ul>
 
+        <h3>🏷️ BRANDS</h3> 
+        <ul>
+            <li><a href="bandai.html">Bandai</a></li>
+            <li><a href="kotobukiya.html">Kotobukiya</a></li>
+            <li><a href="good-smile-company.html">Good Smile Company</a></li>
+            <li><a href="snaa.html">SNAA</a></li>
+        </ul>
+
         <h3>📦 SERIES</h3>
         <ul><li><a href="uc.html">UC / Universal Century</a></li>
 		<li><a href="ce.html">CE / Cosmic Era</a></li>
 		<li><a href="oo.html">00</a></li>
 		<li><a href="ibo.html">Iron-Blooded Orphans</a></li>
 		<li><a href="ac.html">AC / After Colony</a></li>
+        </ul>
 
         <h3>📏 GRADE</h3>
         <ul><li><a href="mg.html">Master Grade (MG)</a></li><li><a href="rg.html">Real Grade (RG)</a></li><li><a href="pg.html">Perfect Grade (PG)</a></li><li><a href="hg.html">High Grade (HG)</a></li></ul>
@@ -249,7 +276,14 @@
                         <span>WEIGHT: <span class="spec-value">62.3t</span></span>
                     </div>
                 </div>
-				 <button class="btn-buy">+ DEPLOY UNIT</button>
+				<button class="action-btn add-cart"
+                    data-product-id="MSZ-006-Zeta-HG"
+                    data-product-name="MSZ-006 ZETA GUNDAM"
+                    data-product-price="¥ 15,500"
+                    data-product-image="https://images.unsplash.com/photo-1581858730638-2127b045e83c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                    data-product-grade="High Grade"
+                    data-product-series="Universal Century"
+                    onclick="handleAddToCart(this)">+ DEPLOY UNIT</button>
             </div>
 
             <div class="unit-card">
@@ -262,7 +296,14 @@
                         <span>WEIGHT: <span class="spec-value">54.2t</span></span>
                     </div>
                 </div>
-				 <button class="btn-buy">+ DEPLOY UNIT</button>
+				<button class="action-btn add-cart"
+                    data-product-id="RX-178-MkII-RG"
+                    data-product-name="RX-178 GUNDAM MK-II"
+                    data-product-price="¥ 4,200"
+                    data-product-image="https://images.unsplash.com/photo-1612408708611-47d30013665c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                    data-product-grade="Real Grade"
+                    data-product-series="Universal Century"
+                    onclick="handleAddToCart(this)">+ DEPLOY UNIT</button>
             </div>
 
             <div class="unit-card">
@@ -275,7 +316,14 @@
                         <span>WEIGHT: <span class="spec-value">61.4t</span></span>
                     </div>
                 </div>
-				 <button class="btn-buy">+ DEPLOY UNIT</button>
+				<button class="action-btn add-cart"
+                    data-product-id="MSN-00100-HyakuShiki-MG"
+                    data-product-name="MSN-00100 HYAKU SHIKI"
+                    data-product-price="¥ 7,800"
+                                       data-product-image="https://images.unsplash.com/photo-1591788001606-8511966dd930?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                    data-product-grade="Master Grade Ver.Ka"
+                    data-product-series="Universal Century"
+                    onclick="handleAddToCart(this)">+ DEPLOY UNIT</button>
             </div>
 
             <div class="unit-card">
@@ -288,6 +336,14 @@
                         <span>WEIGHT: <span class="spec-value">62.1t</span></span>
                     </div>
                 </div>
+				<button class="action-btn add-cart"
+                    data-product-id="RMS-099-RickDias-HG"
+                    data-product-name="RMS-099 RICK DIAS"
+                    data-product-price="¥ 3,500"
+                    data-product-image="https://images.unsplash.com/photo-1581858830638-2127b045e83c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                    data-product-grade="High Grade"
+                    data-product-series="Universal Century"
+                    onclick="handleAddToCart(this)">+ DEPLOY UNIT</button>
             </div>
         </div>
     </main>
@@ -308,10 +364,140 @@
 
         <ul style="margin-top:30px;">
             <li><a href="index.html"><i class="fa fa-home"></i> Return to Hangar</a></li>
-            <li><i class="fa fa-file-alt"></i> History Logs</li>
-            <li><i class="fa fa-star"></i> Elite Units</li>
+            <li><span style="color:#8b949e;"><i class="fa fa-file-alt"></i> History Logs</span></li> 
+            <li><span style="color:#8b949e;"><i class="fa fa-star"></i> Elite Units</span></li> 
         </ul>
     </aside>
 
+    <script>
+     
+        function getCart() {
+            const cart = localStorage.getItem('primeVaultCart');
+            return cart ? JSON.parse(cart) : [];
+        }
+
+     
+        function saveCart(cart) {
+            localStorage.setItem('primeVaultCart', JSON.stringify(cart));
+        }
+
+     
+        function getPreOrders() {
+            const preOrders = localStorage.getItem('primeVaultPreOrders');
+            return preOrders ? JSON.parse(preOrders) : [];
+        }
+
+        // Function to save pre-order items to Local Storage
+        function savePreOrders(preOrders) {
+            localStorage.setItem('primeVaultPreOrders', JSON.stringify(preOrders));
+        }
+
+       
+        function updateCartCountDisplay() {
+            const cart = getCart();
+            const preOrders = getPreOrders();
+            const totalItemsInCart = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalItemsInPreOrder = preOrders.reduce((sum, item) => sum + item.quantity, 0);
+            const totalOverallItems = totalItemsInCart + totalItemsInPreOrder;
+
+            
+            const globalCartCountElement = document.getElementById('global-cart-item-count');
+            if (globalCartCountElement) {
+                globalCartCountElement.textContent = totalOverallItems;
+                globalCartCountElement.style.display = totalOverallItems > 0 ? 'inline-block' : 'none';
+            }
+
+            const sidebarCartCountElement = document.getElementById('sidebar-cart-count');
+            if (sidebarCartCountElement) {
+                sidebarCartCountElement.textContent = totalItemsInCart;
+            }
+            const sidebarPreOrderCountElement = document.getElementById('sidebar-preorder-count');
+            if (sidebarPreOrderCountElement) {
+                sidebarPreOrderCountElement.textContent = totalItemsInPreOrder;
+            }
+        }
+
+       
+        function handleAddToCart(buttonElement) {
+            const dataset = buttonElement.dataset;
+            const itemName = dataset.productName;
+            const itemPrice = dataset.productPrice;
+            const itemImage = dataset.productImage;
+            const itemGrade = dataset.productGrade || '';
+            const itemLineOrSeries = dataset.productSeries || '';
+
+            if (!itemName || !itemPrice || !itemImage) {
+                console.error("Missing product details for Add to Cart:", buttonElement);
+                alert("Error: Could not add item to cart. Missing product details.");
+                return;
+            }
+
+            let cart = getCart();
+            const itemId = dataset.productId || itemName.replace(/\s+/g, '-').toLowerCase();
+
+            const existingItemIndex = cart.findIndex(item => item.id === itemId);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity++;
+            } else {
+                cart.push({
+                    id: itemId,
+                    name: itemName,
+                    price: parseFloat(itemPrice.replace(/[^0-9.]/g, '')), 
+                    image: itemImage,
+                    grade: itemGrade,
+                    series: itemLineOrSeries,
+                    quantity: 1,
+                    type: 'in-stock' 
+                });
+            }
+            saveCart(cart);
+            updateCartCountDisplay();
+            window.location.href = 'cart.html';
+        }
+
+       
+        function handleReserveUnit(buttonElement) {
+            const dataset = buttonElement.dataset;
+            const itemName = dataset.productName;
+            const itemPrice = dataset.productPrice;
+            const itemImage = dataset.productImage;
+            const itemGrade = dataset.productGrade || '';
+            const itemLineOrSeries = dataset.productSeries || '';
+
+            if (!itemName || !itemPrice || !itemImage) {
+                console.error("Missing product details for Reserve Unit:", buttonElement);
+                alert("Error: Could not reserve item. Missing product details.");
+                return;
+            }
+
+            let preOrders = getPreOrders();
+            const itemId = dataset.productId || itemName.replace(/\s+/g, '-').toLowerCase();
+
+            const existingItemIndex = preOrders.findIndex(item => item.id === itemId);
+
+            if (existingItemIndex > -1) {
+                preOrders[existingItemIndex].quantity++;
+            } else {
+                preOrders.push({
+                    id: itemId,
+                    name: itemName,
+                    price: parseFloat(itemPrice.replace(/[^0-9.]/g, '')),
+                    image: itemImage,
+                    grade: itemGrade,
+                    series: itemLineOrSeries,
+                    quantity: 1,
+                    type: 'pre-order'
+                });
+            }
+            savePreOrders(preOrders);
+            updateCartCountDisplay();
+            window.location.href = 'cart.html';
+        }
+
+       
+        document.addEventListener('DOMContentLoaded', updateCartCountDisplay);
+
+    </script>
 </body>
 </html>
