@@ -1,0 +1,236 @@
+:root {
+    --bg-color: #1a1a1a;
+    --header-red: #cc0000;
+    --text-white: #ffffff;
+    --card-bg: #2d2d2d;
+    --input-bg: #3c3c3c;
+    --input-border: #555555;
+    --button-hover: #e60000;
+    --transition: all 0.3s ease;
+    --font-inter: 'Inter', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-white);
+    font-family: var(--font-inter);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.login-container {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.login-logo {
+    max-width: 120px;
+    margin-bottom: 20px;
+    filter: invert(100%) brightness(1.5);
+}
+
+.login-header h1 {
+    color: var(--header-red);
+    margin-bottom: 10px;
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+.login-header p {
+    font-size: 0.9em;
+    margin-bottom: 30px;
+    color: #aaaaaa;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    color: var(--text-white);
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 5px;
+    color: var(--text-white);
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: var(--transition);
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+    border-color: var(--header-red);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(204, 0, 0, 0.3);
+}
+
+.form-group input::placeholder {
+    color: #888888;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.85em;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+}
+
+.remember-me input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: var(--header-red);
+    width: 16px;
+    height: 16px;
+}
+
+.forgot-password {
+    color: var(--header-red);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+    color: var(--button-hover);
+}
+
+.login-button {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--header-red);
+    color: var(--text-white);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.login-button:hover {
+    background-color: var(--button-hover);
+    box-shadow: 0 4px 15px rgba(204, 0, 0, 0.4);
+}
+
+.social-login {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #444444;
+}
+
+.social-login p {
+    margin-bottom: 20px;
+    color: #aaaaaa;
+}
+
+.social-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.social-button {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--input-border);
+    border-radius: 5px;
+    background-color: transparent;
+    color: var(--text-white);
+    font-size: 1em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: var(--transition);
+}
+
+.social-button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--header-red);
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.google-login .social-icon {
+    filter: invert(100%) brightness(1.5);
+}
+
+.apple-login .social-icon {
+    filter: invert(100%);
+}
+
+.create-account {
+    margin-top: 30px;
+    font-size: 0.9em;
+}
+
+.create-account p {
+    margin-bottom: 10px;
+    color: #aaaaaa;
+}
+
+.create-account a {
+    color: var(--header-red);
+    text-decoration: none;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.create-account a:hover {
+    text-decoration: underline;
+    color: var(--button-hover);
+}
+
+@media (max-width: 500px) {
+    .login-container {
+        margin: 20px;
+        padding: 30px 20px;
+    }
+
+    .login-header h1 {
+        font-size: 1.8em;
+    }
+
+    .login-logo {
+        max-width: 100px;
+    }
+
+    .login-button {
+        font-size: 1em;
+        padding: 12px;
+    }
+}
+

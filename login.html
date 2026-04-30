@@ -3,263 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRIME VAULT | ACCESS TERMINAL</title>
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Using Font Awesome for icons -->
-    
-    <style>
-        :root {
-            --vault-bg: #05070a;           /* Dark background like the main site */
-            --panel-bg: #0d1117;          /* Slightly lighter panel background */
-            --accent-gundam: #39d353;     /* V-Fin Green */
-            --accent-zeon: #e63946;       /* Zeon Red */
-            --accent-white: #f1faee;      /* Primary white text */
-            --border-color: #30363d;      /* Border color from main site */
-            --input-bg: #1a202c;          /* Darker input background */
-            --primary-yellow: #FFCC00;    /* Kept for some accents if needed */
-            --text-grey: #8b949e;         /* Grey text from main site */
-        }
-
-        body {
-            background-color: var(--vault-bg);
-            font-family: 'Rajdhani', sans-serif; /* Use the same font */
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: var(--accent-white); /* Default text color */
-            overflow: hidden;
-        }
-
-        /* Loading Screen Transition */
-        #loader {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--vault-bg);
-            z-index: 999;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.4s ease;
-        }
-
-        .spinner {
-            width: 50px; height: 50px;
-            border: 5px solid var(--border-color); /* Use border color */
-            border-top: 5px solid var(--accent-gundam); /* Gundam Green accent */
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .loader-text {
-            margin-top: 20px; 
-            color: var(--accent-gundam); /* Gundam Green */
-            letter-spacing: 2px; 
-            font-size: 14px;
-        }
-
-        /* Login Card Design */
-        .login-card {
-            background-color: var(--panel-bg); /* Use panel background */
-            padding: 35px; /* Slightly adjusted padding */
-            border-radius: 12px; /* Slightly rounded corners */
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Softer shadow */
-            border: 1px solid var(--border-color); /* Add border */
-        }
-
-        .avatar-circle {
-            background-color: var(--accent-gundam); /* Gundam Green */
-            width: 65px; height: 65px; border-radius: 50%;
-            display: inline-flex; justify-content: center; align-items: center;
-            font-size: 32px; color: #0d1117; /* Dark panel bg for contrast */
-            margin-bottom: 20px;
-            border: 2px solid var(--accent-white); /* White border */
-        }
-
-        h2 { 
-            margin: 0 0 8px; 
-            font-weight: 700; 
-            font-size: 30px; /* Larger title */
-            letter-spacing: 2px;
-            color: var(--accent-gundam); /* Gundam Green */
-            text-transform: uppercase;
-        }
-        .subtitle { 
-            color: var(--text-grey); 
-            font-size: 13px; 
-            margin-bottom: 25px; 
-            letter-spacing: 1px;
-        }
-
-        /* Form Styling */
-        .input-group { text-align: left; margin-bottom: 18px; }
-        label { 
-            display: block; 
-            font-size: 12px; 
-            color: var(--accent-gundam); /* Gundam Green label */
-            margin-bottom: 6px; 
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        
-        input {
-            width: 100%; padding: 12px; background: var(--input-bg);
-            border: 1px solid var(--border-color); /* Use border color */
-            border-radius: 8px; color: var(--accent-white);
-            box-sizing: border-box; outline: none; transition: 0.2s;
-            font-family: 'Rajdhani', sans-serif; /* Ensure font consistency */
-            font-size: 14px;
-        }
-        input:focus { border-color: var(--accent-gundam); box-shadow: 0 0 10px rgba(57, 211, 83, 0.4); }
-
-        .form-options {
-            display: flex; justify-content: space-between;
-            font-size: 12px; color: var(--text-grey); margin-bottom: 20px;
-        }
-        .form-options label {
-            display: flex; align-items: center; gap: 8px;
-            color: var(--text-grey); font-size: 13px; font-weight: 400;
-            text-transform: none;
-        }
-        .form-options input[type="checkbox"] {
-            width: 16px; height: 16px; accent-color: var(--accent-gundam);
-            cursor: pointer;
-        }
-        .form-options a {
-            color: var(--accent-gundam); /* Link color */
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .form-options a:hover { text-decoration: underline; }
-
-        .login-btn {
-            background-color: var(--accent-gundam); color: #0d1117; /* Dark panel bg */
-            width: 100%; padding: 14px; border: none; border-radius: 8px;
-            font-weight: 700; cursor: pointer; font-size: 16px;
-            letter-spacing: 1px;
-            transition: 0.2s;
-        }
-        .login-btn:hover { background-color: #32cd5a; /* Slightly brighter green */ }
-
-        /* Social Divider */
-        .divider { margin: 25px 0; border-bottom: 1px solid var(--border-color); position: relative; }
-        .divider span {
-            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
-            background: var(--panel-bg); padding: 0 15px; color: var(--text-grey); font-size: 12px;
-        }
-
-        /* Social Buttons */
-        .social-btn {
-            width: 100%; padding: 12px; border-radius: 8px; margin-bottom: 12px;
-            display: flex; justify-content: center; align-items: center;
-            gap: 12px; font-weight: 600; cursor: pointer; border: 1px solid var(--border-color);
-            font-size: 14px; transition: 0.2s;
-            background: var(--input-bg); /* Use input background */
-            color: var(--accent-white);
-        }
-        .social-btn:hover { background: var(--panel-bg); border-color: var(--accent-gundam); }
-        .social-logo { width: 20px; height: 20px; object-fit: contain; }
-
-        /* Footer Buttons */
-        .footer-text { font-size: 13px; color: var(--text-grey); margin-top: 25px; }
-        .create-btn {
-            background: transparent; border: 1px solid var(--accent-gundam);
-            color: var(--accent-gundam); padding: 12px; width: 100%;
-            margin-top: 15px; border-radius: 8px; cursor: pointer; font-weight: 700;
-            font-size: 14px; letter-spacing: 1px;
-        }
-        .create-btn:hover { background: rgba(57, 211, 83, 0.1); } /* Subtle hover effect */
-    </style>
+    <title>PrimeVault - Pilot Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="login-container">
+        <div class="login-header">
+            <img src="primevault_logo.png" alt="PrimeVault Logo" class="login-logo">
+            <h1>Pilot Login</h1>
+            <p>Access your Hangar and manage your arsenal.</p>
+        </div>
 
-    <!-- Loading Screen -->
-    <div id="loader">
-        <div class="spinner"></div>
-        <p class="loader-text">AUTHENTICATING...</p>
-    </div>
-
-    <!-- Login Card -->
-    <div class="login-card" id="loginCard">
-        <div class="avatar-circle"><i class="fa-solid fa-user"></i></div>
-        <h2>PRIME VAULT ACCESS</h2>
-        <p class="subtitle">Enter terminal credentials</p>
-
-        <form id="loginForm">
-            <div class="input-group">
-                <label>ACCESS ID</label>
-                <input type="email" id="userEmail" placeholder="Enter your ID" required>
+        <form class="login-form" id="loginForm">
+            <div class="form-group">
+                <label for="usernameEmail">Callsign or Email</label>
+                <input type="text" id="usernameEmail" name="usernameEmail" required placeholder="Enter your Callsign or Email">
             </div>
-
-            <div class="input-group">
-                <label>PASSCODE</label>
-                <input type="password" id="userPass" placeholder="Enter your passcode" required>
+            <div class="form-group">
+                <label for="password">Security Code</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your Security Code">
             </div>
 
             <div class="form-options">
-                <label style="cursor:pointer"><input type="checkbox"> REMEMBER ME</label>
-                <a href="#" style="color: var(--accent-gundam);">ACCESS RECOVERY</a>
+                <div class="remember-me">
+                    <input type="checkbox" id="keepHangarOpen" name="keepHangarOpen">
+                    <label for="keepHangarOpen">Keep Hangar Doors Open</label>
+                </div>
+                <a href="forgot-password.html" class="forgot-password">Lost Security Code?</a>
             </div>
 
-            <button type="submit" class="login-btn">INITIATE LOGIN</button>
+            <button type="submit" class="login-button">Engage!</button>
         </form>
 
-        <div class="divider"><span>OR CONNECT VIA</span></div>
+        <div class="social-login">
+            <p>Or log in via comms:</p>
+            <div class="social-buttons">
+                <button class="social-button google-login">
+                    <img src="google_logo.png" alt="Google Logo" class="social-icon">
+                    <span>Google Comms</span>
+                </button>
+                <button class="social-button apple-login">
+                    <img src="apple_logo.png" alt="Apple Logo" class="social-icon">
+                    <span>Apple Protocols</span>
+                </button>
+            </div>
+        </div>
 
-        <button class="social-btn google-btn" onclick="handleSocialLogin('Google')">
-            <img src="images/goog.png" alt="G" class="social-logo"> Continue with Google
-        </button>
-
-        <button class="social-btn apple-btn" onclick="handleSocialLogin('Apple')">
-            <img src="images/apple.jpeg" alt="A" class="social-logo"> Continue with Apple
-        </button>
-
-        <p class="footer-text">New operative?</p>
-       
-        <button class="create-btn" onclick="window.location.href='register.html'">CREATE NEW ACCESS</button>
+        <div class="create-account">
+            <p>New Pilot?</p>
+            <a href="register.html">Register for a Hangar</a>
+        </div>
     </div>
 
-    <script>
-        const loginForm = document.getElementById('loginForm');
-        const loader = document.getElementById('loader');
-        const loginCard = document.getElementById('loginCard');
-
-       
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault(); 
-            startLoginProcess();
-        });
-
-       
-        function handleSocialLogin(provider) {
-            console.log("Logging in with " + provider);
-            startLoginProcess();
-        }
-
-        
-        function startLoginProcess() {
-           
-            loginCard.style.opacity = '0';
-            loginCard.style.transform = 'scale(0.9)';
-            loginCard.style.transition = '0.4s ease';
-
-            setTimeout(() => {
-                loginCard.style.display = 'none';
-                loader.style.display = 'flex';
-
-                
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 2000);
-            }, 400);
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
