@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Suit Gundam | PrimeVault Archive</title>
+    <style>
+        :root {
+            --bg-color: #0d0e10;
+            --runner-grey: #464a4e;
+            --plastic-red: #cc0000;
+            --safety-yellow: #f9d71c;
+            --panel-dark: #16181b;
+            --pure-white: #ffffff;
+            --text-main: #ffffff;
+            --text-dark: #222222;
+            --text-sub: #b0b0b0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER & NAVIGATION (SYNCED WITH INDEX) --- */
+        header {
+            background: var(--panel-dark);
+            border-bottom: 5px solid var(--runner-grey);
+            position: sticky;
+            top: 0;
+            z-index: 10000;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo { font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; text-decoration: none; color: white; }
+        .logo span { color: var(--plastic-red); }
+
+        .search-container { flex-grow: 1; max-width: 650px; margin: 0 40px; }
+        .search-bar {
+            width: 100%;
+            background: #000;
+            border: 2px solid var(--runner-grey);
+            padding: 12px 15px;
+            color: white;
+            border-radius: 4px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .user-actions { display: flex; gap: 25px; align-items: center; }
+        .icon-link { color: white; text-decoration: none; font-size: 24px; transition: color 0.2s; cursor: pointer; }
+        .icon-link:hover { color: var(--safety-yellow); }
+
+        .nav-strip { display: flex; padding: 0 40px; background: var(--panel-dark); max-width: 1400px; margin: 0 auto; }
+        .nav-wrapper { position: relative; padding-bottom: 15px; }
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+            padding: 12px 25px;
+            display: block;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+        }
+        .nav-wrapper:hover .nav-item { color: var(--safety-yellow); }
+
+        .mega-panel {
+            position: fixed;
+            top: 125px;
+            left: 0;
+            width: 100%;
+            background: var(--pure-white);
+            color: var(--text-dark);
+            display: none;
+            padding: 50px 40px;
+            box-sizing: border-box;
+            border-bottom: 10px solid var(--runner-grey);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+        }
+        .nav-wrapper:hover .mega-panel { display: block; }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .brand-box {
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+            font-weight: 800;
+            font-size: 12px;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        /* --- GUNDAM BRAND INTERFACE (HERO) --- */
+        .brand-hero {
+            background: radial-gradient(circle, #1a1d20 0%, #0d0e10 100%);
+            padding: 80px 40px;
+            text-align: center;
+            border-bottom: 2px solid var(--runner-grey);
+        }
+.massive-logo {
+    display: block;
+    width: 100%;
+   
+    max-width: 680px; 
+   
+    max-height: 180px; 
+    object-fit: contain; 
+    
+    margin: 0 auto 30px auto;
+    filter: drop-shadow(0 0 20px rgba(204, 0, 0, 0.2));
+}
+
+        .brand-description {
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-sub);
+            font-size: 16px;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- SERIES CARD GRID --- */
+        .series-container {
+            max-width: 1400px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+
+        .series-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .series-card {
+            background: var(--panel-dark);
+            border: 4px solid var(--runner-grey);
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .series-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--safety-yellow);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+
+        .series-img-box {
+            height: 240px;
+            background: #222;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .series-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: 0.4s;
+        }
+
+        .series-card:hover .series-img-box img { opacity: 1; transform: scale(1.05); }
+
+        .series-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(204, 0, 0, 0.9);
+            color: white;
+            padding: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .series-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .series-name {
+            display: block;
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .series-desc {
+            font-size: 13px;
+            color: var(--text-sub);
+            line-height: 1.5;
+        }
+		
+		.brand-hero {
+    position: relative;
+    background-color: var(--bg-color);
+    background-image: linear-gradient(to bottom, #1a1d20, #0d0e10);
+    padding: 100px 40px 80px 40px; /* Increased top padding for better centering */
+    text-align: center;
+    border-bottom: 2px solid var(--runner-grey);
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-logo-wrapper {
+    margin-bottom: 40px; /* Space between logo and description */
+}
+
+.massive-logo {
+    width: 500%;
+   
+    max-width: 1000px; 
+    height: auto;
+    
+    
+    filter: drop-shadow(0 0 25px rgba(204, 0, 0, 0.25));
+    transition: transform 0.3s ease;
+    margin: 0 auto; 
+    display: block;
+}
+
+
+
+
+.brand-description {
+    max-width: 750px;
+    margin: 0 auto;
+    color: var(--text-sub);
+    font-size: 18px;
+    line-height: 1.8;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+
+.hero-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(22, 24, 27, 0) 0%, rgba(13, 14, 16, 1) 90%);
+    z-index: 1;
+}
+
+        /* --- FOOTER (INDEX CONSISTENCY) --- */
+        footer {
+            background-color: var(--panel-dark);
+            border-top: 10px solid var(--runner-grey);
+            padding: 80px 40px;
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 60px;
+        }
+
+        .footer-col h3 { color: var(--safety-yellow); text-transform: uppercase; margin-bottom: 25px; }
+        .footer-col h4 { font-size: 15px; margin-bottom: 25px; border-left: 4px solid var(--plastic-red); padding-left: 12px; text-transform: uppercase; }
+        .footer-col p, .footer-col li { font-size: 13px; line-height: 1.8; color: var(--text-sub); list-style: none; padding: 0; }
+
+        .warning-box { border: 4px solid #ffffff; padding: 25px; background-color: #000; }
+        .warning-title { color: #ff0000; font-size: 18px; font-weight: 900; text-align: center; margin-bottom: 12px; }
+        .warning-text { font-size: 11px; text-align: justify; text-transform: uppercase; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="top-bar">
+        <a href="index.html" class="logo">Prime<span>Vault</span></a>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search Hangar (Gunpla, Tools, Brands)...">
+        </div>
+        <div class="user-actions">
+            <span class="icon-link">👤</span>
+            <a href="cart.html" class="icon-link">🛒</a>
+        </div>
+    </div>
+
+    <div class="nav-strip">
+        <div class="nav-wrapper"><a href="pre-order.html" class="nav-item">Pre-Order</a></div>
+        <div class="nav-wrapper"><a href="new-arrivals.html" class="nav-item">New Arrivals</a></div>
+        <div class="nav-wrapper"><a href="sale-items.html" class="nav-item">Sale Items</a></div>
+        
+        <div class="nav-wrapper">
+            <span class="nav-item">Brands</span>
+            <div class="mega-panel">
+                <div class="brands-grid">
+                     <a href="tamiya.html" class="brand-box">TAMIYA</a>
+                    <a href="bandai.html" class="brand-box">BANDAI SPIRITS</a>
+                    <a href="hasegawa.html" class="brand-box">HASEGAWA</a>
+                    <a href="#" class="brand-box">REVELL</a>
+                    <a href="#" class="brand-box">KOTOBUKIYA</a>
+                    <a href="#" class="brand-box">GOOD SMILE CO</a>
+                    <a href="#" class="brand-box">ITALERI</a>
+                    <a href="#" class="brand-box">MENG MODEL</a>
+                    <a href="#" class="brand-box">TRUMPETER</a>
+                    <a href="brands.html" class="brand-box">MORE BRANDS -></a>
+                </div>
+            </div>
+        </div>
+		
+        <div class="nav-wrapper">
+            <span class="nav-item">Prime Picks</span>
+            <div class="mega-panel">
+                <div style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;">
+                    <div><h4 style="border-bottom: 2px solid #000; padding-bottom: 10px;">Themes</h4><ul style="list-style:none; padding:0;"><li>Sci-Fi / Mecha</li><li>WWII Military</li></ul></div>
+                    <div><h4 style="border-bottom: 2px solid #000; padding-bottom: 10px;">Series</h4><ul style="list-style:none; padding:0;"><li>Master Grade</li><li>Real Grade</li></ul></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="brand-hero">
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-content">
+        
+        <img src="images/gundamlong.jpeg" alt="Mobile Suit Gundam" class="massive-logo">
+        
+        <p class="brand-description">
+            The definitive standard in mecha modeling. From the high-detail Real Grade series to the beginner-friendly High Grade line, Bandai Spirits' Gunpla ecosystem offers the peak of snap-fit engineering and technical color separation.
+        </p>
+    </div>
+</section>
+
+<main class="series-container">
+    <div class="series-grid">
+        
+        <a href="mg.html" class="series-card">
+            <div class="series-img-box">
+                <img src="images/mg.jpeg" alt="Master Grade">
+                <div class="series-label">1/100 SCALE | MG</div>
+            </div>
+            <div class="series-info">
+                <span class="series-name">Master Grade</span>
+                <p class="series-desc">Featuring a complete inner frame and extreme mechanical complexity.</p>
+            </div>
+        </a>
+
+        <a href="rg.html" class="series-card">
+            <div class="series-img-box">
+                <img src="images/rg.jpeg" alt="Real Grade">
+                <div class="series-label">1/144 SCALE | RG</div>
+            </div>
+            <div class="series-info">
+                <span class="series-name">Real Grade</span>
+                <p class="series-desc">Excelsior engineering packed into a 1/144 scale. The "Realism" flagship.</p>
+            </div>
+        </a>
+
+        <a href="hg.html" class="series-card">
+            <div class="series-img-box">
+                <img src="images/hg.jpeg" alt="High Grade">
+                <div class="series-label">1/144 SCALE | HG</div>
+            </div>
+            <div class="series-info">
+                <span class="series-name">High Grade</span>
+                <p class="series-desc">The most diverse line. Perfect for collectors and custom builders alike.</p>
+            </div>
+        </a>
+
+        <a href="pg.html" class="series-card">
+            <div class="series-img-box">
+                <img src="images/pg.jpeg" alt="Perfect Grade">
+                <div class="series-label">1/60 SCALE | PG</div>
+            </div>
+            <div class="series-info">
+                <span class="series-name">Perfect Grade</span>
+                <p class="series-desc">The ultimate evolution. LED integration and unparalleled parts count.</p>
+            </div>
+        </a>
+
+    </div>
+</main>
+
+<footer style="background-color: #16181b; border-top: 10px solid #464a4e; color: #ffffff; padding: 80px 40px; font-family: 'Segoe UI', Tahoma, sans-serif;">
+    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 60px;">
+        
+        <div style="display: flex; flex-direction: column;">
+            <h3 style="color: #f9d71c; font-size: 20px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; font-weight: 900;">PrimeVault Logistics</h3>
+            <p style="font-size: 13px; line-height: 1.8; color: #b0b0b0; margin-bottom: 20px;">
+                Your tactical hangar for the finest precision-engineered plastic models. We distribute authentic Japanese and international hobby kits globally.
+            </p>
+            <p style="font-size: 12px; font-weight: bold; color: #ffffff; text-transform: uppercase; letter-spacing: 1px;">
+                OPERATIONAL STATUS: <span style="color: #00ff00;">READY</span>
+            </p>
+        </div>
+
+        <div>
+            <h4 style="font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #cc0000; padding-left: 12px; font-weight: 700;">Support Hangar</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 2;">
+                <li><a href="shipping.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Shipping Protocols</a></li>
+                <li><a href="returns.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Returns & Exchanges</a></li>
+                <li><a href="preorder-policy.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Pre-Order Policy</a></li>
+                <li><a href="claims.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Runner Integrity Claims</a></li>
+                <li><a href="customs.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">International Customs</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 style="font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #cc0000; padding-left: 12px; font-weight: 700;">Quick Access</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 2;">
+                <li><a href="about.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">About PrimeVault</a></li>
+                <li><a href="blog.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Hobby Blog</a></li>
+                <li><a href="affiliate.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Affiliate Program</a></li>
+                <li><a href="locations.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Store Locator</a></li>
+                <li><a href="contact.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Contact Dispatch</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <div style="border: 4px solid #ffffff; padding: 25px; background-color: #000; margin-bottom: 25px;">
+                <h4 style="color: #ff0000; font-size: 18px; font-weight: 900; text-align: center; margin: 0 0 12px 0; text-transform: uppercase;">⚠ WARNING</h4>
+                <p style="font-size: 11px; line-height: 1.5; text-align: justify; margin: 0; text-transform: uppercase; color: #ffffff;">
+                    CHOKING HAZARD: SMALL PARTS. FUNCTIONAL SHARP POINTS. THIS PRODUCT IS NOT A TOY. DESIGNED FOR ADULT HOBBYISTS. NOT FOR CHILDREN UNDER 15 YEARS. HANDLE WITH EXTREME CAUTION.
+                </p>
+            </div>
+            <div style="display: flex; gap: 20px; justify-content: center; font-size: 20px; color: #b0b0b0;">
+                <a href="#" style="color: inherit; text-decoration: none;">𝕏</a> 
+                <a href="#" style="color: inherit; text-decoration: none;">📸</a> 
+                <a href="#" style="color: inherit; text-decoration: none;">🎥</a> 
+                <a href="#" style="color: inherit; text-decoration: none;">💬</a>
+            </div>
+        </div>
+    </div>
+
+    <div style="max-width: 1400px; margin: 60px auto 0; border-top: 1px solid #333; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px;">
+        <div style="max-width: 70%;">
+            © 2026 PrimeVault Philippines. Model photography is for illustrative purposes only. All brands are property of their respective owners.
+        </div>
+        <div style="display: flex; gap: 15px;">
+            <div style="width: 45px; height: 28px; background: #333; border-radius: 3px;"></div>
+            <div style="width: 45px; height: 28px; background: #333; border-radius: 3px;"></div>
+            <div style="width: 45px; height: 28px; background: #333; border-radius: 3px;"></div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
+
