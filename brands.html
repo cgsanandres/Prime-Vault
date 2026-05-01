@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrimeVault | High-Grade Plastic Model Hangar</title>
+    <title>Logistics Hub | PrimeVault Directory</title>
     <style>
         :root {
             --bg-color: #0d0e10;
@@ -26,7 +26,7 @@
             overflow-x: hidden;
         }
 
-        /* --- HEADER & NAVIGATION --- */
+        /* --- HEADER & NAVIGATION (PIXEL-PERFECT FROM INDEX) --- */
         header {
             background: var(--panel-dark);
             border-bottom: 5px solid var(--runner-grey);
@@ -44,23 +44,10 @@
             margin: 0 auto;
         }
 
-        .logo {
-            font-size: 28px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            user-select: none;
-        }
-
+        .logo { font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; text-decoration: none; color: white; }
         .logo span { color: var(--plastic-red); }
 
-        .search-container {
-            flex-grow: 1;
-            max-width: 650px;
-            margin: 0 40px;
-        }
-
+        .search-container { flex-grow: 1; max-width: 650px; margin: 0 40px; }
         .search-bar {
             width: 100%;
             background: #000;
@@ -71,38 +58,14 @@
             outline: none;
             font-size: 14px;
         }
-
         .search-bar:focus { border-color: var(--safety-yellow); }
 
-        .user-actions {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-        }
-
-        .icon-link {
-            color: white;
-            text-decoration: none;
-            font-size: 24px;
-            transition: color 0.2s;
-            cursor: pointer;
-        }
-
+        .user-actions { display: flex; gap: 25px; align-items: center; }
+        .icon-link { color: white; text-decoration: none; font-size: 24px; transition: color 0.2s; cursor: pointer; }
         .icon-link:hover { color: var(--safety-yellow); }
 
-        .nav-strip {
-            display: flex;
-            padding: 0 40px;
-            background: var(--panel-dark);
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .nav-wrapper {
-            position: relative;
-            padding-bottom: 15px; 
-        }
-
+        .nav-strip { display: flex; padding: 0 40px; background: var(--panel-dark); max-width: 1400px; margin: 0 auto; }
+        .nav-wrapper { position: relative; padding-bottom: 15px; }
         .nav-item {
             color: white;
             text-decoration: none;
@@ -114,7 +77,6 @@
             cursor: pointer;
             letter-spacing: 0.5px;
         }
-
         .nav-wrapper:hover .nav-item { color: var(--safety-yellow); }
 
         .mega-panel {
@@ -130,7 +92,6 @@
             border-bottom: 10px solid var(--runner-grey);
             box-shadow: 0 25px 60px rgba(0,0,0,0.9);
         }
-
         .nav-wrapper:hover .mega-panel { display: block; }
 
         .brands-grid {
@@ -140,7 +101,6 @@
             max-width: 1300px;
             margin: 0 auto;
         }
-
         .brand-box {
             border: 1px solid #ddd;
             padding: 20px;
@@ -151,181 +111,98 @@
             color: var(--text-dark);
             transition: 0.2s;
         }
+        .brand-box:hover { background: #f4f4f4; border-color: var(--plastic-red); color: var(--plastic-red); }
 
-        .brand-box:hover {
-            background: #f4f4f4;
-            border-color: var(--plastic-red);
-            color: var(--plastic-red);
-        }
+        /* --- DIRECTORY CONTENT SECTIONS --- */
+        .directory-main { max-width: 1400px; margin: 60px auto; padding: 0 40px; }
 
-        /* --- LOGISTICS PARTNERS (TOP POSITION) --- */
-        .logistics-section {
-            background-color: #0d0e10;
-            padding: 60px 0 30px 0;
-            border-bottom: 2px solid var(--runner-grey);
-            position: relative;
-        }
-
-        .brand-reel-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 60px;
-            position: relative;
-        }
-
-        .brand-track {
+        .section-header {
+            font-size: 28px;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-left: 10px solid var(--plastic-red);
+            padding-left: 20px;
+            margin: 80px 0 30px 0;
             display: flex;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-            gap: 60px;
-            align-items: center;
-            padding: 15px 0;
+            justify-content: space-between;
+            align-items: flex-end;
         }
 
-        .brand-item {
-            min-width: 160px;
-            flex-shrink: 0;
-            text-align: center;
-            filter: grayscale(100%);
-            transition: 0.4s;
-            cursor: pointer;
+        .section-header span { font-size: 14px; color: var(--text-sub); letter-spacing: 2px; }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
         }
 
-        .brand-item:hover { filter: grayscale(0%); transform: scale(1.1); }
-        .brand-item img { max-height: 45px; width: auto; }
-
-        .arrow-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-            background: #1a1d20;
-            border: 2px solid var(--runner-grey);
+        .logistics-card {
+            background: var(--panel-dark);
+            border: 3px solid var(--runner-grey);
+            text-decoration: none;
             color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            display: block;
+        }
+
+        .logistics-card:hover {
+            border-color: var(--safety-yellow);
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            height: 180px;
+            background: #222;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            transition: 0.2s;
-        }
-
-        .arrow-btn:hover { border-color: var(--safety-yellow); background: #2a2d30; }
-        .left-arrow { left: 5px; }
-        .right-arrow { right: 5px; }
-
-        /* --- MAIN PRODUCT GRID --- */
-        .main-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .kit-card {
-            background: var(--panel-dark);
-            border: 4px solid var(--runner-grey);
-            border-radius: 4px;
             overflow: hidden;
-            transition: transform 0.3s;
         }
 
-        .kit-card:hover { transform: translateY(-10px); border-color: var(--safety-yellow); }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.3s; }
+        .logistics-card:hover .card-img img { opacity: 1; }
 
-        .kit-image { width: 100%; height: 280px; background: #222; cursor: pointer; }
+        .card-info { padding: 25px; }
+        .card-tag { font-size: 10px; font-weight: 900; color: var(--safety-yellow); text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .card-title { font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
 
-        .kit-details { padding: 25px; }
-
-        .kit-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; height: 44px; overflow: hidden; }
-
-        .kit-price { color: var(--safety-yellow); font-size: 22px; font-weight: 900; margin-bottom: 20px; }
-
-        .btn-action {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            font-size: 13px;
-            letter-spacing: 1px;
-        }
-
-        .btn-cart { background: var(--plastic-red); color: white; }
-        .btn-pre { background: #004a99; color: white; }
-
-        /* --- BOX-ART FOOTER --- */
+        /* --- FOOTER (INDEX CONSISTENCY) --- */
         footer {
             background-color: var(--panel-dark);
             border-top: 10px solid var(--runner-grey);
             color: #ffffff;
             padding: 80px 40px;
-            margin-top: 40px;
+            margin-top: 100px;
         }
 
         .footer-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
-            gap: 60px;
+            max-width: 1400px; margin: 0 auto;
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 60px;
         }
 
         .footer-col h3 { color: var(--safety-yellow); text-transform: uppercase; margin-bottom: 25px; font-size: 20px; }
-
-        .footer-col h4 {
-            font-size: 15px;
-            margin-bottom: 25px;
-            border-left: 4px solid var(--plastic-red);
-            padding-left: 12px;
-            text-transform: uppercase;
-        }
-
+        .footer-col h4 { font-size: 15px; margin-bottom: 25px; border-left: 4px solid var(--plastic-red); padding-left: 12px; text-transform: uppercase; }
         .footer-col p, .footer-col li { font-size: 13px; line-height: 1.8; color: var(--text-sub); }
         .footer-col ul { list-style: none; padding: 0; }
-        .footer-col li { cursor: pointer; transition: 0.2s; margin-bottom: 8px; }
-        .footer-col li:hover { color: white; }
-
-        .warning-box {
-            border: 4px solid #ffffff;
-            padding: 25px;
-            background-color: #000;
-            margin-bottom: 20px;
-        }
-
+        
+        .warning-box { border: 4px solid #ffffff; padding: 25px; background-color: #000; margin-bottom: 20px; }
         .warning-title { color: #ff0000; font-size: 18px; font-weight: 900; text-align: center; margin: 0 0 12px 0; }
         .warning-text { font-size: 11px; line-height: 1.5; text-align: justify; margin: 0; text-transform: uppercase; }
 
-        .copyright-bar {
-            max-width: 1400px;
-            margin: 60px auto 0;
-            border-top: 1px solid #333;
-            padding-top: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 11px;
-            color: #666;
-            text-transform: uppercase;
-        }
     </style>
 </head>
 <body>
 
 <header>
     <div class="top-bar">
-        <div class="logo" onclick="location.href='index.html'">Prime<span>Vault</span></div>
+        <a href="index.html" class="logo">Prime<span>Vault</span></a>
         <div class="search-container">
-            <input type="text" id="mainSearch" class="search-bar" placeholder="Search Hangar (Gunpla, Tools, Brands)...">
+            <input type="text" class="search-bar" placeholder="Search Hangar (Gunpla, Tools, Brands)...">
         </div>
         <div class="user-actions">
             <span class="icon-link">👤</span>
-            <span class="icon-link" onclick="location.href='cart.html'">🛒</span>
+            <a href="cart.html" class="icon-link">🛒</a>
         </div>
     </div>
 
@@ -356,82 +233,95 @@
             <span class="nav-item">Prime Picks</span>
             <div class="mega-panel">
                 <div style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;">
-                    <div><h4 style="border-bottom: 2px solid #000; padding-bottom: 10px;">Themes</h4><ul style="list-style:none; padding:0;"><li>Sci-Fi / Mecha</li><li>WWII Military</li></ul></div>
-                    <div><h4 style="border-bottom: 2px solid #000; padding-bottom: 10px;">Series</h4><ul style="list-style:none; padding:0;"><li>Master Grade</li><li>Real Grade</li></ul></div>
+                    <div><h4 style="border-bottom: 2px solid #000; padding-bottom: 10px;">Themes</h4><ul style="list-style:none; padding:0; line-height: 2;"><li>Sci-Fi / Mecha</li><li>WWII Military</li><li>Aviation</li></ul></div>
+                    <div><h4 style="border-bottom: 2px solid #000; padding-bottom: 10px;">Series</h4><ul style="list-style:none; padding:0; line-height: 2;"><li>Master Grade</li><li>Real Grade</li><li>High Grade</li></ul></div>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<section class="carousel-section" style="background-color: #0d0e10; padding: 60px 0 40px 0; border-bottom: 2px solid #464a4e; position: relative; font-family: 'Segoe UI', Tahoma, sans-serif;">
-    <div class="brand-reel-container" style="max-width: 1400px; margin: 0 auto; padding: 0 60px; position: relative;">
-        
-        <h2 style="position: absolute; top: -45px; left: 60px; font-size: 14px; text-transform: uppercase; color: #f9d71c; letter-spacing: 2px; border-left: 4px solid #cc0000; padding-left: 15px;">Official Logistics Partners</h2>
-        
-        <button class="arrow-btn left-arrow" onclick="scrollBrands(-1)" style="position: absolute; top: 50%; transform: translateY(-50%); left: 5px; z-index: 10; background: #1a1d20; border: 2px solid #464a4e; color: white; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 18px;">&#10094;</button>
-        
-        <div id="brandTrack" class="brand-track" style="display: flex; overflow-x: hidden; scroll-behavior: smooth; gap: 60px; align-items: center; padding: 15px 0;">
-            
-            <a href="tamiya.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; filter: grayscale(100%); transition: 0.4s;">
-                <img src="images/gundam.jpeg" alt="Gundam" style="max-height: 75px; width: auto;">
-            </a>
+<main class="directory-main">
 
-            <a href="bandai.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; filter: grayscale(100%); transition: 0.4s;">
-                <img src="images/bandai.jpeg" alt="Bandai" style="max-height: 75px; width: auto;">
-            </a>
-
-            <a href="hasegawa.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; filter: grayscale(100%); transition: 0.4s;">
-                <img src="images/hasegawa.jpeg" alt="Hasegawa" style="max-height: 75px; width: auto;">
-            </a>
-
-            <a href="revell.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; filter: grayscale(100%); transition: 0.4s;">
-                <img src="images/revell.jpeg" alt="Revell" style="max-height: 75px; width: auto;">
-            </a>
-
-            <a href="italeri.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; filter: grayscale(100%); transition: 0.4s;">
-                <img src="images/italeri.jpeg" alt="Italeri" style="max-height: 75px; width: auto;">
-            </a>
-
-            <a href="goodsmile.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; filter: grayscale(100%); transition: 0.4s;">
-                <img src="images/good-smile-company.jpeg" alt="Good Smile" style="max-height: 75px; width: auto;">
-            </a>
-
-        </div>
-
-        <button class="arrow-btn right-arrow" onclick="scrollBrands(1)" style="position: absolute; top: 50%; transform: translateY(-50%); right: 5px; z-index: 10; background: #1a1d20; border: 2px solid #464a4e; color: white; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 18px;">&#10095;</button>
-        
+    <div class="section-header">
+        Companies <span>MANUFACTURER DATA</span>
     </div>
-</section>
-
-<div class="main-content">
-    <div class="kit-card">
-        <div class="kit-image" onclick="location.href='hi-v-gundam.html'"></div>
-        <div class="kit-details">
-            <div class="kit-title">RG 1/144 RX-93-v2 Hi-v Gundam (Beltorchika's Children)</div>
-            <div class="kit-price">$54.99</div>
-            <button class="btn-action btn-cart" onclick="addToCart('RG Hi-v Gundam', 54.99, 'In Stock')">Add to Cart</button>
-        </div>
+    <div class="grid-layout">
+        <a href="bandai.html" class="logistics-card">
+            <div class="card-img"><div style="font-weight:900; font-size:24px; color:#e2001a">BANDAI SPIRITS</div></div>
+            <div class="card-info">
+                <span class="card-tag">Logistics Level 1</span>
+                <div class="card-title">Bandai Hobby</div>
+            </div>
+        </a>
+        <a href="tamiya.html" class="logistics-card">
+            <div class="card-img"><div style="font-weight:900; font-size:24px; color:#005aaa">TAMIYA</div></div>
+            <div class="card-info">
+                <span class="card-tag">Precision Engineering</span>
+                <div class="card-title">Tamiya Inc.</div>
+            </div>
+        </a>
+        <a href="kotobukiya.html" class="logistics-card">
+            <div class="card-img"><div style="font-weight:900; font-size:24px; color:#8cc63f">KOTOBUKIYA</div></div>
+            <div class="card-info">
+                <span class="card-tag">Craftsmanship</span>
+                <div class="card-title">Kotobukiya</div>
+            </div>
+        </a>
     </div>
 
-    <div class="kit-card">
-        <div class="kit-image" onclick="location.href='product.html'"></div>
-        <div class="kit-details">
-            <div class="kit-title">MG 1/100 Gundam Barbatos (Iron-Blooded Orphans)</div>
-            <div class="kit-price">$48.00</div>
-            <button class="btn-action btn-cart" onclick="addToCart('MG Barbatos', 48.00, 'In Stock')">Add to Cart</button>
-        </div>
+    <div class="section-header">
+        Themes <span>OPERATIONAL CATEGORIES</span>
+    </div>
+    <div class="grid-layout">
+        <a href="#" class="logistics-card">
+            <div class="card-img"><img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600" alt="Sci-Fi"></div>
+            <div class="card-info">
+                <span class="card-tag">Speculative Tech</span>
+                <div class="card-title">Science Fiction</div>
+            </div>
+        </a>
+        <a href="#" class="logistics-card">
+            <div class="card-img"><img src="https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?q=80&w=600" alt="Military"></div>
+            <div class="card-info">
+                <span class="card-tag">Historical Combat</span>
+                <div class="card-title">Military / Armor</div>
+            </div>
+        </a>
+        <a href="#" class="logistics-card">
+            <div class="card-img"><img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=600" alt="Auto"></div>
+            <div class="card-info">
+                <span class="card-tag">Civilian Logistics</span>
+                <div class="card-title">Cars / Bikes</div>
+            </div>
+        </a>
     </div>
 
-    <div class="kit-card">
-        <div class="kit-image" onclick="location.href='product.html'"></div>
-        <div class="kit-details">
-            <div class="kit-title">HG 1/144 Gundam Calibarn (Permet Score 8 Edition)</div>
-            <div class="kit-price">$26.50</div>
-            <button class="btn-action btn-pre" onclick="addToCart('HG Calibarn', 26.50, 'Pre-Order')">Pre-Order</button>
-        </div>
+    <div class="section-header">
+        Series <span>PRODUCT LINES</span>
     </div>
-</div>
+    <div class="grid-layout">
+        <a href="#" class="logistics-card">
+            <div class="card-info" style="border-top: 5px solid var(--plastic-red);">
+                <span class="card-tag">Bandai Spirits</span>
+                <div class="card-title">Mobile Suit Gundam</div>
+            </div>
+        </a>
+        <a href="#" class="logistics-card">
+            <div class="card-info" style="border-top: 5px solid var(--plastic-red);">
+                <span class="card-tag">Kotobukiya</span>
+                <div class="card-title">Frame Arms</div>
+            </div>
+        </a>
+        <a href="#" class="logistics-card">
+            <div class="card-info" style="border-top: 5px solid var(--plastic-red);">
+                <span class="card-tag">Good Smile</span>
+                <div class="card-title">Moderoid Series</div>
+            </div>
+        </a>
+    </div>
+
+</main>
 
 <footer style="background-color: #16181b; border-top: 10px solid #464a4e; color: #ffffff; padding: 80px 40px; font-family: 'Segoe UI', Tahoma, sans-serif;">
     <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 60px;">
@@ -497,25 +387,6 @@
 </footer>
 
 
-
-<script>
-    function scrollBrands(direction) {
-    const track = document.getElementById('brandTrack');
-    const scrollAmount = 350;
-    track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-}
-
-    function addToCart(name, price, status) {
-        let cart = JSON.parse(localStorage.getItem('pv_cart')) || [];
-        cart.push({ id: Date.now(), name: name, price: price, status: status, qty: 1 });
-        localStorage.setItem('pv_cart', JSON.stringify(cart));
-        window.location.href = 'cart.html';
-    }
-
-    document.getElementById('mainSearch').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') alert('Initiating Search for: ' + this.value);
-    });
-</script>
-
 </body>
 </html>
+

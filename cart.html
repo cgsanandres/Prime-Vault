@@ -3,1215 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrimeVault - Your Hangar</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Your Hangar | PrimeVault Logistics</title>
     <style>
-        /* --- Reusable Variables & Base Styles (from index.html) --- */
         :root {
-            --bg-color: #1a1a1a;
-            --header-red: #cc0000;
-            --text-white: #ffffff;
-            --card-bg: #2d2d2d;
-            --input-bg: #3c3c3c;
-            --input-border: #555555;
-            --button-hover: #e60000;
-            --transition: all 0.3s ease;
-            --font-inter: 'Inter', sans-serif;
-            --runner-border-color: #3A3F44; /* Gunmetal grey for runner borders */
-            --preorder-tag-color: #007bff; /* Bright blue for pre-order tags */
-            --favorite-highlight-color: #ffc107; /* Bandai Safety Yellow for favorites */
-            --panel-line-shadow: inset 0 2px 5px rgba(0,0,0,0.4);
-            --nubs-size: 8px;
+            --bg-color: #0d0e10;
+            --runner-grey: #464a4e;
+            --plastic-red: #cc0000;
+            --safety-yellow: #f9d71c;
+            --panel-dark: #16181b;
+            --pure-white: #ffffff;
+            --text-sub: #b0b0b0;
         }
 
         body {
-            margin: 0;
-            padding: 0;
             background-color: var(--bg-color);
-            color: var(--text-white);
-            font-family: var(--font-inter);
-            font-size: 16px;
-            line-height: 1.6;
+            color: var(--pure-white);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
             overflow-x: hidden;
         }
 
-        a {
-            color: var(--text-white);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        a:hover {
-            color: var(--header-red);
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            margin-top: 0;
-            margin-bottom: 0.5em;
-            font-weight: 700;
-        }
-
-        .main-header {
-            background-color: var(--header-red);
+        /* --- HEADER & INDEX-STYLE NAVIGATION --- */
+        header {
+            background: var(--panel-dark);
+            border-bottom: 5px solid var(--runner-grey);
             position: sticky;
             top: 0;
-            z-index: 2000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            border-bottom: 3px solid var(--runner-border-color);
-            position: relative;
+            z-index: 9999;
         }
 
-        .main-header::before,
-        .main-header::after {
-            content: '';
-            position: absolute;
-            height: var(--nubs-size);
-            width: var(--nubs-size);
-            background-color: var(--runner-border-color);
-            border-radius: 50%;
-            top: -4px;
-            z-index: 2001;
-        }
-
-        .main-header::before {
-            left: 10px;
-        }
-
-        .main-header::after {
-            right: 10px;
-        }
-
-        .header-top-runner {
+        .top-bar {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            justify-content: space-between;
+            padding: 10px 40px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        .logo-container {
-            flex-shrink: 0;
-        }
+        .logo { font-size: 26px; font-weight: 900; text-transform: uppercase; text-decoration: none; color: white; }
+        .logo span { color: var(--plastic-red); }
 
-        .site-logo {
-            max-width: 150px;
-            filter: brightness(1.5);
-        }
-
-        .main-nav-links {
-            display: flex;
-            gap: 20px;
+        .search-container {
             flex-grow: 1;
-            justify-content: center;
-        }
-
-        .nav-item {
-            color: var(--text-white);
-            font-weight: 700;
-            padding: 10px 0;
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-item i {
-            margin-left: 5px;
-            font-size: 0.8em;
-        }
-
-        .nav-item:hover {
-            color: var(--text-white);
-        }
-
-        .nav-item::after {
-            content: '';
-            display: block;
-            width: 0;
-            height: 3px;
-            background: var(--text-white);
-            transition: width var(--transition);
-            position: absolute;
-            bottom: 0;
-            left: 0;
-        }
-
-        .nav-item:hover::after {
-            width: 100%;
-            background: var(--button-hover);
-        }
-
-        .has-mega-menu {
-            position: relative;
-        }
-
-        .mega-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
-            min-width: 900px;
-            z-index: 1000;
-            border: 2px solid var(--runner-border-color);
-        }
-
-        .has-mega-menu:hover .mega-menu {
-            display: flex;
-        }
-
-        .brands-mega-menu {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
-        }
-
-        .brand-logo-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--input-bg);
-            padding: 10px;
-            border-radius: 5px;
-            transition: var(--transition);
-            border: 1px solid var(--input-border);
-        }
-
-        .brand-logo-link img {
-            max-width: 100%;
-            max-height: 40px;
-            display: block;
-            filter: grayscale(100%) brightness(1.5);
-            transition: var(--transition);
-        }
-
-        .brand-logo-link:hover {
-            background-color: var(--header-red);
-            border-color: var(--header-red);
-        }
-
-        .brand-logo-link:hover img {
-            filter: grayscale(0%) brightness(1);
-        }
-
-        .more-brands-button {
-            background-color: var(--header-red);
-            color: var(--text-white);
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid var(--header-red);
-        }
-
-        .more-brands-button:hover {
-            background-color: var(--button-hover);
-            border-color: var(--button-hover);
-        }
-
-        .more-brands-button i {
-            margin-left: 8px;
-        }
-
-        .picks-mega-menu {
-            display: flex;
-            gap: 40px;
-            text-align: left;
-        }
-
-        .mega-menu-column h3 {
-            color: var(--header-red);
-            font-size: 1.2em;
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--runner-border-color);
-            padding-bottom: 8px;
-        }
-
-        .mega-menu-column ul li {
-            margin-bottom: 8px;
-        }
-
-        .mega-menu-column ul li a {
-            color: var(--text-white);
-            display: flex;
-            align-items: center;
-        }
-
-        .mega-menu-column ul li a:hover {
-            color: var(--header-red);
-        }
-
-        .mega-menu-column ul li i {
-            margin-right: 10px;
-            color: var(--runner-border-color);
-        }
-
-        .favorites-column h3 {
-            color: var(--favorite-highlight-color);
-        }
-
-        .favorites-column ul li a {
-            color: var(--favorite-highlight-color);
-            font-weight: 700;
-        }
-
-        .favorites-column ul li a:hover {
-            color: var(--header-red);
-        }
-
-        .header-utility {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            max-width: 650px;
+            margin: 0 40px;
         }
 
         .search-bar {
-            display: flex;
-            background-color: var(--input-bg);
-            border-radius: 5px;
-            overflow: hidden;
-            border: 1px solid var(--input-border);
-            transition: var(--transition);
-        }
-
-        .search-bar:focus-within {
-            border-color: var(--header-red);
-            box-shadow: 0 0 0 2px rgba(204, 0, 0, 0.3);
-        }
-
-        .search-input {
-            background: transparent;
-            border: none;
-            padding: 8px 12px;
-            color: var(--text-white);
-            outline: none;
-            font-size: 0.9em;
-            width: 200px;
-        }
-
-        .search-input::placeholder {
-            color: #888888;
-        }
-
-        .search-button {
-            background-color: var(--header-red);
-            border: none;
-            color: var(--text-white);
-            padding: 8px 12px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .search-button:hover {
-            background-color: var(--button-hover);
-        }
-
-        .utility-icon {
-            font-size: 1.4em;
-            color: var(--text-white);
-        }
-
-        .utility-icon:hover {
-            color: var(--button-hover);
-        }
-
-        .main-content {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        .section-divider {
-            background-color: var(--runner-border-color);
-            height: 3px;
             width: 100%;
-            margin: 40px 0;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 2px;
-        }
-
-        .section-divider h2 {
-            background-color: var(--bg-color);
-            padding: 0 20px;
-            color: var(--header-red);
-            font-size: 1.8em;
-            text-transform: uppercase;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* --- Cart Specific Styles --- */
-        .cart-container {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            border: 2px solid var(--runner-border-color);
-            padding: 30px;
-            margin-top: 30px;
-            margin-bottom: 50px;
-        }
-
-        .cart-header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--runner-border-color);
-            padding-bottom: 15px;
-        }
-
-        .cart-header h1 {
-            font-size: 2.5em;
-            color: var(--header-red);
-            text-transform: uppercase;
-        }
-
-        .cart-header p {
-            font-size: 1.1em;
-            color: #cccccc;
-        }
-
-        .cart-items {
-            display: grid;
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .cart-item {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background-color: #212121; /* Slightly darker than card-bg for item separation */
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px solid var(--input-border);
-            transition: var(--transition);
-        }
-
-        .cart-item:hover {
-            background-color: #2a2a2a;
-            transform: translateY(-3px);
-        }
-
-        .cart-item-image {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
+            background: #000;
+            border: 2px solid var(--runner-grey);
+            padding: 12px 15px;
+            color: white;
             border-radius: 4px;
-            flex-shrink: 0;
-        }
-
-        .cart-item-details {
-            flex-grow: 1;
-        }
-
-        .cart-item-title {
-            font-size: 1.2em;
-            margin-bottom: 5px;
-        }
-
-        .cart-item-title a {
-            color: var(--text-white);
-        }
-
-        .cart-item-title a:hover {
-            color: var(--header-red);
-        }
-
-        .cart-item-price {
-            font-weight: 700;
-            color: var(--header-red);
-            font-size: 1.1em;
-        }
-
-        .cart-item-actions {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            background-color: var(--input-bg);
-            border-radius: 4px;
-            border: 1px solid var(--input-border);
-        }
-
-        .quantity-selector button {
-            background: none;
-            border: none;
-            color: var(--text-white);
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 1.1em;
-            transition: var(--transition);
-        }
-
-        .quantity-selector button:hover {
-            background-color: var(--header-red);
-        }
-
-        .quantity-selector input {
-            background: transparent;
-            border: none;
-            width: 40px;
-            text-align: center;
-            color: var(--text-white);
             outline: none;
-            font-size: 1em;
+            font-size: 14px;
         }
 
-        .remove-item-button {
-            background-color: #dc3545; /* Red for removal */
-            color: var(--text-white);
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
+        .search-bar:focus { border-color: var(--safety-yellow); }
+
+        .user-actions { display: flex; gap: 20px; font-size: 22px; }
+        .action-icon { color: white; text-decoration: none; cursor: pointer; }
+
+        .nav-strip { display: flex; padding: 0 40px; background: var(--panel-dark); max-width: 1400px; margin: 0 auto; }
+        
+        /* The Invisible Bridge */
+        .nav-wrapper { position: relative; padding-bottom: 15px; margin-bottom: -15px; }
+        
+        .nav-item {
+            color: white;
+            text-decoration: none;
             font-weight: 700;
-            transition: var(--transition);
-            font-size: 0.9em;
-        }
-
-        .remove-item-button:hover {
-            background-color: #c82333;
-        }
-
-        .cart-summary {
-            background-color: var(--input-bg);
-            padding: 25px;
-            border-radius: 8px;
-            border: 1px solid var(--input-border);
-            margin-left: auto;
-            max-width: 350px;
-        }
-
-        .cart-summary h3 {
-            font-size: 1.5em;
-            color: var(--header-red);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-			             font-size: 1.1em;
-         }
-
-        .summary-row.total {
-            font-weight: 700;
-            font-size: 1.3em;
-            color: var(--favorite-highlight-color);
-            border-top: 1px solid var(--runner-border-color);
-            padding-top: 15px;
-            margin-top: 15px;
-        }
-
-        .checkout-button {
-            background-color: var(--header-red);
-            color: var(--text-white);
-            border: none;
+            font-size: 13px;
+            text-transform: uppercase;
             padding: 15px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 1.2em;
-            width: 100%;
-            margin-top: 25px;
-            transition: var(--transition);
-            text-transform: uppercase;
-            box-shadow: var(--panel-line-shadow);
-        }
-
-        .checkout-button:hover {
-            background-color: var(--button-hover);
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.6);
-        }
-
-        .save-for-later-section {
-            margin-top: 50px;
-            border-top: 2px solid var(--runner-border-color);
-            padding-top: 30px;
-        }
-
-        .save-for-later-section h2 {
-            text-align: center;
-            font-size: 2em;
-            color: var(--header-red);
-            margin-bottom: 30px;
-            text-transform: uppercase;
-        }
-
-        .save-for-later-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .save-for-later-item {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            border: 2px solid var(--runner-border-color);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            transition: var(--transition);
-        }
-
-        .save-for-later-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .save-item-image {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
             display: block;
         }
 
-        .save-item-details {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
+        /* THE INDEX-MATCHING PANELS */
+        .mega-panel {
+            position: fixed;
+            top: 108px;
+            left: 0;
+            width: 100vw;
+            background: #ffffff;
+            color: #000;
+            display: none;
+            padding: 40px;
+            box-sizing: border-box;
+            border-bottom: 8px solid var(--runner-grey);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
         }
 
-        .save-item-title {
-            font-size: 1.1em;
-            min-height: 3.2em; /* Consistent height */
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
+        .nav-wrapper:hover .mega-panel { display: block; }
+        .nav-wrapper:hover .nav-item { color: var(--safety-yellow); }
 
-        .save-item-title a {
-            color: var(--text-white);
-        }
+        .brands-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; max-width: 1200px; margin: 0 auto; }
+        .brand-box { border: 1px solid #ddd; padding: 20px; text-align: center; font-weight: 800; color: #222; text-decoration: none; font-size: 11px; text-transform: uppercase; }
+        .brand-box:hover { border-color: var(--plastic-red); color: var(--plastic-red); background: #f9f9f9; }
 
-        .save-item-title a:hover {
-            color: var(--header-red);
-        }
+        .picks-content { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .picks-col h4 { text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; }
+        .picks-col ul { list-style: none; padding: 0; font-size: 14px; line-height: 2; color: #444; }
 
-        .save-item-price {
-            font-weight: 700;
-            color: var(--header-red);
-            font-size: 1.1em;
-            margin-top: 10px;
-        }
+        /* --- CART LAYOUT --- */
+        .cart-main { max-width: 1400px; margin: 40px auto; padding: 0 40px; display: grid; grid-template-columns: 1fr 380px; gap: 40px; }
+        .cart-header { font-size: 32px; font-weight: 900; text-transform: uppercase; border-left: 10px solid var(--plastic-red); padding-left: 20px; margin-bottom: 30px; }
 
-        .save-item-actions {
-            margin-top: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding-top: 15px;
-            border-top: 1px dashed rgba(255, 255, 255, 0.1);
-        }
+        .category-tab { padding: 10px 20px; font-size: 12px; font-weight: 900; text-transform: uppercase; margin-bottom: 0; }
+        .tab-pre { background: #005a8c; }
+        .tab-stock { background: #4b6329; }
 
-        .move-to-cart-button {
-            background-color: var(--preorder-tag-color); /* Use a blue/green for "move back" */
-            color: var(--text-white);
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: var(--transition);
-            font-size: 0.9em;
-        }
+        .item-row { display: grid; grid-template-columns: 120px 1fr 120px 120px; border-bottom: 1px solid var(--runner-grey); padding: 25px 0; align-items: center; }
+        .item-img { width: 100px; height: 100px; background: #222; border: 1px solid var(--runner-grey); }
+        .price-text { font-weight: 900; color: var(--safety-yellow); font-size: 18px; text-align: right; }
+        
+        .qty-select { background: #000; color: #fff; border: 1px solid var(--runner-grey); padding: 5px; }
 
-        .move-to-cart-button:hover {
-            background-color: darken(var(--preorder-tag-color), 10%);
-        }
+        .summary-side { background: var(--panel-dark); padding: 30px; border: 4px solid var(--runner-grey); height: fit-content; position: sticky; top: 150px; }
+        .total-row { display: flex; justify-content: space-between; margin: 15px 0; font-weight: 900; font-size: 22px; border-top: 2px solid var(--plastic-red); padding-top: 15px; }
 
-        .remove-save-button {
-            background-color: #6c757d; /* Grey for removal from saved */
-            color: var(--text-white);
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: var(--transition);
-            font-size: 0.85em;
-        }
-
-        .remove-save-button:hover {
-            background-color: #5a6268;
-        }
-
-        /* --- Responsive Styles (from index.html, adapted for cart) --- */
-        @media (max-width: 1200px) {
-            .header-top-runner {
-                padding: 10px 15px;
-            }
-            .main-nav-links {
-                gap: 15px;
-            }
-            .mega-menu {
-                min-width: 700px;
-            }
-            .cart-container {
-                padding: 20px;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .main-nav-links {
-                display: none;
-            }
-            .header-top-runner {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-            .search-bar {
-                width: 100%;
-                order: 3;
-            }
-            .mega-menu {
-                min-width: unset;
-                width: 90%;
-                left: 5%;
-                transform: translateX(0);
-            }
-            .picks-mega-menu {
-                flex-direction: column;
-            }
-            .footer-sections {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .social-icons, .newsletter-signup, .barcode-graphic {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .cart-container {
-                display: flex;
-                flex-direction: column;
-                gap: 30px;
-            }
-            .cart-summary {
-                max-width: 100%;
-                margin: 0;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .cart-item {
-                flex-direction: column;
-                align-items: flex-start;
-                text-align: center;
-            }
-            .cart-item-image {
-                width: 100%;
-                height: 120px;
-                margin-bottom: 15px;
-            }
-            .cart-item-details, .cart-item-actions {
-                width: 100%;
-                justify-content: center;
-            }
-            .quantity-selector {
-                margin: 0 auto 10px;
-            }
-            .remove-item-button {
-                width: 100%;
-            }
-            .save-for-later-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 576px) {
-            .search-input {
-                width: auto;
-            }
-            .logo-container {
-                width: 100%;
-                text-align: center;
-            }
-            .site-logo {
-                max-width: 120px;
-            }
-            .header-utility {
-                width: 100%;
-                justify-content: space-around;
-            }
-            .cart-item {
-                padding: 10px;
-                gap: 10px;
-            }
-            .cart-item-image {
-                height: 100px;
-            }
-            .cart-header h1 {
-                font-size: 2em;
-            }
-            .save-for-later-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Additional CSS for cart layout */
-        .cart-content-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 350px; /* Cart items on left, summary on right */
-            gap: 30px;
-        }
-
-        @media (max-width: 992px) {
-            .cart-content-wrapper {
-                grid-template-columns: 1fr; /* Stack on smaller screens */
-            }
-        }
-
+        .btn-checkout { width: 100%; padding: 15px; background: var(--plastic-red); color: white; border: none; font-weight: 900; text-transform: uppercase; cursor: pointer; }
     </style>
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-top-runner">
-            <div class="logo-container">
-                <a href="index.html"><img src="primevault_logo.png" alt="PrimeVault Logo" class="site-logo"></a>
-            </div>
-            <nav class="main-nav-links">
-                <a href="#" class="nav-item">Pre-orders</a>
-                <a href="#" class="nav-item">New Arrivals</a>
-                <a href="#" class="nav-item">On Sale</a>
-                <div class="nav-item has-mega-menu">
-                    <a href="#">Brands <i class="fas fa-chevron-down"></i></a>
-                    <div class="mega-menu brands-mega-menu">
-                        <div class="brand-grid">
-                            <!-- Brands will be dynamically loaded or pre-filled here -->
-                            <a href="#" class="brand-logo-link"><img src="logos/tamiya.png" alt="Tamiya Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/bandai_spirits.png" alt="Bandai Spirits Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/hasegawa.png" alt="Hasegawa Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/revell.png" alt="Revell Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/airfix.png" alt="Airfix Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/italeri.png" alt="Italeri Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/trumpeter.png" alt="Trumpeter Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/academy.png" alt="Academy Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/meng_model.png" alt="Meng Model Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/eduard.png" alt="Eduard Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/aoshima.png" alt="Aoshima Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/zvezda.png" alt="Zvezda Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/fujimi.png" alt="Fujimi Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/takom.png" alt="Takom Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/hobby_boss.png" alt="Hobby Boss Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/kotobukiya.png" alt="Kotobukiya Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/good_smile_company.png" alt="Good Smile Company Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/rye_field_model.png" alt="Rye Field Model Logo"></a>
-                            <a href="#" class="brand-logo-link"><img src="logos/dragon_models.png" alt="Dragon Models Logo"></a>
-                            <a href="#" class="brand-logo-link"><button class="more-brands-button">More Brands <i class="fas fa-arrow-right"></i></button></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="nav-item has-mega-menu">
-                    <a href="#">Picks <i class="fas fa-chevron-down"></i></a>
-                    <div class="mega-menu picks-mega-menu">
-                        <div class="mega-menu-column">
-                            <h3>Themes</h3>
-                            <ul>
-                                <li><a href="#"><i class="fas fa-tank"></i> WWII Military</a></li>
-                                <li><a href="#"><i class="fas fa-robot"></i> Sci-Fi & Mecha</a></li>
-                                <li><a href="#"><i class="fas fa-car"></i> Automotive</a></li>
-                                <li><a href="#"><i class="fas fa-plane"></i> Modern Warfare</a></li>
-                                <li><a href="#"><i class="fas fa-plane-departure"></i> Civilian Aviation</a></li>
-                                <li><a href="#"><i class="fas fa-ship"></i> Maritime</a></li>
-                                <li><a href="#"><i class="fas fa-venus"></i> Bishojo</a></li>
-                            </ul>
-                        </div>
-                        <div class="mega-menu-column">
-                            <h3>Companies</h3>
-                            <ul>
-                                <li><a href="#">Bandai</a></li>
-                                <li><a href="#">Kotobukiya</a></li>
-                                <li><a href="#">Tamiya</a></li>
-                                <li><a href="#">Hasegawa</a></li>
-                                <li><a href="#">Good Smile</a></li>
-                                <li><a href="#">Max Factory</a></li>
-                                <li><a href="#">Megahouse</a></li>
-                            </ul>
-                        </div>
-                        <div class="mega-menu-column">
-                            <h3>Series</h3>
-                            <ul>
-                                <li><a href="#">Gundam Universal Century</a></li>
-                                <li><a href="#">Gundam Seed</a></li>
-                                <li><a href="#">Macross</a></li>
-                                <li><a href="#">Evangelion</a></li>
-                                <li><a href="#">Star Wars</a></li>
-                                <li><a href="#">Frame Arms Girl</a></li>
-                                <li><a href="#">Megami Device</a></li>
-                            </ul>
-                        </div>
-                        <div class="mega-menu-column favorites-column">
-                            <h3>Favorites</h3>
-                            <ul>
-                                <li><a href="#"><i class="fas fa-star"></i> New Tooling / Recent Releases</a></li>
-                                <li><a href="#"><i class="fas fa-crown"></i> P-Bandai / Limited Editions</a></li>
-                                <li><a href="#"><i class="fas fa-wrench"></i> Hobby Tools & Supplies</a></li>
-                                <li><a href="#"><i class="fas fa-display"></i> Display Cases & Stands</a></li>
-                                <li><a href="#"><i class="fas fa-microchip"></i> Detail Up Parts</a></li>
-                                <li><a href="#"><i class="fas fa-brush"></i> Paint & Weathering</a></li>
-                                <li><a href="#"><i class="fas fa-tag"></i> Clearance / "Backlog" Deals</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <a href="#" class="nav-item">Anime</a>
-                <a href="#" class="nav-item">Gaming</a>
-            </nav>
-            <div class="header-utility">
-                <div class="search-bar">
-                    <input type="text" placeholder="The perfect kit awaits..." class="search-input">
-                    <button class="search-button"><i class="fas fa-search"></i></button>
-                </div>
-                <a href="login.html" class="utility-icon"><i class="fas fa-user-circle"></i></a>
-                <a href="cart.html" class="utility-icon"><i class="fas fa-shopping-cart"></i></a>
-            </div>
+
+<header>
+    <div class="top-bar">
+        <a href="index.html" class="logo">Prime<span>Vault</span></a>
+        <div class="search-container"><input type="text" class="search-bar" placeholder="Search Hangar (Gunpla, Tools, Brands)..."></div>
+        <div class="user-actions">
+            <span class="action-icon">👤</span>
+            <span class="action-icon" style="color:var(--safety-yellow)">🛒</span>
         </div>
-    </header>
-
-    <main class="main-content">
-        <div class="cart-container">
-            <div class="cart-header">
-                <h1>Your Hangar</h1>
-                <p>Review your assembled payload before deployment.</p>
-            </div>
-
-            <div class="cart-content-wrapper">
-                <div class="cart-items" id="cartItemsContainer">
-                     <!-- Cart items will be dynamically loaded here by JavaScript -->
-                    <p id="emptyCartMessage" style="text-align: center; color: #ccc; font-size: 1.2em; margin-top: 30px;">
-                        Your Hangar is empty. Start adding some awesome kits!
-                    </p>
-                </div>
-
-                <div class="cart-summary">
-                    <h3>Hangar Manifest</h3>
-                    <div class="summary-row">
-                        <span>Subtotal:</span>
-                        <span id="subtotalPrice">$0.00</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Shipping:</span>
-                        <span id="shippingCost">$0.00</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Tax (Estimated):</span>
-                        <span id="taxCost">$0.00</span>
-                    </div>
-                    <div class="summary-row total">
-                        <span>Total:</span>
-                        <span id="totalPrice">$0.00</span>
-                    </div>
-
-                    <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--input-border);">
-                        <label for="countrySelector" style="display: block; margin-bottom: 10px; color: #ccc;">Select Deployment Zone:</label>
-                        <select id="countrySelector" style="width: 100%; padding: 10px; border-radius: 5px; background-color: var(--input-bg); color: var(--text-white); border: 1px solid var(--input-border);">
-                            <option value="PH">Philippines</option>
-                            <option value="US">United States</option>
-                            <option value="CA">Canada</option>
-                            <option value="UK">United Kingdom</option>
-                            <option value="AU">Australia</option>
-                            <option value="JP">Japan</option>
-                            <option value="SG">Singapore</option>
-                            <!-- Add more countries as needed -->
-                        </select>
-                    </div>
-
-                    <button class="checkout-button">Proceed to Checkout</button>
-                </div>
-            </div>
-
-            <section class="save-for-later-section">
-                <h2>Saved for Later</h2>
-                <div class="save-for-later-grid" id="saveForLaterContainer">
-                    <!-- Saved items will be dynamically loaded here by JavaScript -->
-                    <p id="emptySaveForLaterMessage" style="text-align: center; color: #ccc; font-size: 1em; grid-column: 1 / -1; margin-top: 15px;">
-                        No items in your deferred build list.
-                    </p>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <footer class="main-footer">
-        <div class="footer-runner-frame">
-            <div class="footer-sections">
-                <div class="footer-column">
-                    <h3>MY ACCOUNT</h3>
-                    <ul>
-                        <li><a href="login.html">Sign In</a></li>
-                        <li><a href="register.html">Register</a></li>
-                        <li><a href="#">Pilot's Hangar</a></li>
-                        <li><a href="#">Current Operations</a></li>
-                        <li><a href="cart.html">Shopping Bay</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>MISSION LOG</h3>
-                    <ul>
-                        <li><a href="#">Latest Pre-orders</a></li>
-                        <li><a href="#">Newest Arrivals</a></li>
-                        <li><a href="#">On Sale Items</a></li>
-                        <li><a href="#">All Inventory</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>COMMUNICATIONS</h3>
-                    <ul>
-                        <li><a href="#">Hangar Support</a></li>
-                        <li><a href="#">About PrimeVault</a></li>
-                        <li><a href="#">Package Integrity</a></li>
-                        <li><a href="#">Operation Log</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column footer-social-newsletter">
-                    <h3>JOIN THE SQUADRON</h3>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                    <div class="newsletter-signup">
-                        <input type="email" placeholder="Enter your comms address" class="newsletter-input">
-                        <button class="newsletter-button">Subscribe</button>
-                    </div>
-                    <div class="barcode-graphic">
-                        <img src="barcode.png" alt="Barcode Graphic">
-                    </div>
+    </div>
+    <div class="nav-strip">
+        <div class="nav-wrapper"><a href="#" class="nav-item">Pre-Orders</a></div>
+        <div class="nav-wrapper"><a href="#" class="nav-item">New Arrivals</a></div>
+        
+        <div class="nav-wrapper">
+            <span class="nav-item">Brands</span>
+            <div class="mega-panel">
+                <div class="brands-grid">
+                     <a href="#" class="brand-box">TAMIYA</a>
+                    <a href="#" class="brand-box">BANDAI SPIRITS</a>
+                    <a href="#" class="brand-box">HASEGAWA</a>
+                    <a href="#" class="brand-box">REVELL</a>
+                    <a href="#" class="brand-box">KOTOBUKIYA</a>
+                    <a href="#" class="brand-box">GOOD SMILE CO</a>
+                    <a href="#" class="brand-box">ITALERI</a>
+                    <a href="#" class="brand-box">MENG MODEL</a>
+                    <a href="#" class="brand-box">TRUMPETER</a>
+                    <a href="#" class="brand-box">AOSHIMA</a>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <div class="warning-box">
-                <span>WARNING: CHOKING HAZARD - SMALL PARTS. Not for children under 3 years.</span>
+
+        <div class="nav-wrapper">
+            <span class="nav-item">Picks</span>
+            <div class="mega-panel">
+                <div class="picks-content">
+                    <div class="picks-col"><h4>Themes</h4><ul><li>Sci-Fi / Mecha</li><li>Military</li></ul></div>
+                    <div class="picks-col"><h4>Scale</h4><ul><li>1/100 Master Grade</li><li>1/144 Real Grade</li></ul></div>
+                </div>
             </div>
-            <div class="legal-links">
-                <a href="#">Privacy Protocols</a>
-                <a href="#">Accessibility Directives</a>
-                <a href="#">Terms & Conditions</a>
-                <a href="#">Your Privacy Choices</a>
-            </div>
-            <p class="copyright">Manufactured by PrimeVault &copy; 2026. All rights reserved.</p>
         </div>
-    </footer>
+    </div>
+</header>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const cartItemsContainer = document.getElementById('cartItemsContainer');
-            const saveForLaterContainer = document.getElementById('saveForLaterContainer');
-            const emptyCartMessage = document.getElementById('emptyCartMessage');
-            const emptySaveForLaterMessage = document.getElementById('emptySaveForLaterMessage');
-            const subtotalPriceSpan = document.getElementById('subtotalPrice');
-            const shippingCostSpan = document.getElementById('shippingCost');
-            const taxCostSpan = document.getElementById('taxCost');
-            const totalPriceSpan = document.getElementById('totalPrice');
-            const countrySelector = document.getElementById('countrySelector');
+<div class="cart-main">
+    <section>
+        <h1 class="cart-header">Your Hangar</h1>
+        <div id="cart-content">
+            </div>
+    </section>
 
-            // --- Mega Menu Hover Logic (replicated from index.html) ---
-            const navItemsWithMegaMenu = document.querySelectorAll('.nav-item.has-mega-menu');
-            navItemsWithMegaMenu.forEach(navItem => {
-                let timeout;
-                navItem.addEventListener('mouseenter', () => {
-                    clearTimeout(timeout);
-                    navItem.querySelector('.mega-menu').style.display = 'flex';
-                });
-                navItem.addEventListener('mouseleave', () => {
-                    timeout = setTimeout(() => {
-                        navItem.querySelector('.mega-menu').style.display = 'none';
-                    }, 300);
-                });
-            });
+    <aside class="summary-side">
+        <h2 style="margin-top:0; text-transform:uppercase; font-size:18px;">Logistics Summary</h2>
+        <div id="summary-details">
+            </div>
+        <button class="btn-checkout">Proceed to Secure Checkout</button>
+    </aside>
+</div>
 
-            // --- Cart and Save For Later Management Functions ---
+<footer style="background-color: #16181b; border-top: 10px solid #464a4e; color: #ffffff; padding: 80px 40px; font-family: 'Segoe UI', Tahoma, sans-serif;">
+    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 60px;">
+        
+        <div style="display: flex; flex-direction: column;">
+            <h3 style="color: #f9d71c; font-size: 20px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; font-weight: 900;">PrimeVault Logistics</h3>
+            <p style="font-size: 13px; line-height: 1.8; color: #b0b0b0; margin-bottom: 20px;">
+                Your tactical hangar for the finest precision-engineered plastic models. We distribute authentic Japanese and international hobby kits globally.
+            </p>
+            <p style="font-size: 12px; font-weight: bold; color: #ffffff; text-transform: uppercase; letter-spacing: 1px;">
+                OPERATIONAL STATUS: <span style="color: #00ff00;">READY</span>
+            </p>
+        </div>
 
-            function getCart() {
-                return JSON.parse(localStorage.getItem('primevaultCart')) || [];
-            }
+        <div>
+            <h4 style="font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #cc0000; padding-left: 12px; font-weight: 700;">Support Hangar</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 2;">
+                <li><a href="shipping.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Shipping Protocols</a></li>
+                <li><a href="returns.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Returns & Exchanges</a></li>
+                <li><a href="preorder-policy.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Pre-Order Policy</a></li>
+                <li><a href="claims.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Runner Integrity Claims</a></li>
+                <li><a href="customs.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">International Customs</a></li>
+            </ul>
+        </div>
 
-            function saveCart(cart) {
-                localStorage.setItem('primevaultCart', JSON.stringify(cart));
-            }
+        <div>
+            <h4 style="font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #cc0000; padding-left: 12px; font-weight: 700;">Quick Access</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 2;">
+                <li><a href="about.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">About PrimeVault</a></li>
+                <li><a href="blog.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Hobby Blog</a></li>
+                <li><a href="affiliate.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Affiliate Program</a></li>
+                <li><a href="locations.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Store Locator</a></li>
+                <li><a href="contact.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Contact Dispatch</a></li>
+            </ul>
+        </div>
 
-            function getSavedForLater() {
-                return JSON.parse(localStorage.getItem('primevaultSavedForLater')) || [];
-            }
+        <div>
+            <div style="border: 4px solid #ffffff; padding: 25px; background-color: #000; margin-bottom: 25px;">
+                <h4 style="color: #ff0000; font-size: 18px; font-weight: 900; text-align: center; margin: 0 0 12px 0; text-transform: uppercase;">⚠ WARNING</h4>
+                <p style="font-size: 11px; line-height: 1.5; text-align: justify; margin: 0; text-transform: uppercase; color: #ffffff;">
+                    CHOKING HAZARD: SMALL PARTS. FUNCTIONAL SHARP POINTS. THIS PRODUCT IS NOT A TOY. DESIGNED FOR ADULT HOBBYISTS. NOT FOR CHILDREN UNDER 15 YEARS. HANDLE WITH EXTREME CAUTION.
+                </p>
+            </div>
+            <div style="display: flex; gap: 20px; justify-content: center; font-size: 20px; color: #b0b0b0;">
+                <a href="#" style="color: inherit; text-decoration: none;">𝕏</a> 
+                <a href="#" style="color: inherit; text-decoration: none;">📸</a> 
+                <a href="#" style="color: inherit; text-decoration: none;">🎥</a> 
+                <a href="#" style="color: inherit; text-decoration: none;">💬</a>
+            </div>
+        </div>
+    </div>
 
-            function saveSavedForLater(saved) {
-                localStorage.setItem('primevaultSavedForLater', JSON.stringify(saved));
-            }
+    <div style="max-width: 1400px; margin: 60px auto 0; border-top: 1px solid #333; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px;">
+        <div style="max-width: 70%;">
+            © 2026 PrimeVault Philippines. Model photography is for illustrative purposes only. All brands are property of their respective owners.
+        </div>
+        <div style="display: flex; gap: 15px;">
+            <div style="width: 45px; height: 28px; background: #333; border-radius: 3px;"></div>
+            <div style="width: 45px; height: 28px; background: #333; border-radius: 3px;"></div>
+            <div style="width: 45px; height: 28px; background: #333; border-radius: 3px;"></div>
+        </div>
+    </div>
+</footer>
 
-            function calculateTotals() {
-                let cart = getCart();
-                let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+<script>
+    // 1. Initial Data (Replace with your actual items)
+    let cartItems = [
+        { id: 1, name: "HG 1/144 Gundam Calibarn", price: 26.50, qty: 1, type: 'pre' },
+        { id: 2, name: "MG 1/100 Gundam Barbatos", price: 48.00, qty: 1, type: 'stock' }
+    ];
+
+    function renderCart() {
+        const container = document.getElementById('cart-content');
+        const summary = document.getElementById('summary-details');
+        let html = "";
+        let subtotal = 0;
+
+        // Group by type for visual consistency
+        ['pre', 'stock'].forEach(type => {
+            const filtered = cartItems.filter(item => item.type === type);
+            if(filtered.length > 0) {
+                html += `<div class="category-tab ${type === 'pre' ? 'tab-pre' : 'tab-stock'}">
+                            ${type === 'pre' ? 'Pre-Order Items' : 'In-Stock Items'}
+                         </div>`;
                 
-                // Simple shipping and tax estimation (can be expanded)
-                let shipping = subtotal > 0 ? 10.00 : 0; // Example: $10 shipping if anything in cart
-                let taxRate = 0.05; // Example: 5% tax
-                let tax = subtotal * taxRate;
-
-                subtotalPriceSpan.textContent = `$${subtotal.toFixed(2)}`;
-                shippingCostSpan.textContent = `$${shipping.toFixed(2)}`;
-                taxCostSpan.textContent = `$${tax.toFixed(2)}`;
-                totalPriceSpan.textContent = `$${(subtotal + shipping + tax).toFixed(2)}`;
-            }
-
-            function renderCartItems() {
-                let cart = getCart();
-                cartItemsContainer.innerHTML = ''; // Clear existing items
-
-                if (cart.length === 0) {
-                    emptyCartMessage.style.display = 'block';
-                } else {
-                    emptyCartMessage.style.display = 'none';
-                    cart.forEach((item, index) => {
-                        const cartItemDiv = document.createElement('div');
-                        cartItemDiv.classList.add('cart-item');
-                        cartItemDiv.innerHTML = `
-                            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-                            <div class="cart-item-details">
-                                <h4 class="cart-item-title"><a href="#">${item.name}</a></h4>
-                                <span class="cart-item-price">$${item.price.toFixed(2)}</span>
+                filtered.forEach(item => {
+                    subtotal += (item.price * item.qty);
+                    html += `
+                        <div class="item-row">
+                            <div class="item-img"></div>
+                            <div>
+                                <h3 style="margin:0; font-size:16px;">${item.name}</h3>
+                                <div style="font-size:12px; color:#aaa; margin-top:5px; cursor:pointer;" onclick="deleteItem(${item.id})">Remove</div>
                             </div>
-                            <div class="cart-item-actions">
-                                <div class="quantity-selector">
-                                    <button class="decrease-quantity" data-index="${index}">-</button>
-                                    <input type="number" value="${item.quantity}" min="1" readonly>
-                                    <button class="increase-quantity" data-index="${index}">+</button>
-                                </div>
-                                <button class="remove-item-button" data-index="${index}">Remove</button>
-                                <button class="save-for-later-button" data-index="${index}"><i class="fas fa-bookmark"></i> Save for Later</button>
-                            </div>
-                        `;
-                        cartItemsContainer.appendChild(cartItemDiv);
-                    });
-                }
-                calculateTotals();
+                            <select class="qty-select" onchange="updateQty(${item.id}, this.value)">
+                                ${[1,2,3,4,5].map(n => `<option value="${n}" ${item.qty == n ? 'selected' : ''}>${n}</option>`).join('')}
+                            </select>
+                            <div class="price-text">$${(item.price * item.qty).toFixed(2)}</div>
+                        </div>
+                    `;
+                });
             }
-
-            function renderSavedForLaterItems() {
-                let saved = getSavedForLater();
-                saveForLaterContainer.innerHTML = ''; // Clear existing items
-
-                if (saved.length === 0) {
-                    emptySaveForLaterMessage.style.display = 'block';
-                } else {
-                    emptySaveForLaterMessage.style.display = 'none';
-                    saved.forEach((item, index) => {
-                        const savedItemDiv = document.createElement('div');
-                        savedItemDiv.classList.add('save-for-later-item');
-                        savedItemDiv.innerHTML = `
-                            <img src="${item.image}" alt="${item.name}" class="save-item-image">
-                            <div class="save-item-details">
-                                <h4 class="save-item-title"><a href="#">${item.name}</a></h4>
-                                <span class="save-item-price">$${item.price.toFixed(2)}</span>
-                                <div class="save-item-actions">
-                                    <button class="move-to-cart-button" data-index="${index}">Move to Hangar</button>
-                                    <button class="remove-save-button" data-index="${index}">Remove</button>
-                                </div>
-                            </div>
-                        `;
-                        saveForLaterContainer.appendChild(savedItemDiv);
-                    });
-                }
-            }
-
-            // --- Event Listeners for Cart Actions ---
-
-            cartItemsContainer.addEventListener('click', (event) => {
-                let cart = getCart();
-                const index = event.target.dataset.index;
-
-                if (event.target.classList.contains('increase-quantity')) {
-                    if (cart[index]) {
-                        cart[index].quantity++;
-                        saveCart(cart);
-                        renderCartItems();
-                    }
-                } else if (event.target.classList.contains('decrease-quantity')) {
-                    if (cart[index] && cart[index].quantity > 1) {
-                        cart[index].quantity--;
-                        saveCart(cart);
-                        renderCartItems();
-                    }
-                } else if (event.target.classList.contains('remove-item-button')) {
-                    if (confirm(`Are you sure you want to remove "${cart[index].name}" from your Hangar?`)) {
-                        cart.splice(index, 1);
-                        saveCart(cart);
-                        renderCartItems();
-                    }
-                } else if (event.target.classList.contains('save-for-later-button')) {
-                    if (cart[index]) {
-                        let saved = getSavedForLater();
-                        saved.push(cart[index]);
-                        saveSavedForLater(saved);
-                        cart.splice(index, 1);
-                        saveCart(cart);
-                        renderCartItems();
-                        renderSavedForLaterItems();
-                        alert(`"${cart[index].name}" has been saved for later.`);
-                    }
-                }
-            });
-
-            saveForLaterContainer.addEventListener('click', (event) => {
-                let saved = getSavedForLater();
-                const index = event.target.dataset.index;
-
-                if (event.target.classList.contains('move-to-cart-button')) {
-                    if (saved[index]) {
-                        let cart = getCart();
-                        cart.push(saved[index]);
-                        saveCart(cart);
-                        saved.splice(index, 1);
-                        saveSavedForLater(saved);
-                        renderCartItems();
-                        renderSavedForLaterItems();
-                        alert(`"${saved[index].name}" has been moved back to your Hangar.`);
-                    }
-                } else if (event.target.classList.contains('remove-save-button')) {
-                    if (confirm(`Are you sure you want to permanently remove "${saved[index].name}" from your saved list?`)) {
-                        saved.splice(index, 1);
-                        saveSavedForLater(saved);
-                        renderSavedForLaterItems();
-                    }
-                }
-            });
-
-            countrySelector.addEventListener('change', calculateTotals);
-
-           
-            renderCartItems();
-            renderSavedForLaterItems();
-            calculateTotals();
         });
-    </script>
+
+        container.innerHTML = html || "<p>Hangar is empty.</p>";
+        summary.innerHTML = `
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span>Subtotal:</span><span>$${subtotal.toFixed(2)}</span></div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span>Shipping:</span><span>$12.00</span></div>
+            <div class="total-row"><span>Total:</span><span>$${(subtotal + 12).toFixed(2)}</span></div>
+        `;
+    }
+
+    function updateQty(id, newQty) {
+        cartItems = cartItems.map(item => item.id === id ? {...item, qty: parseInt(newQty)} : item);
+        renderCart();
+    }
+
+    function deleteItem(id) {
+        cartItems = cartItems.filter(item => item.id !== id);
+        renderCart();
+    }
+
+    // Initial load
+    document.addEventListener('DOMContentLoaded', renderCart);
+</script>
+
 </body>
 </html>
-        

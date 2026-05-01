@@ -1,61 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrimeVault - Register Hangar</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrimeVault | Create New Account</title>
+<style>
+    body {
+        background-color: #121212;
+        color: #ffffff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    .auth-wrapper {
+        background-color: #1e1e1e;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+        width: 100%;
+        max-width: 450px;
+        border-top: 4px solid #cc0000;
+        box-sizing: border-box;
+    }
+    .brand-title {
+        font-size: 32px;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 30px;
+        color: #ffffff;
+        letter-spacing: 1px;
+    }
+    .brand-title span {
+        color: #cc0000;
+    }
+    .input-row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    .input-group {
+        margin-bottom: 20px;
+        flex: 1;
+    }
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 13px;
+        color: #b3b3b3;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+        width: 100%;
+        padding: 14px;
+        background-color: #2a2a2a;
+        border: 1px solid #333;
+        border-radius: 4px;
+        color: #ffffff;
+        box-sizing: border-box;
+        font-size: 15px;
+        outline: none;
+        transition: border-color 0.2s ease;
+    }
+    input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+        border-color: #cc0000;
+    }
+    .primary-btn {
+        width: 100%;
+        padding: 15px;
+        background-color: #cc0000;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        margin-top: 10px;
+    }
+    .primary-btn:hover {
+        background-color: #a30000;
+    }
+    .separator {
+        margin: 30px 0;
+        text-align: center;
+        border-bottom: 1px solid #333;
+        line-height: 0.1em;
+    }
+    .separator span {
+        background: #1e1e1e;
+        padding: 0 15px;
+        color: #666;
+        font-size: 12px;
+    }
+    .social-btn {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #444;
+        border-radius: 4px;
+        background-color: transparent;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+    }
+    .social-btn:hover {
+        background-color: #2a2a2a;
+    }
+    .social-btn img {
+        height: 20px;
+        margin-right: 12px;
+    }
+    .apple-btn img {
+        filter: invert(1);
+    }
+    .footer-text {
+        text-align: center;
+        margin-top: 25px;
+        font-size: 14px;
+        color: #b3b3b3;
+    }
+    .footer-text a {
+        color: #cc0000;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .footer-text a:hover {
+        text-decoration: underline;
+    }
+</style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <img src="primevault_logo.png" alt="PrimeVault Logo" class="login-logo">
-            <h1>Register Hangar</h1>
-            <p>Join the ranks, pilot! Create your PrimeVault account.</p>
+
+<div class="auth-wrapper">
+    <div class="brand-title">Prime<span>Vault</span></div>
+    
+    <form id="registerForm">
+        <div class="input-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" required>
+        </div>
+        
+        <div class="input-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" required>
         </div>
 
-        <form class="register-form" id="registerForm">
-            <div class="form-group">
-                <label for="newCallsign">Callsign</label>
-                <input type="text" id="newCallsign" name="newCallsign" required placeholder="Choose your unique Callsign">
+        <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" required>
+        </div>
+        
+        <div class="input-row">
+            <div class="input-group" style="margin-bottom: 0;">
+                <label for="passkey">Password</label>
+                <input type="password" id="passkey" required>
             </div>
-            <div class="form-group">
-                <label for="newEmail">Email Address</label>
-                <input type="email" id="newEmail" name="newEmail" required placeholder="Enter your valid Email Address">
-            </div>
-            <div class="form-group">
-                <label for="newPassword">Security Code</label>
-                <input type="password" id="newPassword" name="newPassword" required placeholder="Create a strong Security Code">
-            </div>
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Security Code</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Re-enter your Security Code">
-            </div>
-
-            <button type="submit" class="login-button">Establish Hangar</button>
-        </form>
-
-        <div class="social-login">
-            <p>Or register via comms:</p>
-            <div class="social-buttons">
-                <button class="social-button google-login">
-                    <img src="google_logo.png" alt="Google Logo" class="social-icon">
-                    <span>Google Comms</span>
-                </button>
-                <button class="social-button apple-login">
-                    <img src="apple_logo.png" alt="Apple Logo" class="social-icon">
-                    <span>Apple Protocols</span>
-                </button>
+            <div class="input-group" style="margin-bottom: 0;">
+                <label for="confirmPasskey">Confirm Password</label>
+                <input type="password" id="confirmPasskey" required>
             </div>
         </div>
-
-        <div class="create-account">
-            <p>Already a Pilot?</p>
-            <a href="login.html">Access Hangar</a>
-        </div>
+        
+        <button type="submit" class="primary-btn">Create Account</button>
+    </form>
+    
+    <div class="separator"><span>OR SIGN UP WITH</span></div>
+    
+    <button class="social-btn google-btn" onclick="handleSocial('Google')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Logo">
+        Sign up with Google
+    </button>
+    
+    <button class="social-btn apple-btn" onclick="handleSocial('Apple')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo">
+        Sign up with Apple
+    </button>
+    
+    <div class="footer-text">
+        Already have an account? <a href="login.html">Sign In</a>
     </div>
+</div>
 
-    <script src="script.js"></script>
+<script>
+document.getElementById("registerForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    let nameVal = document.getElementById("fullName").value.trim();
+    let emailVal = document.getElementById("email").value.trim();
+    let userVal = document.getElementById("username").value.trim();
+    let passVal = document.getElementById("passkey").value.trim();
+    let confirmPassVal = document.getElementById("confirmPasskey").value.trim();
+    
+    if (nameVal === "" || emailVal === "" || userVal === "" || passVal === "" || confirmPassVal === "") {
+        alert("Registration failed: Please fill out all required fields.");
+        return;
+    }
+    
+    if (passVal !== confirmPassVal) {
+        alert("Registration failed: Passwords do not match.");
+        return;
+    }
+    
+    if (passVal.length < 6) {
+        alert("Registration failed: Password must be at least 6 characters long.");
+        return;
+    }
+    
+    localStorage.setItem("primeVaultPilot", userVal);
+    
+    alert("Account created successfully! Welcome to PrimeVault.");
+    window.location.href = "login.html";
+});
+
+function handleSocial(platform) {
+    alert("Initiating registration with " + platform + "...");
+    window.location.href = "login.html";
+}
+</script>
+
 </body>
 </html>
