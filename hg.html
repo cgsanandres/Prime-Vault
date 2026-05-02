@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Grade Hangar | PrimeVault Logistics</title>
+    <style>
+        :root {
+            --bg-color: #0d0e10;
+            --runner-grey: #464a4e;
+            --plastic-red: #cc0000;
+            --safety-yellow: #f9d71c;
+            --panel-dark: #16181b;
+            --pure-white: #ffffff;
+            --text-sub: #b0b0b0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--pure-white);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header { background: var(--panel-dark); border-bottom: 5px solid var(--runner-grey); position: sticky; top: 0; z-index: 1000; }
+        .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 15px 40px; max-width: 1400px; margin: 0 auto; }
+        .logo { font-size: 26px; font-weight: 900; text-transform: uppercase; text-decoration: none; color: white; }
+        .logo span { color: var(--plastic-red); }
+        .search-container { flex-grow: 1; max-width: 650px; margin: 0 40px; }
+        .search-bar { width: 100%; background: #000; border: 2px solid var(--runner-grey); padding: 12px 15px; color: white; border-radius: 4px; outline: none; font-size: 14px; }
+        .user-actions { display: flex; gap: 20px; font-size: 22px; cursor: pointer; }
+
+        /* --- CATALOG LAYOUT --- */
+        .catalog-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 40px;
+        }
+
+        /* --- SIDEBAR FILTERS --- */
+        .sidebar { background: var(--panel-dark); border-right: 2px solid var(--runner-grey); padding: 20px; height: fit-content; }
+        .filter-group { margin-bottom: 25px; }
+        .filter-group h4 { 
+            text-transform: uppercase; 
+            font-size: 13px; 
+            border-bottom: 2px solid #000; 
+            padding-bottom: 8px; 
+            margin-bottom: 12px;
+            color: var(--safety-yellow);
+            font-weight: 900;
+        }
+        .filter-link { 
+            display: block; 
+            font-size: 13px; 
+            color: var(--text-sub); 
+            text-decoration: none; 
+            margin-bottom: 8px; 
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .filter-link:hover { color: var(--pure-white); padding-left: 5px; border-left: 2px solid var(--plastic-red); }
+        .show-more { color: var(--plastic-red); font-weight: bold; cursor: pointer; font-size: 11px; text-transform: uppercase; margin-top: 5px; display: inline-block; }
+
+        /* --- TOP CONTROLS & APPLIED FILTERS --- */
+        .controls-wrapper { margin-bottom: 20px; }
+        .applied-filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; min-height: 34px; align-items: center; }
+        .filter-tag { 
+            background: var(--plastic-red); 
+            color: white;
+            padding: 6px 12px; 
+            border-radius: 2px; 
+            font-size: 11px; 
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+        }
+        .filter-tag span { cursor: pointer; color: #000; font-size: 14px; line-height: 1; }
+        .filter-tag span:hover { color: white; }
+
+        .controls-bar {
+            background: var(--panel-dark);
+            padding: 15px 20px;
+            border: 1px solid var(--runner-grey);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        select, .inner-search { background: #000; color: white; border: 1px solid var(--runner-grey); padding: 8px; font-family: inherit; font-size: 12px; }
+        .inner-search { width: 100%; box-sizing: border-box; margin-bottom: 10px; }
+
+        /* --- PRODUCT GRID --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            background: var(--panel-dark);
+            border: 2px solid var(--runner-grey);
+            padding: 15px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover { border-color: var(--safety-yellow); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .product-img { width: 100%; height: 220px; background: #222; margin-bottom: 15px; position: relative; overflow: hidden; }
+        .product-img::after { content: '1/144 HG'; position: absolute; bottom: 0; left: 0; background: rgba(204,0,0,0.8); padding: 4px 8px; font-size: 10px; font-weight: bold; }
+        .product-name { font-size: 14px; font-weight: 900; line-height: 1.4; margin-bottom: 10px; flex-grow: 1; }
+        .product-price { color: var(--safety-yellow); font-weight: 900; font-size: 18px; }
+
+        /* --- FOOTER --- */
+        footer { background-color: var(--panel-dark); border-top: 10px solid var(--runner-grey); padding: 80px 40px; margin-top: 80px; }
+        .footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 60px; }
+        .footer-col h4 { font-size: 15px; margin-bottom: 25px; border-left: 4px solid var(--plastic-red); padding-left: 12px; text-transform: uppercase; }
+        .footer-col p, .footer-col li { font-size: 13px; line-height: 1.8; color: var(--text-sub); list-style: none; padding: 0; }
+        .warning-box { border: 4px solid #ffffff; padding: 25px; background-color: #000; }
+        .warning-title { color: #ff0000; font-size: 18px; font-weight: 900; text-align: center; margin-bottom: 12px; }
+        .warning-text { font-size: 11px; text-align: justify; text-transform: uppercase; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="top-bar">
+        <a href="index.html" class="logo">Prime<span>Vault</span></a>
+        <div class="search-container"><input type="text" class="search-bar" placeholder="Search High Grade Hangar..."></div>
+        <div class="user-actions"><span>👤</span> <a href="cart.html" style="text-decoration:none; color:inherit;">🛒</a></div>
+    </div>
+</header>
+
+<div class="catalog-container">
+    <aside class="sidebar">
+        <div class="filter-group">
+            <h4>Search in results:</h4>
+            <input type="text" class="inner-search" id="innerSearch" placeholder="Filter current view..." oninput="processFilters()">
+        </div>
+
+        <div class="filter-group">
+            <h4>Department</h4>
+            <span class="filter-link" onclick="addFilter('department', 'Model Kits')">Model Kits</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Product Type</h4>
+            <span class="filter-link" onclick="addFilter('productType', 'High Grade (HG)')">High Grade (HG)</span>
+            <span class="filter-link" onclick="addFilter('productType', 'HG Witch from Mercury')">HG Witch from Mercury</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Brand</h4>
+            <span class="filter-link" onclick="addFilter('brand', 'Bandai Spirits')">Bandai Spirits</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Series</h4>
+            <span class="filter-link" onclick="addFilter('series', 'The Witch from Mercury')">The Witch from Mercury</span>
+            <span class="filter-link" onclick="addFilter('series', 'UC 0079')">UC 0079</span>
+            <span class="filter-link" onclick="addFilter('series', 'Gundam Wing')">Gundam Wing</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Character</h4>
+            <div id="character-list">
+                <span class="filter-link" onclick="addFilter('character', 'Aerial')">Aerial</span>
+                <span class="filter-link" onclick="addFilter('character', 'Lfrith')">Lfrith</span>
+                <span class="filter-link" onclick="addFilter('character', 'Zaku II')">Zaku II</span>
+            </div>
+            <span class="show-more" onclick="expandCharacters()">Show More +</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Size</h4>
+            <span class="filter-link" onclick="addFilter('size', '1/144 Scale')">1/144 Scale</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Theme</h4>
+            <span class="filter-link" onclick="addFilter('theme', 'Mecha')">Mecha</span>
+            <span class="filter-link" onclick="addFilter('theme', 'Sci-Fi')">Sci-Fi</span>
+        </div>
+    </aside>
+
+    <main>
+        <div class="controls-wrapper">
+            <div class="applied-filters" id="appliedFilters"></div>
+            <div class="controls-bar">
+                <div>
+                    Sort By: 
+                    <select id="sortBy" onchange="processFilters()">
+                        <option value="newest">Newest Arrivals</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name-a">Name: A to Z</option>
+                    </select>
+                </div>
+                <div>
+                    Per Page:
+                    <select id="perPage" onchange="processFilters()">
+                        <option value="12">12 Items</option>
+                        <option value="24">24 Items</option>
+                        <option value="48">48 Items</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+    </main>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h3 style="color:var(--safety-yellow); text-transform:uppercase; margin-top:0;">PrimeVault Logistics</h3>
+            <p>Providing essential High Grade components for the global builder network.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Support</h4>
+            <ul><li>Shipping Protocols</li><li>Order Tracking</li></ul>
+        </div>
+        <div class="footer-col">
+            <h4>Network</h4>
+            <ul><li>About the Vault</li><li>Retail Partners</li></ul>
+        </div>
+        <div class="footer-col">
+            <div class="warning-box">
+                <p class="warning-title">⚠ WARNING</p>
+                <p class="warning-text">CHOKING HAZARD: SMALL PARTS. NOT FOR CHILDREN UNDER 15 YEARS.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const hgProducts = [
+        { id: 301, name: "HG 1/144 Gundam Aerial", price: 15.00, department: "Model Kits", productType: "HG Witch from Mercury", brand: "Bandai Spirits", series: "The Witch from Mercury", character: "Aerial", size: "1/144 Scale", theme: "Mecha" },
+        { id: 302, name: "HGUC 1/144 RX-78-2 Gundam (Revive)", price: 12.00, department: "Model Kits", productType: "High Grade (HG)", brand: "Bandai Spirits", series: "UC 0079", character: "RX-78-2 Gundam", size: "1/144 Scale", theme: "Mecha" },
+        { id: 303, name: "HG 1/144 Gundam Lfrith", price: 16.50, department: "Model Kits", productType: "HG Witch from Mercury", brand: "Bandai Spirits", series: "The Witch from Mercury", character: "Lfrith", size: "1/144 Scale", theme: "Mecha" },
+        { id: 304, name: "HGUC 1/144 Char's Zaku II", price: 14.00, department: "Model Kits", productType: "High Grade (HG)", brand: "Bandai Spirits", series: "UC 0079", character: "Zaku II", size: "1/144 Scale", theme: "Sci-Fi" },
+        { id: 305, name: "HGAC 1/144 Wing Gundam", price: 18.00, department: "Model Kits", productType: "High Grade (HG)", brand: "Bandai Spirits", series: "Gundam Wing", character: "Wing Gundam", size: "1/144 Scale", theme: "Mecha" }
+    ];
+
+    let activeFilters = [];
+
+    function addFilter(categoryKey, value) {
+        if (!activeFilters.some(f => f.category === categoryKey && f.value === value)) {
+            activeFilters.push({ category: categoryKey, value: value });
+            processFilters();
+        }
+    }
+
+    function removeFilter(categoryKey, value) {
+        activeFilters = activeFilters.filter(f => !(f.category === categoryKey && f.value === value));
+        processFilters();
+    }
+
+    function processFilters() {
+        const searchTerm = document.getElementById('innerSearch').value.toLowerCase();
+        const sortValue = document.getElementById('sortBy').value;
+        const limit = parseInt(document.getElementById('perPage').value);
+
+        let results = hgProducts.filter(product => {
+            const matchesSearch = product.name.toLowerCase().includes(searchTerm);
+            const matchesTags = activeFilters.every(filter => product[filter.category] === filter.value);
+            return matchesSearch && matchesTags;
+        });
+
+        if(sortValue === 'price-low') results.sort((a,b) => a.price - b.price);
+        if(sortValue === 'price-high') results.sort((a,b) => b.price - a.price);
+        if(sortValue === 'name-a') results.sort((a,b) => a.name.localeCompare(b.name));
+
+        renderUI(results.slice(0, limit));
+    }
+
+    function renderUI(filteredProducts) {
+        const tagContainer = document.getElementById('appliedFilters');
+        tagContainer.innerHTML = activeFilters.length === 0 ? "" : activeFilters.map(f => `
+            <div class="filter-tag" onclick="removeFilter('${f.category}', '${f.value}')">${f.value} <span>✖</span></div>
+        `).join('');
+
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = filteredProducts.length === 0 ? `<p>No matches.</p>` : filteredProducts.map(p => `
+            <a href="product.html?id=${p.id}" class="product-card">
+                <div class="product-img"></div>
+                <div class="product-name">${p.name}</div>
+                <div class="product-price">$${p.price.toFixed(2)}</div>
+            </a>
+        `).join('');
+    }
+
+    function expandCharacters() {
+        const list = document.getElementById('character-list');
+        list.innerHTML += `<span class="filter-link" onclick="addFilter('character', 'Wing Gundam')">Wing Gundam</span>`;
+        event.target.style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', processFilters);
+</script>
+</body>
+</html>
