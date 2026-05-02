@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Grade Hangar | PrimeVault Logistics</title>
+    <style>
+        :root {
+            --bg-color: #0d0e10;
+            --runner-grey: #464a4e;
+            --plastic-red: #cc0000;
+            --safety-yellow: #f9d71c;
+            --panel-dark: #16181b;
+            --pure-white: #ffffff;
+            --text-sub: #b0b0b0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--pure-white);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header { background: var(--panel-dark); border-bottom: 5px solid var(--runner-grey); position: sticky; top: 0; z-index: 1000; }
+        .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 15px 40px; max-width: 1400px; margin: 0 auto; }
+        .logo { font-size: 26px; font-weight: 900; text-transform: uppercase; text-decoration: none; color: white; }
+        .logo span { color: var(--plastic-red); }
+        .search-container { flex-grow: 1; max-width: 650px; margin: 0 40px; }
+        .search-bar { width: 100%; background: #000; border: 2px solid var(--runner-grey); padding: 12px 15px; color: white; border-radius: 4px; outline: none; font-size: 14px; }
+        .user-actions { display: flex; gap: 20px; font-size: 22px; cursor: pointer; }
+
+        /* --- CATALOG LAYOUT --- */
+        .catalog-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 40px;
+        }
+
+        /* --- SIDEBAR FILTERS --- */
+        .sidebar { background: var(--panel-dark); border-right: 2px solid var(--runner-grey); padding: 20px; height: fit-content; }
+        .filter-group { margin-bottom: 25px; }
+        .filter-group h4 { 
+            text-transform: uppercase; 
+            font-size: 13px; 
+            border-bottom: 2px solid #000; 
+            padding-bottom: 8px; 
+            margin-bottom: 12px;
+            color: var(--safety-yellow);
+            font-weight: 900;
+        }
+        .filter-link { 
+            display: block; 
+            font-size: 13px; 
+            color: var(--text-sub); 
+            text-decoration: none; 
+            margin-bottom: 8px; 
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .filter-link:hover { color: var(--pure-white); padding-left: 5px; border-left: 2px solid var(--plastic-red); }
+        .show-more { color: var(--plastic-red); font-weight: bold; cursor: pointer; font-size: 11px; text-transform: uppercase; margin-top: 5px; display: inline-block; }
+
+        /* --- TOP CONTROLS & APPLIED FILTERS --- */
+        .controls-wrapper { margin-bottom: 20px; }
+        
+        .applied-filters { 
+            display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; min-height: 34px; align-items: center;
+        }
+        .filter-tag { 
+            background: var(--plastic-red); 
+            color: white;
+            padding: 6px 12px; 
+            border-radius: 2px; 
+            font-size: 11px; 
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+        }
+        .filter-tag span { cursor: pointer; color: #000; font-size: 14px; line-height: 1; }
+        .filter-tag span:hover { color: white; }
+
+        .controls-bar {
+            background: var(--panel-dark);
+            padding: 15px 20px;
+            border: 1px solid var(--runner-grey);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        select, .inner-search { 
+            background: #000; color: white; border: 1px solid var(--runner-grey); padding: 8px; font-family: inherit; font-size: 12px;
+        }
+        .inner-search { width: 100%; box-sizing: border-box; margin-bottom: 10px; }
+
+        /* --- PRODUCT GRID --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            background: var(--panel-dark);
+            border: 2px solid var(--runner-grey);
+            padding: 15px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover { border-color: var(--safety-yellow); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .product-img { width: 100%; height: 220px; background: #222; margin-bottom: 15px; position: relative; overflow: hidden; }
+        .product-img::after { content: '1/144 RG'; position: absolute; bottom: 0; left: 0; background: rgba(204,0,0,0.8); padding: 4px 8px; font-size: 10px; font-weight: bold; }
+        .product-name { font-size: 14px; font-weight: 900; line-height: 1.4; margin-bottom: 10px; flex-grow: 1; }
+        .product-price { color: var(--safety-yellow); font-weight: 900; font-size: 18px; }
+
+        /* --- FOOTER --- */
+        footer { background-color: var(--panel-dark); border-top: 10px solid var(--runner-grey); padding: 80px 40px; margin-top: 80px; }
+        .footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 60px; }
+        .footer-col h4 { font-size: 15px; margin-bottom: 25px; border-left: 4px solid var(--plastic-red); padding-left: 12px; text-transform: uppercase; }
+        .footer-col p, .footer-col li { font-size: 13px; line-height: 1.8; color: var(--text-sub); list-style: none; padding: 0; }
+        .warning-box { border: 4px solid #ffffff; padding: 25px; background-color: #000; }
+        .warning-title { color: #ff0000; font-size: 18px; font-weight: 900; text-align: center; margin-bottom: 12px; }
+        .warning-text { font-size: 11px; text-align: justify; text-transform: uppercase; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="top-bar">
+        <a href="index.html" class="logo">Prime<span>Vault</span></a>
+        <div class="search-container"><input type="text" class="search-bar" placeholder="Search Real Grade Hangar..."></div>
+        <div class="user-actions"><span>👤</span> <a href="cart.html" style="text-decoration:none; color:inherit;">🛒</a></div>
+    </div>
+</header>
+
+<div class="catalog-container">
+    <aside class="sidebar">
+        <div class="filter-group">
+            <h4>Search in results:</h4>
+            <input type="text" class="inner-search" id="innerSearch" placeholder="Filter current view..." oninput="processFilters()">
+        </div>
+
+        <div class="filter-group">
+            <h4>Department</h4>
+            <span class="filter-link" onclick="addFilter('department', 'Model Kits')">Model Kits</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Product Type</h4>
+            <span class="filter-link" onclick="addFilter('productType', 'Real Grade (RG)')">Real Grade (RG)</span>
+            <span class="filter-link" onclick="addFilter('productType', 'Accessories')">Accessories</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Brand & Company</h4>
+            <span class="filter-link" onclick="addFilter('brand', 'Bandai Spirits')">Bandai Spirits</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Series</h4>
+            <span class="filter-link" onclick="addFilter('series', 'UC 0079')">UC 0079</span>
+            <span class="filter-link" onclick="addFilter('series', 'Char\\'s Counterattack')">Char's Counterattack</span>
+            <span class="filter-link" onclick="addFilter('series', 'Gundam UC')">Gundam UC</span>
+            <span class="filter-link" onclick="addFilter('series', 'Endless Waltz')">Endless Waltz</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Featured In</h4>
+            <span class="filter-link" onclick="addFilter('featuredIn', 'Anime Series')">Anime Series</span>
+            <span class="filter-link" onclick="addFilter('featuredIn', 'OVA / Movies')">OVA / Movies</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Character</h4>
+            <div id="character-list">
+                <span class="filter-link" onclick="addFilter('character', 'RX-78-2 Gundam')">RX-78-2 Gundam</span>
+                <span class="filter-link" onclick="addFilter('character', 'Sazabi')">Sazabi</span>
+                <span class="filter-link" onclick="addFilter('character', 'Nu Gundam')">Nu Gundam</span>
+            </div>
+            <span class="show-more" onclick="expandCharacters()">Show More +</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Size</h4>
+            <span class="filter-link" onclick="addFilter('size', '1/144 Scale')">1/144 Scale</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Theme</h4>
+            <span class="filter-link" onclick="addFilter('theme', 'Mecha')">Mecha</span>
+            <span class="filter-link" onclick="addFilter('theme', 'Sci-Fi')">Sci-Fi</span>
+        </div>
+    </aside>
+
+    <main>
+        <div class="controls-wrapper">
+            <div class="applied-filters" id="appliedFilters">
+                </div>
+
+            <div class="controls-bar">
+                <div>
+                    Sort By: 
+                    <select id="sortBy" onchange="processFilters()">
+                        <option value="newest">Newest Arrivals</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name-a">Name: A to Z</option>
+                    </select>
+                </div>
+                <div>
+                    Per Page:
+                    <select id="perPage" onchange="processFilters()">
+                        <option value="12">12 Items</option>
+                        <option value="24">24 Items</option>
+                        <option value="48">48 Items</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-grid" id="productGrid">
+            </div>
+    </main>
+</div>
+<footer style="background-color: #16181b; border-top: 10px solid #464a4e; color: #ffffff; padding: 80px 40px; font-family: 'Segoe UI', Tahoma, sans-serif;">
+    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 60px;">
+        
+        <div style="display: flex; flex-direction: column;">
+            <h3 style="color: #f9d71c; font-size: 20px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; font-weight: 900;">PrimeVault Logistics</h3>
+            <p style="font-size: 13px; line-height: 1.8; color: #b0b0b0; margin-bottom: 20px;">
+                Your tactical hangar for the finest precision-engineered plastic models. We distribute authentic Japanese and international hobby kits globally.
+            </p>
+            <p style="font-size: 12px; font-weight: bold; color: #ffffff; text-transform: uppercase; letter-spacing: 1px;">
+                OPERATIONAL STATUS: <span style="color: #00ff00;">READY</span>
+            </p>
+        </div>
+
+        <div>
+            <h4 style="font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #cc0000; padding-left: 12px; font-weight: 700;">Support Hangar</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 2;">
+                <li><a href="shipping.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Shipping Protocols</a></li>
+                <li><a href="returns.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Returns & Exchanges</a></li>
+                <li><a href="preorder-policy.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Pre-Order Policy</a></li>
+                <li><a href="claims.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Runner Integrity Claims</a></li>
+                <li><a href="customs.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">International Customs</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 style="font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #cc0000; padding-left: 12px; font-weight: 700;">Quick Access</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 2;">
+                <li><a href="about.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">About PrimeVault</a></li>
+                <li><a href="blog.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Hobby Blog</a></li>
+                <li><a href="affiliate.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Affiliate Program</a></li>
+                <li><a href="locations.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Store Locator</a></li>
+                <li><a href="contact.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Contact Dispatch</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <div style="border: 4px solid #ffffff; padding: 25px; background-color: #000; margin-bottom: 25px;">
+                <h4 style="color: #ff0000; font-size: 18px; font-weight: 900; text-align: center; margin: 0 0 12px 0; text-transform: uppercase;">⚠ WARNING</h4>
+                <p style="font-size: 11px; line-height: 1.5; text-align: justify; margin: 0; text-transform: uppercase; color: #ffffff;">
+                    CHOKING HAZARD: SMALL PARTS. FUNCTIONAL SHARP POINTS. THIS PRODUCT IS NOT A TOY. DESIGNED FOR ADULT HOBBYISTS. NOT FOR CHILDREN UNDER 15 YEARS. HANDLE WITH EXTREME CAUTION.
+                </p>
+            </div>
+            <div style="display: flex; gap: 20px; justify-content: center; font-size: 20px; color: #b0b0b0;">
+                <a href="#" style="color: inherit; text-decoration: none;">𝕏</a> 
+                <a href="#" style="color: inherit; text-decoration: none;">📸</a> 
+                <a href="#" style="color: inherit; text-decoration: none;">🎥</a> 
+                <a href="#" style="color: inherit; text-decoration: none;">💬</a>
+            </div>
+        </div>
+    </div>
+
+    <div style="max-width: 1400px; margin: 60px auto 0; border-top: 1px solid #333; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px;">
+        <div style="max-width: 70%;">
+            © 2026 PrimeVault Philippines. Model photography is for illustrative purposes only. All brands are property of their respective owners.
+        </div>
+        <div style="display: flex; gap: 15px;">
+            <div style="width: 45px; height: 28px; background: #333; border-radius: 3px;"></div>
+            <div style="width: 45px; height: 28px; background: #333; border-radius: 3px;"></div>
+            <div style="width: 45px; height: 28px; background: #333; border-radius: 3px;"></div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    
+    const rgProducts = [
+        { id: 201, name: "RG 1/144 RX-78-2 Gundam", price: 27.00, department: "Model Kits", productType: "Real Grade (RG)", brand: "Bandai Spirits", series: "UC 0079", featuredIn: "Anime Series", character: "RX-78-2 Gundam", size: "1/144 Scale", theme: "Mecha" },
+        { id: 202, name: "RG 1/144 MSN-04 Sazabi", price: 45.00, department: "Model Kits", productType: "Real Grade (RG)", brand: "Bandai Spirits", series: "Char's Counterattack", featuredIn: "OVA / Movies", character: "Sazabi", size: "1/144 Scale", theme: "Mecha" },
+        { id: 203, name: "RG 1/144 RX-93 Nu Gundam", price: 42.00, department: "Model Kits", productType: "Real Grade (RG)", brand: "Bandai Spirits", series: "Char's Counterattack", featuredIn: "OVA / Movies", character: "Nu Gundam", size: "1/144 Scale", theme: "Mecha" },
+        { id: 204, name: "RG 1/144 Unicorn Gundam", price: 38.00, department: "Model Kits", productType: "Real Grade (RG)", brand: "Bandai Spirits", series: "Gundam UC", featuredIn: "OVA / Movies", character: "Unicorn Gundam", size: "1/144 Scale", theme: "Sci-Fi" },
+        { id: 205, name: "RG 1/144 Wing Gundam Zero EW", price: 28.00, department: "Model Kits", productType: "Real Grade (RG)", brand: "Bandai Spirits", series: "Endless Waltz", featuredIn: "OVA / Movies", character: "Wing Zero", size: "1/144 Scale", theme: "Mecha" },
+        { id: 206, name: "RG 1/144 Zeong", price: 60.00, department: "Model Kits", productType: "Real Grade (RG)", brand: "Bandai Spirits", series: "UC 0079", featuredIn: "Anime Series", character: "Zeong", size: "1/144 Scale", theme: "Sci-Fi" }
+    ];
+
+    let activeFilters = [];
+
+    
+    function addFilter(categoryKey, value) {
+        // Prevent duplicates
+        if (!activeFilters.some(f => f.category === categoryKey && f.value === value)) {
+            activeFilters.push({ category: categoryKey, value: value });
+            processFilters();
+        }
+    }
+
+    function removeFilter(categoryKey, value) {
+        activeFilters = activeFilters.filter(f => !(f.category === categoryKey && f.value === value));
+        processFilters();
+    }
+
+    function processFilters() {
+        const searchTerm = document.getElementById('innerSearch').value.toLowerCase();
+        const sortValue = document.getElementById('sortBy').value;
+        const limit = parseInt(document.getElementById('perPage').value);
+
+        // Filter the array
+        let results = rgProducts.filter(product => {
+            // 1. Check "Search in results"
+            const matchesSearch = product.name.toLowerCase().includes(searchTerm);
+            
+            // 2. Check sidebar filters (Product must match ALL active filter criteria)
+            const matchesTags = activeFilters.every(filter => product[filter.category] === filter.value);
+
+            return matchesSearch && matchesTags;
+        });
+
+        // Sort the array
+        if(sortValue === 'price-low') results.sort((a,b) => a.price - b.price);
+        if(sortValue === 'price-high') results.sort((a,b) => b.price - a.price);
+        if(sortValue === 'name-a') results.sort((a,b) => a.name.localeCompare(b.name));
+
+        // Slice for pagination
+        results = results.slice(0, limit);
+
+        renderUI(results);
+    }
+
+   
+    function renderUI(filteredProducts) {
+        // Update Applied Filters Bar
+        const tagContainer = document.getElementById('appliedFilters');
+        if (activeFilters.length === 0) {
+            tagContainer.innerHTML = `<span style="color:var(--text-sub); font-size:12px;">No filters applied. Showing all inventory.</span>`;
+        } else {
+            tagContainer.innerHTML = activeFilters.map(f => `
+                <div class="filter-tag" onclick="removeFilter('${f.category}', '${f.value}')">
+                    ${f.value} <span>✖</span>
+                </div>
+            `).join('');
+        }
+
+        // Update Product Grid
+        const grid = document.getElementById('productGrid');
+        if (filteredProducts.length === 0) {
+            grid.innerHTML = `<div style="grid-column: 1/-1; padding: 40px; text-align:center; color:var(--text-sub);">No Real Grade units match current parameters. Modify filters to search again.</div>`;
+            return;
+        }
+
+        grid.innerHTML = filteredProducts.map(p => `
+            <a href="product.html?id=${p.id}" class="product-card">
+                <div class="product-img"></div>
+                <div class="product-name">${p.name}</div>
+                <div class="product-price">$${p.price.toFixed(2)}</div>
+            </a>
+        `).join('');
+    }
+
+   
+    function expandCharacters() {
+        const list = document.getElementById('character-list');
+        list.innerHTML += `
+            <span class="filter-link" onclick="addFilter('character', 'Unicorn Gundam')">Unicorn Gundam</span>
+            <span class="filter-link" onclick="addFilter('character', 'Wing Zero')">Wing Zero</span>
+            <span class="filter-link" onclick="addFilter('character', 'Zeong')">Zeong</span>
+        `;
+        // Hide the show more button after expanding
+        event.target.style.display = 'none';
+    }
+
+    // Initialize the hangar on load
+    document.addEventListener('DOMContentLoaded', processFilters);
+</script>
+
+</body>
+</html>
