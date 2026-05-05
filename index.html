@@ -26,7 +26,6 @@
             overflow-x: hidden;
         }
 
-        /* --- HEADER & NAVIGATION --- */
         header {
             background: var(--panel-dark);
             border-bottom: 5px solid var(--runner-grey);
@@ -53,7 +52,9 @@
             user-select: none;
         }
 
-        .logo span { color: var(--plastic-red); }
+        .logo span {
+            color: var(--plastic-red);
+        }
 
         .search-container {
             flex-grow: 1;
@@ -72,12 +73,23 @@
             font-size: 14px;
         }
 
-        .search-bar:focus { border-color: var(--safety-yellow); }
+        .search-bar:focus {
+            border-color: var(--safety-yellow);
+        }
 
         .user-actions {
             display: flex;
             gap: 25px;
             align-items: center;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            vertical-align: middle;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
         }
 
         .icon-link {
@@ -86,9 +98,15 @@
             font-size: 24px;
             transition: color 0.2s;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
         }
 
-        .icon-link:hover { color: var(--safety-yellow); }
+        .icon-link:hover {
+            color: var(--safety-yellow);
+        }
 
         .nav-strip {
             display: flex;
@@ -115,7 +133,9 @@
             letter-spacing: 0.5px;
         }
 
-        .nav-wrapper:hover .nav-item { color: var(--safety-yellow); }
+        .nav-wrapper:hover .nav-item {
+            color: var(--safety-yellow);
+        }
 
         .mega-panel {
             position: fixed;
@@ -131,7 +151,9 @@
             box-shadow: 0 25px 60px rgba(0,0,0,0.9);
         }
 
-        .nav-wrapper:hover .mega-panel { display: block; }
+        .nav-wrapper:hover .mega-panel {
+            display: block;
+        }
 
         .brands-grid {
             display: grid;
@@ -158,108 +180,102 @@
             color: var(--plastic-red);
         }
 
-        /* --- LOGISTICS PARTNERS (TOP POSITION) --- */
-        .logistics-section {
-            background-color: #0d0e10;
-            padding: 60px 0 30px 0;
-            border-bottom: 2px solid var(--runner-grey);
-            position: relative;
-        }
-
-        .brand-reel-container {
+        .showcase-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 60px;
-            position: relative;
+            padding: 20px 40px 60px;
         }
 
-        .brand-track {
-            display: flex;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-            gap: 60px;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .brand-item {
-            min-width: 160px;
-            flex-shrink: 0;
-            text-align: center;
-            filter: grayscale(100%);
-            transition: 0.4s;
-            cursor: pointer;
-        }
-
-        .brand-item:hover { filter: grayscale(0%); transform: scale(1.1); }
-        .brand-item img { max-height: 45px; width: auto; }
-
-        .arrow-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-            background: #1a1d20;
-            border: 2px solid var(--runner-grey);
-            color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            transition: 0.2s;
-        }
-
-        .arrow-btn:hover { border-color: var(--safety-yellow); background: #2a2d30; }
-        .left-arrow { left: 5px; }
-        .right-arrow { right: 5px; }
-
-        /* --- MAIN PRODUCT GRID --- */
-        .main-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .kit-card {
-            background: var(--panel-dark);
-            border: 4px solid var(--runner-grey);
-            border-radius: 4px;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-
-        .kit-card:hover { transform: translateY(-10px); border-color: var(--safety-yellow); }
-
-        .kit-image { width: 100%; height: 280px; background: #222; cursor: pointer; }
-
-        .kit-details { padding: 25px; }
-
-        .kit-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; height: 44px; overflow: hidden; }
-
-        .kit-price { color: var(--safety-yellow); font-size: 22px; font-weight: 900; margin-bottom: 20px; }
-
-        .btn-action {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            font-weight: bold;
+        .section-header {
+            font-size: 20px;
+            font-weight: 900;
             text-transform: uppercase;
-            cursor: pointer;
-            font-size: 13px;
+            color: var(--pure-white);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--runner-grey);
+            padding-bottom: 10px;
             letter-spacing: 1px;
         }
 
-        .btn-cart { background: var(--plastic-red); color: white; }
-        .btn-pre { background: #004a99; color: white; }
+        .banner-card {
+            position: relative;
+            background: var(--panel-dark);
+            border-radius: 2px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid var(--runner-grey);
+            display: flex;
+            flex-direction: column;
+        }
 
-        /* --- BOX-ART FOOTER --- */
+        .banner-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            border-color: var(--safety-yellow);
+        }
+
+        .banner-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: #222;
+        }
+
+        .banner-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(22, 24, 27, 0.95);
+            color: var(--text-main);
+            padding: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            box-sizing: border-box;
+            border-top: 2px solid var(--runner-grey);
+        }
+
+        .grid-asym {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .grid-sym-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .grid-row-5 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .large-banner {
+            height: 500px;
+        }
+
+        .stacked-banners {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: 500px;
+        }
+
+        .stacked-banners .banner-card {
+            height: calc(50% - 10px);
+        }
+
+        .vertical-banner {
+            height: 380px;
+        }
+
         footer {
             background-color: var(--panel-dark);
             border-top: 10px solid var(--runner-grey);
@@ -276,7 +292,12 @@
             gap: 60px;
         }
 
-        .footer-col h3 { color: var(--safety-yellow); text-transform: uppercase; margin-bottom: 25px; font-size: 20px; }
+        .footer-col h3 {
+            color: var(--safety-yellow);
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            font-size: 20px;
+        }
 
         .footer-col h4 {
             font-size: 15px;
@@ -286,10 +307,26 @@
             text-transform: uppercase;
         }
 
-        .footer-col p, .footer-col li { font-size: 13px; line-height: 1.8; color: var(--text-sub); }
-        .footer-col ul { list-style: none; padding: 0; }
-        .footer-col li { cursor: pointer; transition: 0.2s; margin-bottom: 8px; }
-        .footer-col li:hover { color: white; }
+        .footer-col p, .footer-col li {
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--text-sub);
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col li {
+            cursor: pointer;
+            transition: 0.2s;
+            margin-bottom: 8px;
+        }
+
+        .footer-col li:hover {
+            color: white;
+        }
 
         .warning-box {
             border: 4px solid #ffffff;
@@ -298,8 +335,21 @@
             margin-bottom: 20px;
         }
 
-        .warning-title { color: #ff0000; font-size: 18px; font-weight: 900; text-align: center; margin: 0 0 12px 0; }
-        .warning-text { font-size: 11px; line-height: 1.5; text-align: justify; margin: 0; text-transform: uppercase; }
+        .warning-title {
+            color: #ff0000;
+            font-size: 18px;
+            font-weight: 900;
+            text-align: center;
+            margin: 0 0 12px 0;
+        }
+
+        .warning-text {
+            font-size: 11px;
+            line-height: 1.5;
+            text-align: justify;
+            margin: 0;
+            text-transform: uppercase;
+        }
 
         .copyright-bar {
             max-width: 1400px;
@@ -324,8 +374,12 @@
             <input type="text" id="mainSearch" class="search-bar" placeholder="Search Hangar (Gunpla, Tools, Brands)...">
         </div>
         <div class="user-actions">
-            <span class="icon-link">👤</span>
-            <span class="icon-link" onclick="location.href='cart.html'">🛒</span>
+           <span class="icon-link">
+               <img src="images/user.png" alt="User" class="nav-icon" onerror="this.style.display='none'">
+           </span>
+           <span class="icon-link" onclick="location.href='cart.html'">
+               <img src="images/cart.png" alt="Cart" class="nav-icon" onerror="this.style.display='none'">
+           </span>
         </div>
     </div>
 
@@ -338,15 +392,20 @@
             <span class="nav-item">Brands</span>
             <div class="mega-panel">
                 <div class="brands-grid">
-                    <a href="tamiya.html" class="brand-box">TAMIYA</a>
-                    <a href="bandai.html" class="brand-box">BANDAI SPIRITS</a>
-                    <a href="hasegawa.html" class="brand-box">HASEGAWA</a>
-                    <a href="#" class="brand-box">REVELL</a>
-                    <a href="#" class="brand-box">KOTOBUKIYA</a>
-                    <a href="#" class="brand-box">GOOD SMILE CO</a>
-                    <a href="#" class="brand-box">ITALERI</a>
-                    <a href="#" class="brand-box">MENG MODEL</a>
-                    <a href="#" class="brand-box">TRUMPETER</a>
+                    <a href="gundam.html" class="brand-box">MOBILE SUIT GUNDAM</a>
+                    <a href="macross.html" class="brand-box">MACROSS / ROBOTECH</a>
+                    <a href="evangelion.html" class="brand-box">EVANGELION</a>
+                    <a href="zoids.html" class="brand-box">ZOIDS</a>
+                    <a href="star-wars.html" class="brand-box">STAR WARS</a>
+                    <a href="armored-core.html" class="brand-box">ARMORED CORE</a>
+                    <a href="ma-k.html" class="brand-box">MA.K.</a>
+                    <a href="frame-arms-girls.html" class="brand-box">FRAME ARMS GIRL</a>
+                    <a href="transformers.html" class="brand-box">TRANSFORMERS</a>
+                    <a href="cyberformula.html" class="brand-box">CYBERFORMULA</a>
+                    <a href="fine-molds.html" class="brand-box">FINE MOLDS</a>
+                    <a href="doyusha.html" class="brand-box">DOYUSHA</a>
+                    <a href="patlabor.html" class="brand-box">PATLABOR</a>
+                    <a href="digimon.html" class="brand-box">DIGIMON</a>
                     <a href="brands.html" class="brand-box">MORE BRANDS -></a>
                 </div>
             </div>
@@ -356,8 +415,10 @@
             <span class="nav-item">Prime Picks</span>
             <div class="mega-panel">
                 <div style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;">
-                    <div><h4 style="border-bottom: 2px solid #000; padding-bottom: 10px;">Themes</h4><ul style="list-style:none; padding:0;"><li>Sci-Fi / Mecha</li><li>WWII Military</li></ul></div>
-                    <div><h4 style="border-bottom: 2px solid #000; padding-bottom: 10px;">Series</h4><ul style="list-style:none; padding:0;"><li>Master Grade</li><li>Real Grade</li></ul></div>
+                    <div><h4 style="border-bottom: 2px solid #000; padding-bottom: 10px;">Themes</h4><ul style="list-style:none; padding:0;"><li>Mecha & Sci-Fi</li><li>Military Scale</li><li>Civilian Vehicles</li><li>Figures & Characters</li></ul></div>
+                    <div><h4 style="border-bottom: 2px solid #000; padding-bottom: 10px;">Series</h4><ul style="list-style:none; padding:0;"><li>Gunpla Grades</li><li>Standard Scales</li><li>Non-Gundam Lines</li></ul></div>
+                     <div><h4 style="border-bottom: 2px solid #000; padding-bottom: 10px;">Companies</h4><ul style="list-style:none; padding:0;"><li>Bandai Spirits</li><li>Hasegawa</li><li>Kotobukiya</li><li>Good Smile Company</li><li>Tamiya</li></ul></div>
+                    <div><h4 style="border-bottom: 2px solid #000; padding-bottom: 10px;">Favorites</h4><ul style="list-style:none; padding:0;"><li>P-Bandai</li><li>Back in Stock / Bargain Bin</li><li>Pre-Order Hub</li></ul></div>
                 </div>
             </div>
         </div>
@@ -367,34 +428,54 @@
 <section class="carousel-section" style="background-color: #0d0e10; padding: 60px 0 40px 0; border-bottom: 2px solid #464a4e; position: relative; font-family: 'Segoe UI', Tahoma, sans-serif;">
     <div class="brand-reel-container" style="max-width: 1400px; margin: 0 auto; padding: 0 60px; position: relative;">
         
-        <h2 style="position: absolute; top: -45px; left: 60px; font-size: 14px; text-transform: uppercase; color: #f9d71c; letter-spacing: 2px; border-left: 4px solid #cc0000; padding-left: 15px;">Official Logistics Partners</h2>
+        <h2 style="position: absolute; top: -45px; left: 60px; font-size: 14px; text-transform: uppercase; color: #f9d71c; letter-spacing: 2px; border-left: 4px solid #cc0000; padding-left: 15px;"></h2>
         
         <button class="arrow-btn left-arrow" onclick="scrollBrands(-1)" style="position: absolute; top: 50%; transform: translateY(-50%); left: 5px; z-index: 10; background: #1a1d20; border: 2px solid #464a4e; color: white; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 18px;">&#10094;</button>
         
         <div id="brandTrack" class="brand-track" style="display: flex; overflow-x: hidden; scroll-behavior: smooth; gap: 60px; align-items: center; padding: 15px 0;">
             
-            <a href="gundam.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; filter: grayscale(100%); transition: 0.4s;">
+            <a href="gundam.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; transition: 0.4s;">
                 <img src="images/gundam.jpeg" alt="Gundam" style="max-height: 75px; width: auto;">
             </a>
 
-            <a href="bandai.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; filter: grayscale(100%); transition: 0.4s;">
-                <img src="images/bandai.jpeg" alt="Bandai" style="max-height: 75px; width: auto;">
+            <a href="moderoid.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center;  transition: 0.4s;">
+                <img src="images/moderoid.jpeg" alt="MODEROID" style="max-height: 75px; width: auto;">
             </a>
 
-            <a href="hasegawa.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; filter: grayscale(100%); transition: 0.4s;">
-                <img src="images/hasegawa.jpeg" alt="Hasegawa" style="max-height: 75px; width: auto;">
+            <a href="plamax.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; transition: 0.4s;">
+                <img src="images/plamax.png" alt="Plamax" style="max-height: 75px; width: auto;">
             </a>
 
-            <a href="revell.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; filter: grayscale(100%); transition: 0.4s;">
-                <img src="images/revell.jpeg" alt="Revell" style="max-height: 75px; width: auto;">
+            <a href="hexa-gear.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center;  transition: 0.4s;">
+                <img src="images/hexa-gear.png" alt="Hexa Gear" style="max-height: 75px; width: auto;">
             </a>
 
-            <a href="macross.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; filter: grayscale(100%); transition: 0.4s;">
+            <a href="macross.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; transition: 0.4s;">
                 <img src="images/macross.png" alt="Macross" style="max-height: 75px; width: auto;">
             </a>
 
-            <a href="figma.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; filter: grayscale(100%); transition: 0.4s;">
-                <img src="images/figma.jpeg" alt="Figma" style="max-height: 75px; width: auto;">
+            <a href="30-minutes.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center;  transition: 0.4s;">
+                <img src="images/evangelion.png" alt="" style="max-height: 75px; width: auto;">
+            </a>
+            
+            <a href="transformers.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center;  transition: 0.4s;">
+                <img src="images/transformerss.png" alt="Transformers" style="max-height: 75px; width: auto;">
+            </a>
+            
+            <a href="star-wars.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center; transition: 0.4s;">
+                <img src="images/star-wars.png" alt="Star Wars" style="max-height: 75px; width: auto;">
+            </a>
+            
+            <a href="frame-arms-girls.html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center;  transition: 0.4s;">
+                <img src="images/frame-arms.jpeg" alt="" style="max-height: 75px; width: auto;">
+            </a>
+            
+            <a href=".html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center;  transition: 0.4s;">
+                <img src="images/armoredcore.png" alt="" style="max-height: 75px; width: auto;">
+            </a>
+
+        <a href=".html" class="brand-item" style="min-width: 160px; flex-shrink: 0; text-align: center;  transition: 0.4s;">
+                <img src="images/good-smile-company.jpeg" alt="" style="max-height: 75px; width: auto;">
             </a>
 
         </div>
@@ -404,112 +485,124 @@
     </div>
 </section>
 
-<div class="main-content">
-    <div class="kit-card">
-        <div class="kit-image" onclick="location.href='hi-v-gundam.html'"></div>
-        <div class="kit-details">
-            <div class="kit-title">RG 1/144 RX-93-v2 Hi-v Gundam (Beltorchika's Children)</div>
-            <div class="kit-price">$54.99</div>
-            <button class="btn-action btn-cart" onclick="addToCart('RG Hi-v Gundam', 54.99, 'In Stock')">Add to Cart</button>
+<div class="showcase-container">
+    <h2 class="section-header">New Arrivals</h2>
+    
+    <div class="grid-asym">
+        <div class="banner-card large-banner" onclick="location.href='gundam.html'">
+            <img src="images/strike-freedom.jpeg" alt="Mobile Suit Gundam Series" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMyMjIiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjRweCIgZmlsbD0iIzU1NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkd1bmRhbSBVbml2ZXJzZSBLaXRzPC90ZXh0Pjwvc3ZnPg=='">
+            <div class="banner-label">Mobile Suit Gundam: Master Grade & Real Grade Kits In Stock!</div>
+        </div>
+        
+        <div class="stacked-banners">
+            <div class="banner-card" onclick="location.href='macross.html'">
+                <img src="images/valkyrie_macross.jpeg" alt="Macross Series" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMzMzMiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjRweCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1hY3Jvc3MgVmFsa3lyaWVzPC90ZXh0Pjwvc3ZnPg=='">
+                <div class="banner-label">Hasegawa Macross 1/72 Scale Valkyries</div>
+            </div>
+            <div class="banner-card" onclick="location.href='30-minutes.html'">
+                <img src="images/bodyparts_30mm.jpeg" alt="30 Minute Missions" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiM0NDQiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjRweCIgZmlsbD0iIzc3NyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPjMwIE1pbnV0ZXMgbGluZTwvdGV4dD48L3N2Zz4='">
+                <div class="banner-label">30 Minutes Missions & Sisters Expansion Packs</div>
+            </div>
         </div>
     </div>
 
-    <div class="kit-card">
-        <div class="kit-image" onclick="location.href='product.html'"></div>
-        <div class="kit-details">
-            <div class="kit-title">MG 1/100 Gundam Barbatos (Iron-Blooded Orphans)</div>
-            <div class="kit-price">$48.00</div>
-            <button class="btn-action btn-cart" onclick="addToCart('MG Barbatos', 48.00, 'In Stock')">Add to Cart</button>
+    <div class="grid-row-5">
+        <div class="banner-card vertical-banner" onclick="location.href='evangelion.html'">
+            <img src="images/rg_eva.jpeg" alt="Evangelion" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMyMjIiLz48L3N2Zz4='">
+            <div class="banner-label">Evangelion RG Line</div>
         </div>
-    </div>
-
-    <div class="kit-card">
-        <div class="kit-image" onclick="location.href='product.html'"></div>
-        <div class="kit-details">
-            <div class="kit-title">HG 1/144 Gundam Calibarn (Permet Score 8 Edition)</div>
-            <div class="kit-price">$26.50</div>
-            <button class="btn-action btn-pre" onclick="addToCart('HG Calibarn', 26.50, 'Pre-Order')">Pre-Order</button>
+        <div class="banner-card vertical-banner" onclick="location.href='zoids.html'">
+            <img src="images/hmm_zoids.jpeg" alt="Zoids HMM" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMzMzMiLz48L3N2Zz4='">
+            <div class="banner-label">Kotobukiya Zoids HMM</div>
+        </div>
+        <div class="banner-card vertical-banner" onclick="location.href='armored-core.html'">
+            <img src="images/haze_ac.jpeg" alt="Armored Core" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiM0NDQiLz48L3N2Zz4='">
+            <div class="banner-label">Armored Core V.I.</div>
+        </div>
+        <div class="banner-card vertical-banner" onclick="location.href='moderoid.html'">
+            <img src="images/super_moderoid.jpeg" alt="Moderoid" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMzMzMiLz48L3N2Zz4='">
+            <div class="banner-label">Moderoid Super Robots</div>
+        </div>
+        <div class="banner-card vertical-banner" onclick="location.href='frame-arms-girls.html'">
+            <img src="images/fag.jpeg" alt="Frame Arms" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMyMjIiLz48L3N2Zz4='">
+            <div class="banner-label">Frame Arms Girl</div>
         </div>
     </div>
 </div>
 
-<footer style="background-color: #16181b; border-top: 10px solid #464a4e; color: #ffffff; padding: 80px 40px; font-family: 'Segoe UI', Tahoma, sans-serif;">
-    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 60px;">
-        
+<div class="showcase-container" style="padding-top: 0;">
+    <h2 class="section-header">Featured Pre-Orders</h2>
+    
+    <div class="grid-sym-2">
+        <div class="banner-card large-banner" onclick="location.href='star-wars.html'">
+            <img src="images/bandai_starwars.jpeg" alt="Star Wars Plamo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMyMjIiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjRweCIgZmlsbD0iIzU1NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlN0YXIgV2FycyBWZWhpY2xlczwvdGV4dD48L3N2Zz4='">
+            <div class="banner-label">Bandai Star Wars 1/72 & 1/144 Scale Vehicles</div>
+        </div>
+        <div class="banner-card large-banner" onclick="location.href='furai-transformers.html'">
+            <img src="images/furai_transformers.jpeg" alt="Transformers Kits" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMzMzMiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjRweCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlRyYW5zZm9ybWVycyBGdXJhaSBNb2RlbDwvdGV4dD48L3N2Zz4='">
+            <div class="banner-label">Flame Toys Transformers Furai Model Kits</div>
+        </div>
+    </div>
+</div>
+
+
+
+<footer>
+    <div class="footer-grid">
         <div style="display: flex; flex-direction: column;">
-            <h3 style="color: #f9d71c; font-size: 20px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; font-weight: 900;">PrimeVault Logistics</h3>
-            <p style="font-size: 13px; line-height: 1.8; color: #b0b0b0; margin-bottom: 20px;">
+            <h3 style="color: var(--safety-yellow); font-size: 20px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; font-weight: 900;">PrimeVault Logistics</h3>
+            <p style="font-size: 13px; line-height: 1.8; color: var(--text-sub); margin-bottom: 20px;">
                 Your tactical hangar for the finest precision-engineered plastic models. We distribute authentic Japanese and international hobby kits globally.
             </p>
-            <p style="font-size: 12px; font-weight: bold; color: #ffffff; text-transform: uppercase; letter-spacing: 1px;">
+            <p style="font-size: 12px; font-weight: bold; color: var(--pure-white); text-transform: uppercase; letter-spacing: 1px;">
                 OPERATIONAL STATUS: <span style="color: #00ff00;">READY</span>
             </p>
         </div>
 
         <div>
-            <h4 style="font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #cc0000; padding-left: 12px; font-weight: 700;">Support Hangar</h4>
+            <h4 style="font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid var(--plastic-red); padding-left: 12px; font-weight: 700;">Support Hangar</h4>
             <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 2;">
-                <li><a href="shipping.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Shipping Protocols</a></li>
-                <li><a href="returns.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Returns & Exchanges</a></li>
-                <li><a href="preorder-policy.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Pre-Order Policy</a></li>
-                <li><a href="claims.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Runner Integrity Claims</a></li>
-                <li><a href="customs.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">International Customs</a></li>
+                <li><a href="shipping.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Shipping Protocols</a></li>
+                <li><a href="returns.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Returns & Exchanges</a></li>
+                <li><a href="preorder-policy.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Pre-Order Policy</a></li>
+                <li><a href="claims.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Runner Integrity Claims</a></li>
+                <li><a href="customs.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">International Customs</a></li>
             </ul>
         </div>
 
         <div>
-            <h4 style="font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #cc0000; padding-left: 12px; font-weight: 700;">Quick Access</h4>
+            <h4 style="font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid var(--plastic-red); padding-left: 12px; font-weight: 700;">Quick Access</h4>
             <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 2;">
-                <li><a href="about.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">About PrimeVault</a></li>
-                <li><a href="blog.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Hobby Blog</a></li>
-                <li><a href="affiliate.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Affiliate Program</a></li>
-                <li><a href="locations.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Store Locator</a></li>
-                <li><a href="contact.html" style="color: #b0b0b0; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Contact Dispatch</a></li>
+                <li><a href="about.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">About PrimeVault</a></li>
+                <li><a href="blog.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Hobby Blog</a></li>
+                <li><a href="affiliate.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Affiliate Program</a></li>
+                <li><a href="locations.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Store Locator</a></li>
+                <li><a href="contact.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Contact Dispatch</a></li>
             </ul>
         </div>
 
         <div>
-            <div style="border: 4px solid #ffffff; padding: 25px; background-color: #000; margin-bottom: 25px;">
-                <h4 style="color: #ff0000; font-size: 18px; font-weight: 900; text-align: center; margin: 0 0 12px 0; text-transform: uppercase;">⚠ WARNING</h4>
-                <p style="font-size: 11px; line-height: 1.5; text-align: justify; margin: 0; text-transform: uppercase; color: #ffffff;">
+            <div class="warning-box">
+                <h4 class="warning-title">⚠ WARNING</h4>
+                <p class="warning-text">
                     CHOKING HAZARD: SMALL PARTS. FUNCTIONAL SHARP POINTS. THIS PRODUCT IS NOT A TOY. DESIGNED FOR ADULT HOBBYISTS. NOT FOR CHILDREN UNDER 15 YEARS. HANDLE WITH EXTREME CAUTION.
                 </p>
-            </div>
-            <div style="display: flex; gap: 20px; justify-content: center; font-size: 20px; color: #b0b0b0;">
-                <a href="#" style="color: inherit; text-decoration: none;">𝕏</a> 
-                <a href="#" style="color: inherit; text-decoration: none;">📸</a> 
-                <a href="#" style="color: inherit; text-decoration: none;">🎥</a> 
-                <a href="#" style="color: inherit; text-decoration: none;">💬</a>
             </div>
         </div>
     </div>
 
-    <div style="max-width: 1400px; margin: 60px auto 0; border-top: 1px solid #333; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px;">
+    <div class="copyright-bar">
         <div style="max-width: 70%;">
             © 2026 PrimeVault Philippines. Model photography is for illustrative purposes only. All brands are property of their respective owners.
-        </div>
-        <div style="display: flex; gap: 15px;">
-            <div style="width: 45px; height: 28px; background: #333; border-radius: 3px;"></div>
-            <div style="width: 45px; height: 28px; background: #333; border-radius: 3px;"></div>
-            <div style="width: 45px; height: 28px; background: #333; border-radius: 3px;"></div>
         </div>
     </div>
 </footer>
 
-
-
 <script>
     function scrollBrands(direction) {
-    const track = document.getElementById('brandTrack');
-    const scrollAmount = 350;
-    track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-}
-
-    function addToCart(name, price, status) {
-        let cart = JSON.parse(localStorage.getItem('pv_cart')) || [];
-        cart.push({ id: Date.now(), name: name, price: price, status: status, qty: 1 });
-        localStorage.setItem('pv_cart', JSON.stringify(cart));
-        window.location.href = 'cart.html';
+        const track = document.getElementById('brandTrack');
+        const scrollAmount = 350;
+        track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
     }
 
     document.getElementById('mainSearch').addEventListener('keypress', function (e) {
