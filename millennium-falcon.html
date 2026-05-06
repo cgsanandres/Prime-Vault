@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | PrimeVault</title>
+    <style>
+        :root {
+            --bg-color: #0d0e10;
+            --runner-grey: #464a4e;
+            --plastic-red: #cc0000;
+            --safety-yellow: #f9d71c;
+            --panel-dark: #16181b;
+            --pure-white: #ffffff;
+            --text-main: #ffffff;
+            --text-dark: #222222;
+            --text-sub: #b0b0b0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER (SYNCED) --- */
+        header { background: var(--panel-dark); border-bottom: 5px solid var(--runner-grey); position: sticky; top: 0; z-index: 1000; }
+        .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 15px 40px; max-width: 1400px; margin: 0 auto; }
+        .logo { font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; color: white; }
+        .logo span { color: var(--plastic-red); }
+        .search-container { flex-grow: 1; max-width: 650px; margin: 0 40px; }
+        .search-bar { width: 100%; background: #000; border: 2px solid var(--runner-grey); padding: 12px 15px; color: white; border-radius: 4px; outline: none; }
+        .user-actions { display: flex; gap: 25px; align-items: center; }
+        .icon-link { color: white; text-decoration: none; font-size: 24px; transition: 0.2s; cursor: pointer; }
+        .icon-link:hover { color: var(--safety-yellow); }
+        .nav-strip { display: flex; padding: 0 40px; background: var(--panel-dark); max-width: 1400px; margin: 0 auto; }
+        .nav-item { color: white; text-decoration: none; font-weight: bold; font-size: 13px; text-transform: uppercase; padding: 12px 25px; display: block; cursor: pointer; }
+        .nav-item:hover { color: var(--safety-yellow); }
+
+        /* --- PRODUCT PAGE LAYOUT --- */
+        .product-page-container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 40px;
+        }
+
+        .product-header {
+            border-bottom: 2px solid var(--runner-grey);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .product-title {
+            font-size: 28px;
+            font-weight: 900;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+        }
+
+        .product-brand {
+            color: var(--text-sub);
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .product-brand span { color: var(--safety-yellow); }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        /* --- GALLERY SECTION --- */
+        .gallery-container {
+            display: flex;
+            gap: 20px;
+            background: var(--panel-dark);
+            padding: 20px;
+            border: 2px solid var(--runner-grey);
+        }
+
+        .thumbnails {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 80px;
+        }
+
+        .thumb-box {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--runner-grey);
+            cursor: pointer;
+            background: #000;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .thumb-box.active {
+            border-color: var(--safety-yellow);
+        }
+
+        .thumb-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+
+        .thumb-box.active img, .thumb-box:hover img {
+            opacity: 1;
+        }
+
+        .main-image-stage {
+            flex-grow: 1;
+            background: #000;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+            border: 1px solid var(--runner-grey);
+        }
+
+        .main-image-stage img {
+            max-width: 100%;
+            max-height: 600px;
+            object-fit: contain;
+        }
+
+        /* Gallery Controls */
+        .nav-arrow {
+            position: absolute;
+            bottom: 20px;
+            background: rgba(22, 24, 27, 0.8);
+            border: 2px solid var(--runner-grey);
+            color: white;
+            font-size: 24px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            z-index: 10;
+        }
+
+        .nav-arrow:hover { background: var(--plastic-red); border-color: var(--plastic-red); }
+        .nav-arrow.left { left: 20px; }
+        .nav-arrow.right { left: 75px; } /* Placed next to each other like BBTS, or adjust as needed */
+
+        .fullscreen-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(22, 24, 27, 0.8);
+            border: 2px solid var(--runner-grey);
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+            transition: 0.3s;
+            z-index: 10;
+        }
+
+        .fullscreen-btn:hover { background: var(--safety-yellow); color: black; border-color: var(--safety-yellow); }
+
+        /* --- PURCHASE BOX --- */
+        .buy-box {
+            background: var(--panel-dark);
+            padding: 30px;
+            border: 2px solid var(--runner-grey);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .price {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--pure-white);
+        }
+
+        .btn-add-cart {
+            background: var(--plastic-red);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 16px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-add-cart:hover { background: #ff1a1a; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(204,0,0,0.4); }
+
+        .controls-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .qty-select {
+            flex: 1;
+            background: #000;
+            color: white;
+            border: 2px solid var(--runner-grey);
+            padding: 12px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .btn-wishlist {
+            flex: 2;
+            background: transparent;
+            color: white;
+            border: 2px solid var(--runner-grey);
+            padding: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-wishlist:hover { border-color: var(--safety-yellow); color: var(--safety-yellow); }
+
+        /* --- PRODUCT INFO TABS/SECTIONS --- */
+        .info-section {
+            background: var(--panel-dark);
+            border: 2px solid var(--runner-grey);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .info-block {
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--runner-grey);
+            padding-bottom: 30px;
+        }
+        .info-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .info-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--safety-yellow);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .info-content {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-sub);
+        }
+
+        .info-list {
+            list-style-type: square;
+            padding-left: 20px;
+            color: var(--text-sub);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        .info-list li { margin-bottom: 8px; }
+
+        /* --- FULL SCREEN MODAL --- */
+        #fullscreen-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 20000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            background: transparent;
+            color: white;
+            border: none;
+            font-size: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .close-btn:hover { color: var(--plastic-red); }
+
+        /* Modal Arrows */
+        .modal-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            color: white;
+            border: none;
+            font-size: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .modal-arrow:hover { color: var(--safety-yellow); }
+        .modal-arrow.left { left: -80px; }
+        .modal-arrow.right { right: -80px; }
+
+
+        /* --- FOOTER (SYNCED) --- */
+        footer { background-color: var(--panel-dark); border-top: 10px solid var(--runner-grey); padding: 80px 40px; margin-top: 40px; }
+        .footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 60px; }
+        .footer-col h3 { color: var(--safety-yellow); text-transform: uppercase; margin-bottom: 25px; }
+        .footer-col h4 { font-size: 15px; margin-bottom: 25px; border-left: 4px solid var(--plastic-red); padding-left: 12px; text-transform: uppercase; }
+        .footer-col p, .footer-col li { font-size: 13px; line-height: 1.8; color: var(--text-sub); list-style: none; padding: 0; margin: 0; }
+        .footer-col a { color: var(--text-sub); text-decoration: none; transition: 0.2s; }
+        .footer-col a:hover { color: white; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="top-bar">
+        <a href="index.html" class="logo">Prime<span>Vault</span></a>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search Hangar (Gunpla, Tools, Brands)...">
+        </div>
+        <div class="user-actions">
+            <span class="icon-link">👤</span>
+            <a href="cart.html" class="icon-link">🛒</a>
+        </div>
+    </div>
+    <div class="nav-strip">
+        <a href="pre-order.html" class="nav-item">Pre-Order</a>
+        <a href="new-arrivals.html" class="nav-item">New Arrivals</a>
+        <a href="sale-items.html" class="nav-item">Sale Items</a>
+        <a href="brands.html" class="nav-item">Brands</a>
+    </div>
+</header>
+
+<main class="product-page-container">
+    
+    <div class="product-header">
+        <h1 class="product-title">BANDAI 1/44 SCALE MILLENIUM FALCON (TFA. VER)</h1>
+        <div class="product-brand">BY <span>BANDAI SPIRITS</span> | BRAND <span>STAR WARS</span></div>
+    </div>
+
+    <div class="product-grid">
+        
+        <div class="gallery-container">
+            <div class="thumbnails" id="thumbnail-container">
+                <div class="thumb-box active" onclick="setMainImage(0)">
+                    <img src="images/product-shot-1.jpg" alt="Thumb 1">
+                </div>
+                <div class="thumb-box" onclick="setMainImage(1)">
+                    <img src="images/product-shot-2.jpg" alt="Thumb 2">
+                </div>
+                <div class="thumb-box" onclick="setMainImage(2)">
+                    <img src="images/product-shot-3.jpg" alt="Thumb 3">
+                </div>
+                <div class="thumb-box" onclick="setMainImage(3)">
+                    <img src="images/product-shot-4.jpg" alt="Thumb 4">
+                </div>
+                <div class="thumb-box" onclick="setMainImage(4)">
+                    <img src="images/product-shot-5.jpg" alt="Thumb 5">
+                </div>
+            </div>
+
+            <div class="main-image-stage">
+                <img id="main-display-img" src="images/product-shot-1.jpg" alt="Product Main Image">
+                
+                <button class="nav-arrow left" onclick="prevImage()">&#10094;</button>
+                <button class="nav-arrow right" onclick="nextImage()">&#10095;</button>
+                <button class="fullscreen-btn" onclick="openFullscreen()">&#x26F6; Full Screen</button>
+            </div>
+        </div>
+
+        <div class="buy-box">
+            <div style="background: var(--runner-grey); color: white; padding: 5px 10px; font-size: 12px; font-weight: bold; width: fit-content;">IN STOCK</div>
+            
+            <div class="price">$60.00</div>
+            
+            <button class="btn-add-cart" onclick="window.location.href='cart.html'">
+                🛒 ADD TO CART
+            </button>
+
+            <div class="controls-row">
+                <select class="qty-select">
+                    <option value="1">Qty: 1</option>
+                    <option value="2">Qty: 2</option>
+                    <option value="3">Qty: 3</option>
+                    <option value="4">Qty: 4</option>
+                    <option value="5">Qty: 5</option>
+                </select>
+
+                <button class="btn-wishlist">♡ Add to Wishlist</button>
+            </div>
+            
+            <div style="border-top: 1px solid var(--runner-grey); padding-top: 20px; font-size: 12px; color: var(--text-sub);">
+                <p>📦 <strong>$6 Flat Rate Shipping</strong> within the lower 48 states.</p>
+                <p>🛡️ <strong>Collector Grade Packaging</strong> guaranteed on all shipments.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-section">
+        
+  <div class="info-block">
+    <h2 class="info-title">Product Description</h2>
+    <div class="info-content">
+        <p>The fastest hunk of junk in the galaxy makes its spectacular debut in the Bandai Star Wars model kit line! This highly detailed 1/144 scale Millennium Falcon captures the ship's modified appearance as seen in Star Wars: The Force Awakens. This release features the iconic rectangular radar dish that replaced the original destroyed at the Battle of Endor, meticulously crafted side walls, and precision-molded paneling that requires no glue for assembly.</p>
+        <p>Using Bandai's advanced injection molding techniques, the hull features unparalleled surface detailing right down to individual conduits and maintenance pits. It serves as a masterful display piece straight out of the box, or as the perfect canvas for custom weathering and panel lining.</p>
+    </div>
+</div>
+
+<div class="info-block">
+    <h2 class="info-title">Product Features</h2>
+    <ul class="info-list">
+        <li>1/144 Scale</li>
+        <li>Made of high-quality PS and ABS plastics</li>
+        <li>Based on the vehicle in Star Wars: The Force Awakens</li>
+        <li>Traditional snap-fit assembly with no glue or cement required</li>
+        <li>Exquisite surface detailing matching the movie studio models</li>
+        <li>Interchangeable display configurations for landing gear or flight mode</li>
+    </ul>
+</div>
+
+<div class="info-block">
+    <h2 class="info-title">Box Contents</h2>
+    <ul class="info-list">
+        <li>Molded plastic parts to build
+            <ul>
+                <li>Millennium Falcon (TFA Ver.)</li>
+                <li>Rectangular sensor dish</li>
+                <li>Engine effect parts</li>
+                <li>Opening/closing cockpit and boarding ramp parts</li>
+            </ul>
+        </li>
+        <li>1/144 Miniature in-scale figures
+            <ul>
+                <li>Han Solo (Seated)</li>
+                <li>Chewbacca (Seated)</li>
+                <li>Rey (Seated)</li>
+                <li>Finn (Seated)</li>
+                <li>BB-8</li>
+            </ul>
+        </li>
+        <li>Desert/Jakku terrain display base</li>
+        <li>Foil sticker sheet for quick panel color</li>
+        <li>Water slide decal sheet for precision application</li>
+        <li>Instruction manual</li>
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+
+    </div>
+</main>
+
+<div id="fullscreen-modal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeFullscreen()">×</button>
+        <button class="modal-arrow left" onclick="prevImage()">&#10094;</button>
+        <img id="modal-img" src="" alt="Fullscreen View">
+        <button class="modal-arrow right" onclick="nextImage()">&#10095;</button>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h3>PrimeVault Logistics</h3>
+            <p>Your tactical hangar for the finest precision-engineered plastic models. We distribute authentic Japanese and international hobby kits globally.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Support Hangar</h4>
+            <ul>
+                <li><a href="#">Shipping Protocols</a></li>
+                <li><a href="#">Returns & Exchanges</a></li>
+                <li><a href="#">Pre-Order Policy</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Quick Access</h4>
+            <ul>
+                <li><a href="#">About PrimeVault</a></li>
+                <li><a href="#">Hobby Blog</a></li>
+                <li><a href="#">Contact Dispatch</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <div style="border: 4px solid #ffffff; padding: 25px; background-color: #000;">
+                <h4 style="color: #ff0000; font-size: 18px; font-weight: 900; text-align: center; margin: 0 0 12px 0;">⚠ WARNING</h4>
+                <p style="font-size: 11px; text-transform: uppercase; color: #ffffff;">CHOKING HAZARD: SMALL PARTS. FUNCTIONAL SHARP POINTS. THIS PRODUCT IS NOT A TOY. DESIGNED FOR ADULT HOBBYISTS.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Array collecting all the images you insert into the thumb-boxes above
+    const images = [
+        "images/product-shot-1.jpg",
+        "images/product-shot-2.jpg",
+        "images/product-shot-3.jpg",
+        "images/product-shot-4.jpg",
+        "images/product-shot-5.jpg"
+    ];
+    
+    let currentIndex = 0;
+    const mainImg = document.getElementById('main-display-img');
+    const modalImg = document.getElementById('modal-img');
+    const modal = document.getElementById('fullscreen-modal');
+    const thumbs = document.querySelectorAll('.thumb-box');
+
+    function updateGallery() {
+        // Update images
+        mainImg.src = images[currentIndex];
+        modalImg.src = images[currentIndex];
+        
+        // Update active thumbnail styling
+        thumbs.forEach((thumb, index) => {
+            if(index === currentIndex) {
+                thumb.classList.add('active');
+            } else {
+                thumb.classList.remove('active');
+            }
+        });
+    }
+
+    function setMainImage(index) {
+        currentIndex = index;
+        updateGallery();
+    }
+
+    function nextImage() {
+        currentIndex++;
+        if (currentIndex >= images.length) {
+            currentIndex = 0; 
+        }
+        updateGallery();
+    }
+
+    function prevImage() {
+        currentIndex--;
+        if (currentIndex < 0) {
+            currentIndex = images.length - 1; 
+        }
+        updateGallery();
+    }
+
+    function openFullscreen() {
+        modalImg.src = images[currentIndex];
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden"; 
+    }
+
+    function closeFullscreen() {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+   
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeFullscreen();
+        }
+    }
+</script>
+
+</body>
+</html>

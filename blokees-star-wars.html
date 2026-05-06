@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furai Transformers Model Kits | PrimeVault Logistics</title>
+    <style>
+        :root {
+            --bg-color: #0d0e10;
+            --runner-grey: #464a4e;
+            --plastic-red: #cc0000;
+            --safety-yellow: #f9d71c;
+            --panel-dark: #16181b;
+            --pure-white: #ffffff;
+            --text-sub: #b0b0b0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--pure-white);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header { background: var(--panel-dark); border-bottom: 5px solid var(--runner-grey); position: sticky; top: 0; z-index: 1000; }
+        .top-bar { display: flex; align-items: center; justify-content: space-between; padding: 15px 40px; max-width: 1400px; margin: 0 auto; }
+        .logo { font-size: 26px; font-weight: 900; text-transform: uppercase; text-decoration: none; color: white; }
+        .logo span { color: var(--plastic-red); }
+        .search-container { flex-grow: 1; max-width: 650px; margin: 0 40px; }
+        .search-bar { width: 100%; background: #000; border: 2px solid var(--runner-grey); padding: 12px 15px; color: white; border-radius: 4px; outline: none; font-size: 14px; }
+        .user-actions { display: flex; gap: 20px; font-size: 22px; cursor: pointer; }
+
+        /* --- CATALOG LAYOUT --- */
+        .catalog-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 40px;
+        }
+
+        /* --- SIDEBAR FILTERS --- */
+        .sidebar { background: var(--panel-dark); border-right: 2px solid var(--runner-grey); padding: 20px; height: fit-content; }
+        .filter-group { margin-bottom: 25px; }
+        .filter-group h4 { 
+            text-transform: uppercase; 
+            font-size: 13px; 
+            border-bottom: 2px solid #000; 
+            padding-bottom: 8px; 
+            margin-bottom: 12px;
+            color: var(--safety-yellow);
+            font-weight: 900;
+        }
+        .filter-link { 
+            display: block; 
+            font-size: 13px; 
+            color: var(--text-sub); 
+            text-decoration: none; 
+            margin-bottom: 8px; 
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .filter-link:hover { color: var(--pure-white); padding-left: 5px; border-left: 2px solid var(--plastic-red); }
+        .show-more { color: var(--plastic-red); font-weight: bold; cursor: pointer; font-size: 11px; text-transform: uppercase; margin-top: 5px; display: inline-block; }
+
+        /* --- TOP CONTROLS & APPLIED FILTERS --- */
+        .controls-wrapper { margin-bottom: 20px; }
+        
+        .applied-filters { 
+            display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; min-height: 34px; align-items: center;
+        }
+        .filter-tag { 
+            background: var(--plastic-red); 
+            color: white;
+            padding: 6px 12px; 
+            border-radius: 2px; 
+            font-size: 11px; 
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+        }
+        .filter-tag span { cursor: pointer; color: #000; font-size: 14px; line-height: 1; }
+        .filter-tag span:hover { color: white; }
+
+        .controls-bar {
+            background: var(--panel-dark);
+            padding: 15px 20px;
+            border: 1px solid var(--runner-grey);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        select, .inner-search { 
+            background: #000; color: white; border: 1px solid var(--runner-grey); padding: 8px; font-family: inherit; font-size: 12px;
+        }
+        .inner-search { width: 100%; box-sizing: border-box; margin-bottom: 10px; }
+
+        /* --- PRODUCT GRID --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            background: var(--panel-dark);
+            border: 2px solid var(--runner-grey);
+            padding: 15px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .product-card:hover { border-color: var(--safety-yellow); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        
+        .product-img { width: 100%; height: 220px; background: #222; margin-bottom: 15px; position: relative; overflow: hidden; }
+        
+        /* Dynamic Grade Label */
+        .grade-badge { 
+            position: absolute; bottom: 0; left: 0; 
+            padding: 4px 8px; font-size: 10px; font-weight: bold; color: white;
+        }
+        .badge-mg { background: rgba(204,0,0,0.9); } /* Red for MG */
+        .badge-rg { background: rgba(25, 118, 210, 0.9); } /* Blue for RG */
+
+        .product-name { font-size: 14px; font-weight: 900; line-height: 1.4; margin-bottom: 10px; flex-grow: 1; }
+        .product-price { color: var(--safety-yellow); font-weight: 900; font-size: 18px; }
+
+        
+        footer { background-color: var(--panel-dark); border-top: 10px solid var(--runner-grey); padding: 80px 40px; margin-top: 80px; }
+        .footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 60px; }
+        .footer-col h4 { font-size: 15px; margin-bottom: 25px; border-left: 4px solid var(--plastic-red); padding-left: 12px; text-transform: uppercase; }
+        .footer-col p, .footer-col li { font-size: 13px; line-height: 1.8; color: var(--text-sub); list-style: none; padding: 0; }
+        .warning-box { border: 4px solid #ffffff; padding: 25px; background-color: #000; }
+		
+		.product-img {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #222; /* Fallback color */
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="top-bar">
+        <a href="index.html" class="logo">Prime<span>Vault</span></a>
+        <div class="search-container"><input type="text" class="search-bar" placeholder="Search Hangar Inventory..."></div>
+        <div class="user-actions"><span>👤</span> <a href="cart.html" style="text-decoration:none; color:inherit;">🛒</a></div>
+    </div>
+</header>
+
+<div class="catalog-container">
+    <aside class="sidebar">
+        <div class="filter-group">
+            <h4>Search in results:</h4>
+            <input type="text" class="inner-search" id="innerSearch" placeholder="Filter current view..." oninput="processFilters()">
+        </div>
+
+        <div class="filter-group">
+            <h4>Blokees Type / Series</h4>
+            <span class="filter-link" onclick="addFilter('productType', 'Galaxy Version')">Galaxy Version (Standard)</span>
+            <span class="filter-link" onclick="addFilter('productType', 'Classic Class')">Classic Class (Value)</span>
+            <span class="filter-link" onclick="addFilter('productType', 'Action Edition')">Action Edition (Premium/LED)</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Era / Continuity</h4>
+            <span class="filter-link" onclick="addFilter('series', 'Original Trilogy')">Original Trilogy</span>
+            <span class="filter-link" onclick="addFilter('series', 'Prequel Trilogy')">Prequel Trilogy</span>
+            <span class="filter-link" onclick="addFilter('series', 'The Mandalorian')">The Mandalorian / New Republic</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Character / Figure</h4>
+            <div id="character-list">
+                <span class="filter-link" onclick="addFilter('character', 'Darth Vader')">Darth Vader</span>
+                <span class="filter-link" onclick="addFilter('character', 'Luke Skywalker')">Luke Skywalker</span>
+                <span class="filter-link" onclick="addFilter('character', 'Stormtrooper')">Stormtrooper</span>
+                <span class="filter-link" onclick="addFilter('character', 'Din Djarin')">The Mandalorian</span>
+            </div>
+            <span class="show-more" onclick="expandCharacters()">Show More +</span>
+        </div>
+
+        <div class="filter-group">
+            <h4>Faction</h4>
+            <span class="filter-link" onclick="addFilter('theme', 'Galactic Empire')">Galactic Empire / Sith</span>
+            <span class="filter-link" onclick="addFilter('theme', 'Rebel Alliance')">Rebel Alliance / Jedi</span>
+            <span class="filter-link" onclick="addFilter('theme', 'Bounty Hunters')">Bounty Hunters / Scum</span>
+        </div>
+    </aside>
+
+
+
+
+
+    <main>
+        <div class="controls-wrapper">
+            <div class="applied-filters" id="appliedFilters"></div>
+
+            <div class="controls-bar">
+                <div>
+                    Sort By: 
+                    <select id="sortBy" onchange="processFilters()">
+                        <option value="newest">Newest Arrivals</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name-a">Name: A to Z</option>
+                    </select>
+                </div>
+                <div>
+                    Per Page:
+                    <select id="perPage" onchange="processFilters()">
+                        <option value="12">12 Items</option>
+                        <option value="24">24 Items</option>
+                        <option value="48">48 Items</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+    </main>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div style="display: flex; flex-direction: column;">
+            <h3 style="color: var(--safety-yellow); font-size: 20px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; font-weight: 900;">PrimeVault Logistics</h3>
+            <p style="font-size: 13px; line-height: 1.8; color: var(--text-sub); margin-bottom: 20px;">
+                Your tactical hangar for the finest precision-engineered plastic models. We distribute authentic Japanese and international hobby kits globally.
+            </p>
+            <p style="font-size: 12px; font-weight: bold; color: var(--pure-white); text-transform: uppercase; letter-spacing: 1px;">
+                OPERATIONAL STATUS: <span style="color: #00ff00;">READY</span>
+            </p>
+        </div>
+
+        <div>
+            <h4 style="font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid var(--plastic-red); padding-left: 12px; font-weight: 700;">Support Hangar</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 2;">
+                <li><a href="shipping.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Shipping Protocols</a></li>
+                <li><a href="returns.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Returns & Exchanges</a></li>
+                <li><a href="preorder-policy.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Pre-Order Policy</a></li>
+                <li><a href="claims.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Runner Integrity Claims</a></li>
+                <li><a href="customs.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">International Customs</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 style="font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid var(--plastic-red); padding-left: 12px; font-weight: 700;">Quick Access</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 2;">
+                <li><a href="about.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">About PrimeVault</a></li>
+                <li><a href="blog.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Hobby Blog</a></li>
+                <li><a href="affiliate.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Affiliate Program</a></li>
+                <li><a href="locations.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Store Locator</a></li>
+                <li><a href="contact.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Contact Dispatch</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <div class="warning-box">
+                <h4 class="warning-title">⚠ WARNING</h4>
+                <p class="warning-text">
+                    CHOKING HAZARD: SMALL PARTS. FUNCTIONAL SHARP POINTS. THIS PRODUCT IS NOT A TOY. DESIGNED FOR ADULT HOBBYISTS. NOT FOR CHILDREN UNDER 15 YEARS. HANDLE WITH EXTREME CAUTION.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright-bar">
+        <div style="max-width: 70%;">
+            © 2026 PrimeVault Philippines. Model photography is for illustrative purposes only. All brands are property of their respective owners.
+        </div>
+    </div>
+</footer>
+<script>
+    
+ 
+const allProducts = [
+    
+    { 
+        id: 101, 
+        grade: "Galaxy Version", 
+        name: "Blokees Star Wars Galaxy Version Darth Vader", 
+        price: 15.00, 
+        productType: "Galaxy Version", 
+        series: "Original Trilogy", 
+        character: "Darth Vader", 
+        theme: "Galactic Empire", 
+        image: "images/blokees-vader.jpeg",
+        targetPage: "vader.html"
+    },
+    { 
+        id: 102, 
+        grade: "Galaxy Version", 
+        name: "Blokees Star Wars Galaxy Version Luke Skywalker", 
+        price: 15.00, 
+        productType: "Galaxy Version", 
+        series: "Original Trilogy", 
+        character: "Luke Skywalker", 
+        theme: "Rebel Alliance", 
+        image: "images/blokees-luke.jpeg",
+        targetPage: "luke.html"
+    },
+    { 
+        id: 103, 
+        grade: "Galaxy Version", 
+        name: "Blokees Star Wars Galaxy Version Din Djarin", 
+        price: 16.00, 
+        productType: "Galaxy Version", 
+        series: "The Mandalorian", 
+        character: "Din Djarin", 
+        theme: "Bounty Hunters", 
+        image: "images/blokees-mando.jpeg",
+        targetPage: "mando.html"
+    },
+    
+   
+    { 
+        id: 202, 
+        grade: "Classic Class", 
+        name: "Blokees Star Wars Classic Class Stormtrooper", 
+        price: 9.00, 
+        productType: "Classic Class", 
+        series: "Original Trilogy", 
+        character: "Stormtrooper", 
+        theme: "Galactic Empire", 
+        image: "images/blokees-stormtrooper.jpeg",
+        targetPage: "stormtrooper.html"
+    },
+    { 
+        id: 203, 
+        grade: "Galaxy Version", 
+        name: "Blokees Star Wars Galaxy Version Ahsoka Tano", 
+        price: 15.00, 
+        productType: "Galaxy Version", 
+        series: "Prequel Trilogy", 
+        character: "Ahsoka Tano", 
+        theme: "Rebel Alliance", 
+        image: "images/blokees-ahsoka.jpeg",
+        targetPage: "ahsoka.html"
+    }
+];
+
+let activeFilters = [];
+
+function addFilter(categoryKey, value) {
+    if (!activeFilters.some(f => f.category === categoryKey && f.value === value)) {
+        activeFilters.push({ category: categoryKey, value: value });
+        processFilters();
+    }
+}
+
+function removeFilter(categoryKey, value) {
+    activeFilters = activeFilters.filter(f => !(f.category === categoryKey && f.value === value));
+    processFilters();
+}
+
+function processFilters() {
+    const searchTerm = document.getElementById('innerSearch')?.value.toLowerCase() || '';
+    const sortValue = document.getElementById('sortBy')?.value || 'name-a';
+    const limit = parseInt(document.getElementById('perPage')?.value || 12);
+
+    let results = allProducts.filter(product => {
+        const matchesSearch = product.name.toLowerCase().includes(searchTerm);
+        const matchesTags = activeFilters.every(filter => product[filter.category] === filter.value);
+        return matchesSearch && matchesTags;
+    });
+
+    // Sorting Logic
+    if(sortValue === 'price-low') results.sort((a,b) => a.price - b.price);
+    if(sortValue === 'price-high') results.sort((a,b) => b.price - a.price);
+    if(sortValue === 'name-a') results.sort((a,b) => a.name.localeCompare(b.name));
+
+    results = results.slice(0, limit);
+    renderUI(results);
+}
+
+function renderUI(filteredProducts) {
+    const tagContainer = document.getElementById('appliedFilters');
+    if (!tagContainer) return;
+    
+    // Render Filter Tags
+    if (activeFilters.length === 0) {
+        tagContainer.innerHTML = `<span style="color:var(--text-sub); font-size:12px;">Data access granted. Showing full Blokees Star Wars inventory.</span>`;
+    } else {
+        tagContainer.innerHTML = activeFilters.map(f => `
+            <div class="filter-tag" onclick="removeFilter('${f.category}', '${f.value}')">
+                ${f.value} <span>✖</span>
+            </div>
+        `).join('');
+    }
+
+    const grid = document.getElementById('productGrid');
+    if (!grid) return;
+
+    if (filteredProducts.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; padding: 40px; text-align:center; color:var(--text-sub);">These are not the figures you are looking for. Try a different filter.</div>`;
+        return;
+    }
+
+    grid.innerHTML = filteredProducts.map(p => {
+        // Set dynamic badge color class based on the product grade
+        let badgeClass = "badge-galaxy";
+        if (p.grade === "Action Edition") badgeClass = "badge-action";
+        if (p.grade === "Classic Class") badgeClass = "badge-classic";
+
+        return `
+            <a href="${p.targetPage}" class="product-card">
+                <div class="product-img" style="background-image: url('${p.image}')">
+                    <div class="grade-badge ${badgeClass}">
+                        ${p.grade}
+                    </div>
+                </div>
+                <div class="product-name">${p.name}</div>
+                <div class="product-price">$${p.price.toFixed(2)}</div>
+            </a>
+        `;
+    }).join('');
+}
+
+function expandCharacters() {
+    const list = document.getElementById('character-list');
+    if (!list) return;
+
+    const additionalChars = [
+        { key: 'character', val: 'Ahsoka Tano' },
+        { key: 'character', val: 'Stormtrooper' },
+        { key: 'character', val: 'Din Djarin' }
+    ];
+    
+    additionalChars.forEach(char => {
+        const span = document.createElement('span');
+        span.className = 'filter-link';
+        span.innerText = char.val;
+        span.onclick = () => addFilter(char.key, char.val);
+        list.appendChild(span);
+    });
+    
+    if (event && event.target) {
+        event.target.style.display = 'none';
+    }
+}
+
+
+    
+
+
+document.addEventListener('DOMContentLoaded', processFilters);
+</script>
+
+</body>
+</html>
