@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Grade | PrimeVault Logistics</title>
+    <title>Entry Grade | PrimeVault Logistics</title>
     <style>
         :root {
             --bg-color: #0d0e10;
@@ -160,6 +160,7 @@
     </div>
 </header>
 
+
 <div class="catalog-container">
     <aside class="sidebar">
         <div class="filter-group">
@@ -169,26 +170,25 @@
 
         <div class="filter-group">
             <h4>Grade / Type</h4>
-            <span class="filter-link" onclick="addFilter('productType', 'Standard RG')">Standard Real Grade</span>
-            <span class="filter-link" onclick="addFilter('productType', 'RG Premium Bandai')">Premium Bandai (P-Bandai)</span>
-            <span class="filter-link" onclick="addFilter('productType', 'Expansion')">Effect Parts / Weapon Sets</span>
+            <span class="filter-link" onclick="addFilter('productType', 'Standard EG')">Standard Entry Grade</span>
+            <span class="filter-link" onclick="addFilter('productType', 'Full Weapon Set')">Full Weapon / Equipment Ver.</span>
+            <span class="filter-link" onclick="addFilter('productType', 'Special Recirculation')">Special / Eco-Pla Color</span>
         </div>
 
         <div class="filter-group">
             <h4>Timeline / Continuity</h4>
             <span class="filter-link" onclick="addFilter('series', 'Universal Century')">Universal Century (UC)</span>
             <span class="filter-link" onclick="addFilter('series', 'Cosmic Era')">Cosmic Era (Gundam SEED)</span>
-            <span class="filter-link" onclick="addFilter('series', 'After Colony')">After Colony (Gundam Wing)</span>
-            <span class="filter-link" onclick="addFilter('series', 'Future Century')">Future Century (G-Gundam)</span>
+            <span class="filter-link" onclick="addFilter('series', 'Ad Stella')">Ad Stella (Witch From Mercury)</span>
         </div>
 
         <div class="filter-group">
             <h4>Mobile Suit / Character</h4>
             <div id="character-list">
-                <span class="filter-link" onclick="addFilter('character', 'RX-93 nu Gundam')">ν Gundam</span>
-                <span class="filter-link" onclick="addFilter('character', 'MSN-04 Sazabi')">Sazabi</span>
-                <span class="filter-link" onclick="addFilter('character', 'ZGMF-X20A Strike Freedom')">Strike Freedom Gundam</span>
-                <span class="filter-link" onclick="addFilter('character', 'GF13-017NJII God Gundam')">God Gundam</span>
+                <span class="filter-link" onclick="addFilter('character', 'RX-78-2 Gundam')">RX-78-2 Gundam</span>
+                <span class="filter-link" onclick="addFilter('character', 'GAT-X105 Strike Gundam')">Strike Gundam</span>
+                <span class="filter-link" onclick="addFilter('character', 'RX-93 nu Gundam')">ν Gundam (Nu)</span>
+                <span class="filter-link" onclick="addFilter('character', 'build-strike-exceed')">Build Strike Exceed Galaxy</span>
             </div>
             <span class="show-more" onclick="expandCharacters()">Show More +</span>
         </div>
@@ -196,9 +196,10 @@
         <div class="filter-group">
             <h4>Faction</h4>
             <span class="filter-link" onclick="addFilter('theme', 'Earth Federation / Protagonists')">Earth Federation / Protagonists</span>
-            <span class="filter-link" onclick="addFilter('theme', 'Zeon / Neo Zeon / Antagonists')">Zeon / Neo Zeon / Antagonists</span>
+            <span class="filter-link" onclick="addFilter('theme', 'Omni Enclave / Antagonists')">OMNI / Zeon / Antagonists</span>
         </div>
     </aside>
+
 
 
 
@@ -286,46 +287,47 @@
 <script>
     
  
+
 const allProducts = [
-    // --- Standard Real Grade ---
+    // --- Standard Entry Grade ---
     { 
         id: 101, 
-        grade: "RG", 
-        name: "Bandai RG 1/144 RX-93 nu Gundam", 
-        price: 45.00, 
-        productType: "Standard RG", 
+        grade: "Standard EG", 
+        name: "Bandai Entry Grade 1/144 RX-78-2 Gundam", 
+        price: 7.00, 
+        productType: "Standard EG", 
         series: "Universal Century", 
-        character: "RX-93 nu Gundam", 
+        character: "RX-78-2 Gundam", 
         theme: "Earth Federation / Protagonists", 
-        image: "images/rg-nugundam.jpeg",
-        targetPage: "rg-nugundam.html"
+        image: "images/eg-rx782.jpeg",
+        targetPage: "eg-rx782.html"
     },
     { 
         id: 102, 
-        grade: "RG", 
-        name: "Bandai RG 1/144 MSN-04 Sazabi", 
-        price: 50.00, 
-        productType: "Standard RG", 
-        series: "Universal Century", 
-        character: "MSN-04 Sazabi", 
-        theme: "Zeon / Neo Zeon / Antagonists", 
-        image: "images/rg-sazabi.jpeg",
-        targetPage: "rg-sazabi.html"
+        grade: "Standard EG", 
+        name: "Bandai Entry Grade 1/144 GAT-X105 Strike Gundam", 
+        price: 7.00, 
+        productType: "Standard EG", 
+        series: "Cosmic Era", 
+        character: "GAT-X105 Strike Gundam", 
+        theme: "Earth Federation / Protagonists", 
+        image: "images/eg-strike.jpeg",
+        targetPage: "eg-strike.html"
     },
     { 
         id: 103, 
-        grade: "RG", 
-        name: "Bandai RG 1/144 GF13-017NJII God Gundam", 
-        price: 38.00, 
-        productType: "Standard RG", 
-        series: "Future Century", 
-        character: "GF13-017NJII God Gundam", 
+        grade: "Standard EG", 
+        name: "Bandai Entry Grade 1/144 RX-93 nu Gundam", 
+        price: 11.00, 
+        productType: "Standard EG", 
+        series: "Universal Century", 
+        character: "RX-93 nu Gundam", 
         theme: "Earth Federation / Protagonists", 
-        image: "images/rg-godgundam.jpeg",
-        targetPage: "rg-godgundam.html"
+        image: "images/eg-nugundam.jpeg",
+        targetPage: "eg-nugundam.html"
     },
     
-    
+  
 ];
 
 let activeFilters = [];
@@ -367,7 +369,7 @@ function renderUI(filteredProducts) {
     
     // Render Filter Tags
     if (activeFilters.length === 0) {
-        tagContainer.innerHTML = `<span style="color:var(--text-sub); font-size:12px;">All visual sensors clear. Showing the full Real Grade catalog.</span>`;
+        tagContainer.innerHTML = `<span style="color:var(--text-sub); font-size:12px;">All visual sensors clear. Showing the full Entry Grade catalog.</span>`;
     } else {
         tagContainer.innerHTML = activeFilters.map(f => `
             <div class="filter-tag" onclick="removeFilter('${f.category}', '${f.value}')">
@@ -378,15 +380,15 @@ function renderUI(filteredProducts) {
 
     const grid = document.getElementById('productGrid');
     if (filteredProducts.length === 0) {
-        grid.innerHTML = `<div style="grid-column: 1/-1; padding: 40px; text-align:center; color:var(--text-sub);">No Real Grade kits match your current active filters.</div>`;
+        grid.innerHTML = `<div style="grid-column: 1/-1; padding: 40px; text-align:center; color:var(--text-sub);">No Entry Grade kits match your current active filters.</div>`;
         return;
     }
 
     grid.innerHTML = filteredProducts.map(p => {
-        // Dynamic badge color class based on RG distribution type
-        let badgeClass = "badge-rg-standard";
-        if (p.grade === "P-Bandai") badgeClass = "badge-rg-pbandai";
-        if (p.grade === "Expansion") badgeClass = "badge-rg-expansion";
+        // Dynamic badge color class based on Entry Grade sub-type
+        let badgeClass = "badge-eg-standard";
+        if (p.grade === "Full Weapon") badgeClass = "badge-eg-weapon";
+        if (p.grade === "Special Color") badgeClass = "badge-eg-special";
 
         return `
             <a href="${p.targetPage}" class="product-card">
@@ -405,9 +407,9 @@ function renderUI(filteredProducts) {
 function expandCharacters() {
     const list = document.getElementById('character-list');
     const additionalChars = [
-        { key: 'character', val: 'GF13-017NJII God Gundam' },
-        { key: 'character', val: 'ZGMF-X20A Strike Freedom' },
-        { key: 'character', val: 'MSN-04 Sazabi' }
+        { key: 'character', val: 'RX-93 nu Gundam' },
+        { key: 'character', val: 'GAT-X105 Strike Gundam' },
+        { key: 'character', val: 'build-strike-exceed' }
     ];
     
     additionalChars.forEach(char => {
@@ -423,8 +425,6 @@ function expandCharacters() {
     }
 }
 
-
-    
 
 
 document.addEventListener('DOMContentLoaded', processFilters);

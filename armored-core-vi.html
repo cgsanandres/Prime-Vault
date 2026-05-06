@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Grade | PrimeVault Logistics</title>
+    <title>Armored Core V.I. | PrimeVault Logistics</title>
     <style>
         :root {
             --bg-color: #0d0e10;
@@ -168,37 +168,38 @@
         </div>
 
         <div class="filter-group">
-            <h4>Grade / Type</h4>
-            <span class="filter-link" onclick="addFilter('productType', 'Standard RG')">Standard Real Grade</span>
-            <span class="filter-link" onclick="addFilter('productType', 'RG Premium Bandai')">Premium Bandai (P-Bandai)</span>
-            <span class="filter-link" onclick="addFilter('productType', 'Expansion')">Effect Parts / Weapon Sets</span>
+            <h4>Variable Infinity Class</h4>
+            <span class="filter-link" onclick="addFilter('productType', 'V.I. Standard')">V.I. Standard Kits (1/72)</span>
+            <span class="filter-link" onclick="addFilter('productType', 'V.I. Weapon Set')">V.I. Weapon / Extension Units</span>
         </div>
 
         <div class="filter-group">
-            <h4>Timeline / Continuity</h4>
-            <span class="filter-link" onclick="addFilter('series', 'Universal Century')">Universal Century (UC)</span>
-            <span class="filter-link" onclick="addFilter('series', 'Cosmic Era')">Cosmic Era (Gundam SEED)</span>
-            <span class="filter-link" onclick="addFilter('series', 'After Colony')">After Colony (Gundam Wing)</span>
-            <span class="filter-link" onclick="addFilter('series', 'Future Century')">Future Century (G-Gundam)</span>
+            <h4>Game Continuity</h4>
+            <span class="filter-link" onclick="addFilter('series', 'AC 1 to 3')">AC1 / Master of Arena / AC3</span>
+            <span class="filter-link" onclick="addFilter('series', 'AC Nexus / Last Raven')">Nexus / Last Raven</span>
+            <span class="filter-link" onclick="addFilter('series', 'AC 4 / For Answer')">AC4 / For Answer</span>
+            <span class="filter-link" onclick="addFilter('series', 'AC V / Verdict Day')">AC V / Verdict Day</span>
         </div>
 
         <div class="filter-group">
-            <h4>Mobile Suit / Character</h4>
+            <h4>Core Unit / Mecha</h4>
             <div id="character-list">
-                <span class="filter-link" onclick="addFilter('character', 'RX-93 nu Gundam')">ν Gundam</span>
-                <span class="filter-link" onclick="addFilter('character', 'MSN-04 Sazabi')">Sazabi</span>
-                <span class="filter-link" onclick="addFilter('character', 'ZGMF-X20A Strike Freedom')">Strike Freedom Gundam</span>
-                <span class="filter-link" onclick="addFilter('character', 'GF13-017NJII God Gundam')">God Gundam</span>
+                <span class="filter-link" onclick="addFilter('character', 'White Glint')">White Glint</span>
+                <span class="filter-link" onclick="addFilter('character', 'Nineball')">Nineball / Nineball Seraph</span>
+                <span class="filter-link" onclick="addFilter('character', 'Aliya')">Suppressor / Alicia Aliya</span>
+                <span class="filter-link" onclick="addFilter('character', 'Oracle')">Dual Face / Oracle</span>
             </div>
             <span class="show-more" onclick="expandCharacters()">Show More +</span>
         </div>
 
         <div class="filter-group">
-            <h4>Faction</h4>
-            <span class="filter-link" onclick="addFilter('theme', 'Earth Federation / Protagonists')">Earth Federation / Protagonists</span>
-            <span class="filter-link" onclick="addFilter('theme', 'Zeon / Neo Zeon / Antagonists')">Zeon / Neo Zeon / Antagonists</span>
+            <h4>Core Type / Weight</h4>
+            <span class="filter-link" onclick="addFilter('theme', 'Lightweight')">Lightweight / Reverse-Joint</span>
+            <span class="filter-link" onclick="addFilter('theme', 'Middleweight')">Middleweight / Standard Biped</span>
+            <span class="filter-link" onclick="addFilter('theme', 'Heavyweight')">Heavyweight / Tank Tread</span>
         </div>
     </aside>
+
 
 
 
@@ -287,45 +288,81 @@
     
  
 const allProducts = [
-    // --- Standard Real Grade ---
+    // --- Variable Infinity Standard Core Kits ---
     { 
         id: 101, 
-        grade: "RG", 
-        name: "Bandai RG 1/144 RX-93 nu Gundam", 
-        price: 45.00, 
-        productType: "Standard RG", 
-        series: "Universal Century", 
-        character: "RX-93 nu Gundam", 
-        theme: "Earth Federation / Protagonists", 
-        image: "images/rg-nugundam.jpeg",
-        targetPage: "rg-nugundam.html"
+        grade: "V.I. Standard", 
+        name: "Kotobukiya 1/72 V.I. White Glint", 
+        price: 72.00, 
+        productType: "V.I. Standard", 
+        series: "AC 4 / For Answer", 
+        character: "White Glint", 
+        theme: "Middleweight", 
+        image: "images/vi-white-glint.jpeg",
+        targetPage: "white-glint.html"
     },
     { 
         id: 102, 
-        grade: "RG", 
-        name: "Bandai RG 1/144 MSN-04 Sazabi", 
-        price: 50.00, 
-        productType: "Standard RG", 
-        series: "Universal Century", 
-        character: "MSN-04 Sazabi", 
-        theme: "Zeon / Neo Zeon / Antagonists", 
-        image: "images/rg-sazabi.jpeg",
-        targetPage: "rg-sazabi.html"
+        grade: "V.I. Standard", 
+        name: "Kotobukiya 1/72 V.I. Rayleonard 03-AALIYA Suppressor", 
+        price: 65.00, 
+        productType: "V.I. Standard", 
+        series: "AC 4 / For Answer", 
+        character: "Aliya", 
+        theme: "Lightweight", 
+        image: "images/vi-aliya.jpeg",
+        targetPage: "aliya-suppressor.html"
     },
     { 
         id: 103, 
-        grade: "RG", 
-        name: "Bandai RG 1/144 GF13-017NJII God Gundam", 
-        price: 38.00, 
-        productType: "Standard RG", 
-        series: "Future Century", 
-        character: "GF13-017NJII God Gundam", 
-        theme: "Earth Federation / Protagonists", 
-        image: "images/rg-godgundam.jpeg",
-        targetPage: "rg-godgundam.html"
+        grade: "V.I. Standard", 
+        name: "Kotobukiya 1/72 V.I. Nineball Seraph", 
+        price: 78.00, 
+        productType: "V.I. Standard", 
+        series: "AC 1 to 3", 
+        character: "Nineball", 
+        theme: "Heavyweight", 
+        image: "images/vi-nineball-seraph.jpeg",
+        targetPage: "nineball-seraph.html"
     },
     
-    
+    // --- Variable Infinity Weapon & Extension Units ---
+    { 
+        id: 201, 
+        grade: "V.I. Weapon Set", 
+        name: "Kotobukiya V.I. Weapon Unit 016 (Saline M-05 & Motorcobra)", 
+        price: 18.00, 
+        productType: "V.I. Weapon Set", 
+        series: "AC 4 / For Answer", 
+        character: "White Glint", 
+        theme: "Middleweight", 
+        image: "images/vi-weapon-016.jpeg",
+        targetPage: "weapon-unit-016.html"
+    },
+    { 
+        id: 202, 
+        grade: "V.I. Weapon Set", 
+        name: "Kotobukiya V.I. Weapon Unit 017 (WG Back Units)", 
+        price: 18.00, 
+        productType: "V.I. Weapon Set", 
+        series: "AC 4 / For Answer", 
+        character: "White Glint", 
+        theme: "Middleweight", 
+        image: "images/vi-weapon-017.jpeg",
+        targetPage: "weapon-unit-017.html"
+    },
+    { 
+        id: 203, 
+        grade: "V.I. Weapon Set", 
+        name: "Kotobukiya V.I. Extension Unit 01 (Overed Booster)", 
+        price: 15.00, 
+        productType: "V.I. Weapon Set", 
+        series: "AC Nexus / Last Raven", 
+        character: "Oracle", 
+        theme: "Middleweight", 
+        image: "images/vi-extension-01.jpeg",
+        targetPage: "extension-unit-01.html"
+    }
 ];
 
 let activeFilters = [];
@@ -367,7 +404,7 @@ function renderUI(filteredProducts) {
     
     // Render Filter Tags
     if (activeFilters.length === 0) {
-        tagContainer.innerHTML = `<span style="color:var(--text-sub); font-size:12px;">All visual sensors clear. Showing the full Real Grade catalog.</span>`;
+        tagContainer.innerHTML = `<span style="color:var(--text-sub); font-size:12px;">All diagnostic systems green. Showing full Raven inventory.</span>`;
     } else {
         tagContainer.innerHTML = activeFilters.map(f => `
             <div class="filter-tag" onclick="removeFilter('${f.category}', '${f.value}')">
@@ -378,21 +415,20 @@ function renderUI(filteredProducts) {
 
     const grid = document.getElementById('productGrid');
     if (filteredProducts.length === 0) {
-        grid.innerHTML = `<div style="grid-column: 1/-1; padding: 40px; text-align:center; color:var(--text-sub);">No Real Grade kits match your current active filters.</div>`;
+        grid.innerHTML = `<div style="grid-column: 1/-1; padding: 40px; text-align:center; color:var(--text-sub);">No Core units or accessories match your tactical parameters.</div>`;
         return;
     }
 
     grid.innerHTML = filteredProducts.map(p => {
-        // Dynamic badge color class based on RG distribution type
-        let badgeClass = "badge-rg-standard";
-        if (p.grade === "P-Bandai") badgeClass = "badge-rg-pbandai";
-        if (p.grade === "Expansion") badgeClass = "badge-rg-expansion";
+        // Set dynamic badge color class based on the product grade
+        let badgeClass = "badge-standard";
+        if (p.grade === "V.I. Weapon Set") badgeClass = "badge-weapon";
 
         return `
             <a href="${p.targetPage}" class="product-card">
                 <div class="product-img" style="background-image: url('${p.image}')">
                     <div class="grade-badge ${badgeClass}">
-                        ${p.grade}
+                        ${p.grade === "V.I. Standard" ? "Standard" : "Weapon Set"}
                     </div>
                 </div>
                 <div class="product-name">${p.name}</div>
@@ -405,9 +441,8 @@ function renderUI(filteredProducts) {
 function expandCharacters() {
     const list = document.getElementById('character-list');
     const additionalChars = [
-        { key: 'character', val: 'GF13-017NJII God Gundam' },
-        { key: 'character', val: 'ZGMF-X20A Strike Freedom' },
-        { key: 'character', val: 'MSN-04 Sazabi' }
+        { key: 'character', val: 'Aliya' },
+        { key: 'character', val: 'Oracle' }
     ];
     
     additionalChars.forEach(char => {
@@ -423,6 +458,7 @@ function expandCharacters() {
     }
 }
 
+  
 
     
 

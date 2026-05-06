@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Grade | PrimeVault Logistics</title>
+    <title>Real Grade and Master Grade Model Kits | PrimeVault Logistics</title>
     <style>
         :root {
             --bg-color: #0d0e10;
@@ -168,38 +168,42 @@
         </div>
 
         <div class="filter-group">
-            <h4>Grade / Type</h4>
-            <span class="filter-link" onclick="addFilter('productType', 'Standard RG')">Standard Real Grade</span>
-            <span class="filter-link" onclick="addFilter('productType', 'RG Premium Bandai')">Premium Bandai (P-Bandai)</span>
-            <span class="filter-link" onclick="addFilter('productType', 'Expansion')">Effect Parts / Weapon Sets</span>
+            <h4>Grade / Scale</h4>
+            <span class="filter-link" onclick="addFilter('productType', 'Master Grade (MG)')">Master Grade (1/100)</span>
+            <span class="filter-link" onclick="addFilter('productType', 'Real Grade (RG)')">Real Grade (1/144)</span>
         </div>
 
         <div class="filter-group">
-            <h4>Timeline / Continuity</h4>
-            <span class="filter-link" onclick="addFilter('series', 'Universal Century')">Universal Century (UC)</span>
-            <span class="filter-link" onclick="addFilter('series', 'Cosmic Era')">Cosmic Era (Gundam SEED)</span>
-            <span class="filter-link" onclick="addFilter('series', 'After Colony')">After Colony (Gundam Wing)</span>
-            <span class="filter-link" onclick="addFilter('series', 'Future Century')">Future Century (G-Gundam)</span>
+            <h4>Universe / Series</h4>
+            <span class="filter-link" onclick="addFilter('series', 'UC 0079')">Universal Century 0079</span>
+            <span class="filter-link" onclick="addFilter('series', 'UC 0093')">Char's Counterattack (UC 0093)</span>
+            <span class="filter-link" onclick="addFilter('series', 'SEED')">Gundam SEED / SEED Destiny</span>
+            <span class="filter-link" onclick="addFilter('series', 'OO')">Gundam 00</span>
+            <span class="filter-link" onclick="addFilter('series', 'Iron-Blooded Orphans')">Iron-Blooded Orphans</span>
+            <span class="filter-link" onclick="addFilter('series', 'Witch from Mercury')">The Witch from Mercury</span>
         </div>
 
         <div class="filter-group">
-            <h4>Mobile Suit / Character</h4>
+            <h4>Character / Unit</h4>
             <div id="character-list">
-                <span class="filter-link" onclick="addFilter('character', 'RX-93 nu Gundam')">ν Gundam</span>
-                <span class="filter-link" onclick="addFilter('character', 'MSN-04 Sazabi')">Sazabi</span>
-                <span class="filter-link" onclick="addFilter('character', 'ZGMF-X20A Strike Freedom')">Strike Freedom Gundam</span>
-                <span class="filter-link" onclick="addFilter('character', 'GF13-017NJII God Gundam')">God Gundam</span>
+                <span class="filter-link" onclick="addFilter('character', 'RX-78-2 Gundam')">RX-78-2 Gundam</span>
+                <span class="filter-link" onclick="addFilter('character', 'Nu Gundam')">Nu Gundam / Hi-Nu</span>
+                <span class="filter-link" onclick="addFilter('character', 'Sazabi')">MSN-04 Sazabi</span>
+                <span class="filter-link" onclick="addFilter('character', 'Freedom Gundam')">Freedom / Strike Freedom</span>
+                <span class="filter-link" onclick="addFilter('character', 'Gundam Exia')">Exia / 00 Raiser</span>
+                <span class="filter-link" onclick="addFilter('character', 'Barbatos')">Gundam Barbatos</span>
             </div>
             <span class="show-more" onclick="expandCharacters()">Show More +</span>
         </div>
 
         <div class="filter-group">
-            <h4>Faction</h4>
-            <span class="filter-link" onclick="addFilter('theme', 'Earth Federation / Protagonists')">Earth Federation / Protagonists</span>
-            <span class="filter-link" onclick="addFilter('theme', 'Zeon / Neo Zeon / Antagonists')">Zeon / Neo Zeon / Antagonists</span>
+            <h4>Theme / Faction</h4>
+            <span class="filter-link" onclick="addFilter('theme', 'Earth Federation')">Earth Federation / E.F.S.F.</span>
+            <span class="filter-link" onclick="addFilter('theme', 'Zeon')">Principality of Zeon / Neo Zeon</span>
+            <span class="filter-link" onclick="addFilter('theme', 'Zaft')">ZAFT</span>
+            <span class="filter-link" onclick="addFilter('theme', 'Celestial Being')">Celestial Being</span>
         </div>
     </aside>
-
 
 
 
@@ -287,45 +291,81 @@
     
  
 const allProducts = [
-    // --- Standard Real Grade ---
+    // --- Master Grade (MG) 1/100 Scale Kits ---
     { 
         id: 101, 
-        grade: "RG", 
-        name: "Bandai RG 1/144 RX-93 nu Gundam", 
+        grade: "Master Grade (MG)", 
+        name: "MG 1/100 RX-78-2 Gundam Ver.3.0", 
         price: 45.00, 
-        productType: "Standard RG", 
-        series: "Universal Century", 
-        character: "RX-93 nu Gundam", 
-        theme: "Earth Federation / Protagonists", 
-        image: "images/rg-nugundam.jpeg",
-        targetPage: "rg-nugundam.html"
+        productType: "Master Grade (MG)", 
+        series: "UC 0079", 
+        character: "RX-78-2 Gundam", 
+        theme: "Earth Federation", 
+        image: "images/mg-rx78-v3.jpeg",
+        targetPage: "rx-78-2.html"
     },
     { 
         id: 102, 
-        grade: "RG", 
-        name: "Bandai RG 1/144 MSN-04 Sazabi", 
+        grade: "Master Grade (MG)", 
+        name: "MG 1/100 Gundam Barbatos", 
         price: 50.00, 
-        productType: "Standard RG", 
-        series: "Universal Century", 
-        character: "MSN-04 Sazabi", 
-        theme: "Zeon / Neo Zeon / Antagonists", 
-        image: "images/rg-sazabi.jpeg",
-        targetPage: "rg-sazabi.html"
+        productType: "Master Grade (MG)", 
+        series: "Iron-Blooded Orphans", 
+        character: "Barbatos", 
+        theme: "Tekkadan", 
+        image: "images/mg-barbatos.jpeg",
+        targetPage: "barbatos.html"
     },
     { 
         id: 103, 
-        grade: "RG", 
-        name: "Bandai RG 1/144 GF13-017NJII God Gundam", 
-        price: 38.00, 
-        productType: "Standard RG", 
-        series: "Future Century", 
-        character: "GF13-017NJII God Gundam", 
-        theme: "Earth Federation / Protagonists", 
-        image: "images/rg-godgundam.jpeg",
-        targetPage: "rg-godgundam.html"
+        grade: "Master Grade (MG)", 
+        name: "MG 1/100 MSN-04 Sazabi Ver.Ka", 
+        price: 95.00, 
+        productType: "Master Grade (MG)", 
+        series: "UC 0093", 
+        character: "Sazabi", 
+        theme: "Zeon", 
+        image: "images/mg-sazabi.jpeg",
+        targetPage: "sazabi.html"
     },
     
-    
+    // --- Real Grade (RG) 1/144 Scale Kits ---
+    { 
+        id: 201, 
+        grade: "Real Grade (RG)", 
+        name: "RG 1/144 Hi-Nu Gundam", 
+        price: 55.00, 
+        productType: "Real Grade (RG)", 
+        series: "UC 0093", 
+        character: "Nu Gundam", 
+        theme: "Earth Federation", 
+        image: "images/rg-hinu.jpeg",
+        targetPage: "hi-nu-gundam.html"
+    },
+    { 
+        id: 202, 
+        grade: "Real Grade (RG)", 
+        name: "RG 1/144 Nu Gundam", 
+        price: 48.00, 
+        productType: "Real Grade (RG)", 
+        series: "UC 0093", 
+        character: "Nu Gundam", 
+        theme: "Earth Federation", 
+        image: "images/rg-nu.jpeg",
+        targetPage: "nu-gundam.html"
+    },
+    { 
+        id: 203, 
+        grade: "Real Grade (RG)", 
+        name: "RG 1/144 Freedom Gundam", 
+        price: 35.00, 
+        productType: "Real Grade (RG)", 
+        series: "SEED", 
+        character: "Freedom Gundam", 
+        theme: "Zaft", 
+        image: "images/rg-freedom.jpeg",
+        targetPage: "freedom-gundam.html"
+    }
 ];
 
 let activeFilters = [];
@@ -367,7 +407,7 @@ function renderUI(filteredProducts) {
     
     // Render Filter Tags
     if (activeFilters.length === 0) {
-        tagContainer.innerHTML = `<span style="color:var(--text-sub); font-size:12px;">All visual sensors clear. Showing the full Real Grade catalog.</span>`;
+        tagContainer.innerHTML = `<span style="color:var(--text-sub); font-size:12px;">All units operational. Showing full mobile suit inventory.</span>`;
     } else {
         tagContainer.innerHTML = activeFilters.map(f => `
             <div class="filter-tag" onclick="removeFilter('${f.category}', '${f.value}')">
@@ -378,21 +418,20 @@ function renderUI(filteredProducts) {
 
     const grid = document.getElementById('productGrid');
     if (filteredProducts.length === 0) {
-        grid.innerHTML = `<div style="grid-column: 1/-1; padding: 40px; text-align:center; color:var(--text-sub);">No Real Grade kits match your current active filters.</div>`;
+        grid.innerHTML = `<div style="grid-column: 1/-1; padding: 40px; text-align:center; color:var(--text-sub);">No mobile suits match your current active filters.</div>`;
         return;
     }
 
     grid.innerHTML = filteredProducts.map(p => {
-        // Dynamic badge color class based on RG distribution type
-        let badgeClass = "badge-rg-standard";
-        if (p.grade === "P-Bandai") badgeClass = "badge-rg-pbandai";
-        if (p.grade === "Expansion") badgeClass = "badge-rg-expansion";
+        // Set dynamic badge color class based on the product grade
+        let badgeClass = "badge-mg";
+        if (p.grade === "Real Grade (RG)") badgeClass = "badge-rg";
 
         return `
             <a href="${p.targetPage}" class="product-card">
                 <div class="product-img" style="background-image: url('${p.image}')">
                     <div class="grade-badge ${badgeClass}">
-                        ${p.grade}
+                        ${p.grade === "Master Grade (MG)" ? "1/100 MG" : "1/144 RG"}
                     </div>
                 </div>
                 <div class="product-name">${p.name}</div>
@@ -405,9 +444,9 @@ function renderUI(filteredProducts) {
 function expandCharacters() {
     const list = document.getElementById('character-list');
     const additionalChars = [
-        { key: 'character', val: 'GF13-017NJII God Gundam' },
-        { key: 'character', val: 'ZGMF-X20A Strike Freedom' },
-        { key: 'character', val: 'MSN-04 Sazabi' }
+        { key: 'character', val: 'Freedom Gundam' },
+        { key: 'character', val: 'Sazabi' },
+        { key: 'character', val: 'Barbatos' }
     ];
     
     additionalChars.forEach(char => {
