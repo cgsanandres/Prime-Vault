@@ -365,7 +365,7 @@
 <main class="product-page-container">
     
     <div class="product-header">
-        <h1 class="product-title">RG 1/144 Nu Gundam</h1>
+        <h1 class="product-title">MG 1/100 RX-78-2 Gundam Ver.3.0</h1>
         <div class="product-brand">BY <span>BANDAI SPIRITS</span> | BRAND <span>MOBILE SUIT GUNDAM</span></div>
     </div>
 
@@ -374,13 +374,13 @@
         <div class="gallery-container">
             <div class="thumbnails" id="thumbnail-container">
                 <div class="thumb-box active" onclick="setMainImage(0)">
-                    <img src="images/nu-gundam-rg.jpeg" alt="Thumb 1">
+                    <img src="images/782rx.jpeg" alt="Thumb 1">
                 </div>
-            
+               
             </div>
 
             <div class="main-image-stage">
-                <img id="main-display-img" src="images/nu-gundam-rg.jpeg" alt="Product Main Image">
+                <img id="main-display-img" src="images/782rx.jpeg" alt="Product Main Image">
                 
                 <button class="nav-arrow left" onclick="prevImage()">&#10094;</button>
                 <button class="nav-arrow right" onclick="nextImage()">&#10095;</button>
@@ -391,7 +391,7 @@
         <div class="buy-box">
             <div style="background: var(--runner-grey); color: white; padding: 5px 10px; font-size: 12px; font-weight: bold; width: fit-content;">IN STOCK</div>
             
-            <div class="price">$48.00</div>
+            <div class="price">$45.00</div>
             
             <button class="btn-add-cart" onclick="window.location.href='cart.html'">
                 🛒 ADD TO CART
@@ -419,24 +419,23 @@
     <div class="info-section">
         
 <div class="info-block">
-  <div class="info-block">
     <h2 class="info-title">Product Description</h2>
     <div class="info-content">
-        <p>The legendary mobile suit piloted by Amuro Ray joins the Real Grade lineup with Bandai's masterfully engineered RG 1/144 scale RX-93 ν Gundam! Featured in the cinematic masterpiece Mobile Suit Gundam: Char's Counterattack, this model kit delivers unparalleled detail and dynamic posing capabilities previously reserved for larger scales. The kit features a multi-link gimmick that shifts the armor plates in tandem with the joints to create a highly realistic, mechanical movement without the absolute need for glue or cement.</p>
-        <p>Utilizing high-precision multi-color injection molding, this Real Grade kit offers spectacular parts and color separation straight out of the box. From the complex assembly of its signature Fin Funnels to the intricately detailed internal skeleton, this kit provides a complex, rewarding build for beginners and veteran modelers alike.</p>
+        <p>The iconic mobile suit that started it all reaches its absolute peak of Master Grade engineering with Bandai's incredibly detailed MG 1/100 scale RX-78-2 Gundam Ver.3.0! Piloted by Amuro Ray in the original Mobile Suit Gundam series, this version incorporates the visual styling and intricate multi-tone armor plating of the full-scale statue once displayed in Tokyo. The kit utilizes high-precision parts separation to ensure a rewarding assembly experience with zero glue or cement required.</p>
+        <p>This Ver.3.0 release introduces a revolutionary Movable Armor System, where plates slide and shift in perfect synchronization with the underlying joints to replicate realistic mechanical movement. Featuring a fully transforming Core Fighter, exceptional articulation, and a highly detailed inner frame, this model stands as the definitive 1/100 scale representation of the classic Granddaddy Gundam.</p>
     </div>
 </div>
 
 <div class="info-block">
     <h2 class="info-title">Product Features</h2>
     <ul class="info-list">
-        <li>1/144 Scale</li>
+        <li>1/100 Scale</li>
         <li>Made of high-quality PS, ABS, and PP plastics</li>
-        <li>Based on the iconic mobile suit from Mobile Suit Gundam: Char's Counterattack</li>
-        <li>Features a highly articulated Advanced MS Joint internal frame for dynamic posing</li>
-        <li>Innovative armor-sliding gimmick that moves panels as the limbs flex</li>
+        <li>Based on the iconic original anime series Mobile Suit Gundam</li>
+        <li>Advanced Movable Armor System that moves and slides plates in tandem with joint articulation</li>
+        <li>Sophisticated multi-tone white, blue, and red plastic injection for maximum out-of-the-box realism</li>
         <li>Traditional snap-fit assembly with no glue or cement required</li>
-        <li>Fully functional Fin Funnels that can be uncoupled and posed individually</li>
+        <li>Head-mounted compartment designed to hold a Bandai Yellow LED Unit (sold separately) to illuminate the eyes</li>
     </ul>
 </div>
 
@@ -445,30 +444,26 @@
     <ul class="info-list">
         <li>Molded plastic parts to build
             <ul>
-                <li>RX-93 ν Gundam</li>
+                <li>RX-78-2 Gundam</li>
                 <li>Beam Rifle</li>
-                <li>New Hyper Bazooka</li>
-                <li>Shield with integrated beam cannon and missiles</li>
-                <li>Custom Beam Saber</li>
-                <li>Spare Beam Saber</li>
-                <li>6x Fin Funnels</li>
+                <li>Hyper Bazooka</li>
+                <li>Shield with integrated viewing shutter</li>
+                <li>2x Beam Sabers</li>
+                <li>Fully transforming FF-X7 Core Fighter</li>
             </ul>
         </li>
-        <li>In-scale miniature figure
+        <li>In-scale miniature figures
             <ul>
+                <li>Amuro Ray (Seated inside the Core Fighter)</li>
                 <li>Amuro Ray (Standing pilot figure)</li>
             </ul>
         </li>
-        <li>Weapon-holding and expressive manipulator hand parts</li>
-        <li>Foil sticker sheet for sensor details</li>
-        <li>Realistic decal sheet for high-precision panel markings</li>
+        <li>Expressive Emotion Manipulator SP hands with fully poseable fingers</li>
+        <li>Foil sticker sheet for copper joint accents and sensor details</li>
+        <li>Realistic decal sheet for precision warning signs and markings</li>
         <li>Instruction manual</li>
     </ul>
 </div>
-
-
-
-
 
 
 
@@ -522,10 +517,10 @@
 </footer>
 
 <script>
-    
+    // Array collecting all the images you insert into the thumb-boxes above
     const images = [
-        "images/nu-gundam-rg.jpeg",
-       
+        "images/782rx.jpeg",
+        
     ];
     
     let currentIndex = 0;
