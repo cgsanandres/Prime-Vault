@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Furai Transformers Model Kits | PrimeVault Logistics</title>
+    <title>Yolopark Transformers AMK Model Kit Series | PrimeVault Logistics</title>
     <style>
         :root {
             --bg-color: #0d0e10;
@@ -168,33 +168,35 @@
         </div>
 
         <div class="filter-group">
-            <h4>Furai Class / Variant</h4>
-            <span class="filter-link" onclick="addFilter('productType', 'Furai Model')">Standard Furai Model</span>
-            <span class="filter-link" onclick="addFilter('productType', 'Furai Deluxe')">Deluxe / Extra Armor</span>
+            <h4>Series / Grade</h4>
+            <span class="filter-link" onclick="addFilter('productType', 'AMK Standard')">AMK Standard Series (16-20cm)</span>
+            <span class="filter-link" onclick="addFilter('productType', 'AMK Pro')">AMK Pro Series (Die-cast/LED)</span>
+            <span class="filter-link" onclick="addFilter('productType', 'AMK Mini')">AMK Mini Series (Pocket Size)</span>
         </div>
 
         <div class="filter-group">
-            <h4>Universe / Continuity</h4>
-            <span class="filter-link" onclick="addFilter('series', 'IDW Comics')">IDW Publishing Comics</span>
+            <h4>Continuity / Universe</h4>
             <span class="filter-link" onclick="addFilter('series', 'Generation 1')">Generation 1 (G1)</span>
-            
+            <span class="filter-link" onclick="addFilter('series', 'Rise of the Beasts')">Rise of the Beasts (ROTB)</span>
+            <span class="filter-link" onclick="addFilter('series', 'Transformers One')">Transformers One (TF1)</span>
+            <span class="filter-link" onclick="addFilter('series', 'Beast Wars')">Beast Wars / IDW</span>
         </div>
 
         <div class="filter-group">
             <h4>Character</h4>
             <div id="character-list">
-                <span class="filter-link" onclick="addFilter('character', 'Optimus Prime')">Optimus Prime</span>
-                <span class="filter-link" onclick="addFilter('character', 'Megatron')">Megatron</span>
-                <span class="filter-link" onclick="addFilter('character', 'Bumblebee')">Soundwave</span>
-                <span class="filter-link" onclick="addFilter('character', 'Rodimus')">Rodimus</span>
+                <span class="filter-link" onclick="addFilter('character', 'Optimus Prime')">Optimus Prime / Orion Pax</span>
+                <span class="filter-link" onclick="addFilter('character', 'Megatron')">Megatron / D-16</span>
+                <span class="filter-link" onclick="addFilter('character', 'Bumblebee')">Bumblebee / B-127</span>
+                <span class="filter-link" onclick="addFilter('character', 'Starscream')">Starscream / Seekers</span>
             </div>
             <span class="show-more" onclick="expandCharacters()">Show More +</span>
         </div>
 
         <div class="filter-group">
             <h4>Faction</h4>
-            <span class="filter-link" onclick="addFilter('theme', 'Autobot')">Autobots</span>
-            <span class="filter-link" onclick="addFilter('theme', 'Decepticon')">Decepticons</span>
+            <span class="filter-link" onclick="addFilter('theme', 'Autobot')">Autobots / Maximals</span>
+            <span class="filter-link" onclick="addFilter('theme', 'Decepticon')">Decepticons / Terrorcons</span>
         </div>
     </aside>
 
@@ -283,70 +285,81 @@
     
  
 const allProducts = [
-    // --- Standard Furai Models ---
+    
     { 
         id: 101, 
-        grade: "Furai Model", 
-        name: "Flame Toys Furai Model Optimus Prime (IDW Ver.)", 
-        price: 40.00, 
-        productType: "Furai Model", 
-        series: "IDW Comics", 
+        grade: "AMK Standard", 
+        name: "Yolopark AMK Series Optimus Prime (ROTB)", 
+        price: 34.99, 
+        productType: "AMK Standard", 
+        series: "Rise of the Beasts", 
         character: "Optimus Prime", 
         theme: "Autobot", 
-        image: "images/furai-optimus-idw.jpeg",
-        targetPage: "optimus-idw.html"
+        image: "images/amk-optimus.jpeg",
+        targetPage: "optimus-prime.html"
     },
     { 
         id: 102, 
-        grade: "Furai Model", 
-        name: "Flame Toys Furai Model Soundwave (G1)", 
-        price: 38.00, 
-        productType: "Furai Model", 
-        series: "Generation 1", 
-        character: "Soundwave", 
-        theme: "Decepticon", 
-        image: "images/furai-soundwave.jpeg",
-        targetPage: "soundwave.html"
+        grade: "AMK Standard", 
+        name: "Yolopark AMK Series Bumblebee (ROTB)", 
+        price: 29.99, 
+        productType: "AMK Standard", 
+        series: "Rise of the Beasts", 
+        character: "Bumblebee", 
+        theme: "Autobot", 
+        image: "images/amk-bumblebee.jpeg",
+        targetPage: "bumblebee.html"
     },
     { 
         id: 103, 
-        grade: "Furai Model", 
-        name: "Flame Toys Furai Model Rodimus (IDW Ver.)", 
-        price: 42.00, 
-        productType: "Furai Model", 
-        series: "IDW Comics", 
-        character: "Rodimus", 
+        grade: "AMK Standard", 
+        name: "Yolopark AMK Series Orion Pax (Transformers One)", 
+        price: 32.99, 
+        productType: "AMK Standard", 
+        series: "Transformers One", 
+        character: "Optimus Prime", 
         theme: "Autobot", 
-        image: "images/furai-rodimus.jpeg",
-        targetPage: "rodimus.html"
+        image: "images/amk-orionpax.jpeg",
+        targetPage: "orion-pax.html"
     },
     
-    // --- Deluxe Furai Models ---
+    // --- AMK Pro & Mini Series ---
     { 
         id: 201, 
-        grade: "Furai Deluxe", 
-        name: "Flame Toys Furai Model Megatron IDW (Autobot Ver.)", 
-        price: 55.00, 
-        productType: "Furai Deluxe", 
-        series: "IDW Comics", 
+        grade: "AMK Pro", 
+        name: "Yolopark AMK Pro Series Megatron (G1)", 
+        price: 59.99, 
+        productType: "AMK Pro", 
+        series: "Generation 1", 
         character: "Megatron", 
-        theme: "Autobot", 
-        image: "images/furai-megatron-idw.jpeg",
-        targetPage: "megatron-idw.html"
+        theme: "Decepticon", 
+        image: "images/amkpro-megatron.jpeg",
+        targetPage: "megatron.html"
     },
     { 
         id: 202, 
-        grade: "Furai Deluxe", 
-        name: "Flame Toys Furai Model Devastator", 
-        price: 95.00, 
-        productType: "Furai Deluxe", 
+        grade: "AMK Pro", 
+        name: "Yolopark AMK Mini Series Soundwave (G1)", 
+        price: 9.99, 
+        productType: "AMK Mini", 
         series: "Generation 1", 
-        character: "Devastator", 
+        character: "Soundwave", 
         theme: "Decepticon", 
-        image: "images/furai-devastator.jpeg",
-        targetPage: "devastator.html"
+        image: "images/amkpro-soundwave.jpeg",
+        targetPage: "soundwave.html"
     },
-    
+    { 
+        id: 203, 
+        grade: "AMK Mini", 
+        name: "Yolopark AMK Mini Series Grimlock (G1)", 
+        price: 9.99, 
+        productType: "AMK Mini", 
+        series: "Generation 1", 
+        character: "Grimlock", 
+        theme: "Autobot", 
+        image: "images/amkmini-grimlock.jpeg",
+        targetPage: "grimlock.html"
+    }
 ];
 
 let activeFilters = [];
@@ -388,7 +401,7 @@ function renderUI(filteredProducts) {
     
     // Render Filter Tags
     if (activeFilters.length === 0) {
-        tagContainer.innerHTML = `<span style="color:var(--text-sub); font-size:12px;">All matrix systems clear. Showing full stylized mecha inventory.</span>`;
+        tagContainer.innerHTML = `<span style="color:var(--text-sub); font-size:12px;">All units scanning clear. Showing full tactical inventory.</span>`;
     } else {
         tagContainer.innerHTML = activeFilters.map(f => `
             <div class="filter-tag" onclick="removeFilter('${f.category}', '${f.value}')">
@@ -404,15 +417,16 @@ function renderUI(filteredProducts) {
     }
 
     grid.innerHTML = filteredProducts.map(p => {
-        // Set dynamic badge color class based on the product grade
+        // Set dynamic badge color based on product grade
         let badgeClass = "badge-standard";
-        if (p.grade === "Furai Deluxe") badgeClass = "badge-deluxe";
+        if (p.grade === "AMK Pro") badgeClass = "badge-pro";
+        if (p.grade === "AMK Mini") badgeClass = "badge-mini";
 
         return `
             <a href="${p.targetPage}" class="product-card">
                 <div class="product-img" style="background-image: url('${p.image}')">
                     <div class="grade-badge ${badgeClass}">
-                        ${p.grade === "Furai Model" ? "Standard" : "Deluxe"}
+                        ${p.grade}
                     </div>
                 </div>
                 <div class="product-name">${p.name}</div>
@@ -425,9 +439,9 @@ function renderUI(filteredProducts) {
 function expandCharacters() {
     const list = document.getElementById('character-list');
     const additionalChars = [
-        { key: 'character', val: 'Rodimus' },
         { key: 'character', val: 'Megatron' },
-        { key: 'character', val: 'Optimus Primal' }
+        { key: 'character', val: 'Soundwave' },
+        { key: 'character', val: 'Grimlock' }
     ];
     
     additionalChars.forEach(char => {
@@ -443,7 +457,7 @@ function expandCharacters() {
     }
 }
 
-    
+
 
 
 document.addEventListener('DOMContentLoaded', processFilters);
