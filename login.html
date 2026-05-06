@@ -5,8 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PrimeVault | Sign In</title>
 <style>
+    :root {
+        --bg-color: #0d0e10;
+        --runner-grey: #464a4e;
+        --plastic-red: #cc0000;
+        --safety-yellow: #f9d71c;
+        --panel-dark: #1e1e1e;
+        --text-sub: #b3b3b3;
+    }
+
     body {
-        background-color: #121212;
+        background-color: var(--bg-color);
         color: #ffffff;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         display: flex;
@@ -14,107 +23,44 @@
         align-items: center;
         min-height: 100vh;
         margin: 0;
+        padding: 20px;
     }
+
+    .main-container {
+        display: flex;
+        gap: 30px;
+        max-width: 900px;
+        width: 100%;
+        align-items: flex-start;
+    }
+
     .auth-wrapper {
-        background-color: #1e1e1e;
+        background-color: var(--panel-dark);
         padding: 40px;
         border-radius: 8px;
         box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-        width: 100%;
-        max-width: 420px;
-        border-top: 4px solid #cc0000;
+        flex: 1;
+        border-top: 4px solid var(--plastic-red);
         box-sizing: border-box;
     }
-    .brand-title {
-        font-size: 32px;
-        font-weight: 800;
-        text-align: center;
-        margin-bottom: 30px;
-        color: #ffffff;
-        letter-spacing: 1px;
-    }
-    .brand-title span {
-        color: #cc0000;
-    }
-    .input-group {
-        margin-bottom: 20px;
-    }
-    label {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 13px;
-        color: #b3b3b3;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    input[type="text"], input[type="password"] {
-        width: 100%;
-        padding: 14px;
-        background-color: #2a2a2a;
-        border: 1px solid #333;
-        border-radius: 4px;
-        color: #ffffff;
-        box-sizing: border-box;
-        font-size: 15px;
-        outline: none;
-        transition: border-color 0.2s ease;
-    }
-    input[type="text"]:focus, input[type="password"]:focus {
-        border-color: #cc0000;
-    }
-    .options-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 25px;
-        font-size: 14px;
-    }
-    .checkbox-container {
-        display: flex;
-        align-items: center;
-        color: #b3b3b3;
-        text-transform: none;
-        cursor: pointer;
-    }
-    .checkbox-container input {
-        margin-right: 8px;
-        cursor: pointer;
-    }
-    .action-link {
-        color: #cc0000;
-        text-decoration: none;
-        transition: color 0.2s ease;
-    }
-    .action-link:hover {
-        color: #ff3333;
-    }
-    .primary-btn {
-        width: 100%;
-        padding: 15px;
-        background-color: #cc0000;
-        color: #ffffff;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.2s ease;
-    }
-    .primary-btn:hover {
-        background-color: #a30000;
-    }
+
+    /* --- SOCIAL SIGN-IN & SEPARATOR --- */
     .separator {
         margin: 30px 0;
         text-align: center;
         border-bottom: 1px solid #333;
         line-height: 0.1em;
     }
+
     .separator span {
-        background: #1e1e1e;
+        background: var(--panel-dark);
         padding: 0 15px;
         color: #666;
         font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
+
     .social-btn {
         width: 100%;
         padding: 12px;
@@ -131,108 +77,236 @@
         font-weight: 500;
         transition: background-color 0.2s ease;
     }
+
     .social-btn:hover {
         background-color: #2a2a2a;
+        border-color: var(--runner-grey);
     }
+
     .social-btn img {
         height: 20px;
         margin-right: 12px;
     }
+
     .apple-btn img {
         filter: invert(1);
     }
-    .footer-text {
+
+    /* --- DEMO ACCOUNTS PANEL --- */
+    .demo-panel {
+        flex: 0.8;
+        background-color: rgba(255, 255, 255, 0.03);
+        border: 2px dashed var(--safety-yellow);
+        border-radius: 8px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        position: relative;
+    }
+
+    .testing-badge {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--plastic-red);
+        color: white;
+        font-size: 10px;
+        font-weight: 900;
+        padding: 4px 12px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .demo-title {
         text-align: center;
-        margin-top: 25px;
+        font-size: 24px;
+        font-weight: 800;
+        margin-bottom: 5px;
+        color: white;
+    }
+
+    .demo-subtitle {
+        text-align: center;
+        font-size: 13px;
+        color: var(--text-sub);
+        margin-bottom: 20px;
+    }
+
+    .role-box {
+        background: rgba(0,0,0,0.3);
+        border: 1px solid var(--runner-grey);
+        padding: 15px;
+        border-radius: 6px;
+    }
+
+    .role-box h4 {
+        margin: 0 0 8px 0;
+        color: var(--safety-yellow);
+        text-transform: uppercase;
         font-size: 14px;
-        color: #b3b3b3;
     }
-    .footer-text a {
-        color: #cc0000;
-        text-decoration: none;
-        font-weight: bold;
+
+    .role-box p {
+        margin: 4px 0;
+        font-size: 13px;
+        font-family: 'Courier New', Courier, monospace;
+        color: #ddd;
     }
-    .footer-text a:hover {
-        text-decoration: underline;
+
+    .role-box span { color: var(--text-sub); }
+
+    /* --- FORM STYLES --- */
+    .brand-title {
+        font-size: 32px;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 30px;
+        color: #ffffff;
+        letter-spacing: 1px;
+    }
+    .brand-title span { color: var(--plastic-red); }
+
+    .input-group { margin-bottom: 20px; }
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 13px;
+        color: var(--text-sub);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    input[type="text"], input[type="password"] {
+        width: 100%;
+        padding: 14px;
+        background-color: #2a2a2a;
+        border: 1px solid #333;
+        border-radius: 4px;
+        color: #ffffff;
+        box-sizing: border-box;
+        font-size: 15px;
+        outline: none;
+    }
+
+    input[type="text"]:focus, input[type="password"]:focus {
+        border-color: var(--plastic-red);
+    }
+
+    .primary-btn {
+        width: 100%;
+        padding: 15px;
+        background-color: var(--safety-yellow);
+        color: #000;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 900;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .primary-btn:hover { background-color: #e0c118; }
+
+    @media (max-width: 800px) {
+        .main-container { flex-direction: column; }
+        .demo-panel { width: 100%; box-sizing: border-box; order: 2; }
     }
 </style>
 </head>
 <body>
 
-<div class="auth-wrapper">
-    <div class="brand-title">Prime<span>Vault</span></div>
-    
-    <form id="loginForm">
-        <div class="input-group">
-            <label for="identifier">Email or Username</label>
-            <input type="text" id="identifier" required>
+<div class="main-container">
+    <div class="auth-wrapper">
+        <div class="brand-title">Prime<span>Vault</span></div>
+       
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="identifier">Email or Username</label>
+                <input type="text" id="identifier" required>
+            </div>
+           
+            <div class="input-group">
+                <label for="passkey">Password</label>
+                <input type="password" id="passkey" required>
+            </div>
+           
+            <button type="submit" class="primary-btn">Sign In</button>
+        </form>
+
+        <div class="separator"><span>Or Continue With</span></div>
+
+        <button class="social-btn google-btn" onclick="handleSocial('Google')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Logo">
+            Sign in with Google
+        </button>
+       
+        <button class="social-btn apple-btn" onclick="handleSocial('Apple')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo">
+            Sign in with Apple
+        </button>
+       
+        <div style="text-align: center; margin-top: 25px; font-size: 14px; color: var(--text-sub);">
+            Don't have an account? <a href="register.html" style="color: var(--plastic-red); text-decoration: none; font-weight: bold;">Create New Account</a>
         </div>
-        
-        <div class="input-group">
-            <label for="passkey">Password</label>
-            <input type="password" id="passkey" required>
+    </div>
+
+    <div class="demo-panel">
+        <div class="testing-badge">Testing Only</div>
+        <h2 class="demo-title">Demo Accounts</h2>
+        <p class="demo-subtitle">Temporary credentials for role testing</p>
+
+        <div class="role-box">
+            <h4>Superadmin Role</h4>
+            <p><span>Username:</span> superadmin</p>
+            <p><span>Password:</span> superadmin</p>
         </div>
-        
-        <div class="options-row">
-            <label class="checkbox-container">
-                <input type="checkbox" id="rememberBox"> Remember me
-            </label>
-            <a href="forgot-password.html" class="action-link">Forgot Password?</a>
+
+        <div class="role-box">
+            <h4>Admin Role</h4>
+            <p><span>Username:</span> admin</p>
+            <p><span>Password:</span> admin</p>
         </div>
-        
-        <button type="submit" class="primary-btn">Sign In</button>
-    </form>
-    
-    <div class="separator"><span>OR CONTINUE WITH</span></div>
-    
-    <button class="social-btn google-btn" onclick="handleSocial('Google')">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Logo">
-        Sign in with Google
-    </button>
-    
-    <button class="social-btn apple-btn" onclick="handleSocial('Apple')">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo">
-        Sign in with Apple
-    </button>
-    
-    <div class="footer-text">
-        Don't have an account? <a href="register.html">Create New Account</a>
+
+        <div class="role-box">
+            <h4>User Role</h4>
+            <p><span>Username:</span> user</p>
+            <p><span>Password:</span> user</p>
+        </div>
     </div>
 </div>
 
 <script>
-window.onload = function() {
-    let savedData = localStorage.getItem("primeVaultPilot");
-    if (savedData) {
-        document.getElementById("identifier").value = savedData;
-        document.getElementById("rememberBox").checked = true;
-    }
-};
-
 document.getElementById("loginForm").addEventListener("submit", function(event) {
     event.preventDefault();
-    
-    let userVal = document.getElementById("identifier").value.trim();
+   
+    let userVal = document.getElementById("identifier").value.trim().toLowerCase();
     let passVal = document.getElementById("passkey").value.trim();
-    
-    if (userVal === "" || passVal === "") {
-        alert("Authentication failed: Please provide both an email/username and a password.");
-        return;
+   
+    if (userVal === "superadmin" && passVal === "superadmin") {
+        alert("Superadmin access granted. Redirecting to Command Deck...");
+        window.location.href = "super-analytics.html";
+    } 
+    else if (userVal === "admin" && passVal === "admin") {
+        alert("Admin access granted. Redirecting to Hangar Ops...");
+        window.location.href = "admin-inventory.html";
+    } 
+    else if (userVal === "user" && passVal === "user") {
+        alert("Pilot access granted. Entering Vault...");
+        window.location.href = "index.html";
+    } 
+    else {
+        alert("Authentication successful. Welcome to PrimeVault.");
+        window.location.href = "index.html";
     }
-    
-    let rememberChecked = document.getElementById("rememberBox").checked;
-    
-    if (rememberChecked) {
-        localStorage.setItem("primeVaultPilot", userVal);
-    } else {
-        localStorage.removeItem("primeVaultPilot");
-    }
-    
-    window.location.href = "index.html";
 });
 
 function handleSocial(platform) {
     alert("Authenticating with " + platform + " secure servers...");
+    // In a real app, this would trigger the OAuth flow
     window.location.href = "index.html";
 }
 </script>
