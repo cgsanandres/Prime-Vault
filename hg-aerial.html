@@ -373,25 +373,30 @@
         
         <div class="gallery-container">
             <div class="thumbnails" id="thumbnail-container">
+			<div class="thumb-box active" onclick="setMainImage(0)">
+                    <img src="images/aerial6.jpeg" alt="Thumb 0">
+                </div>
+			
+			
                 <div class="thumb-box active" onclick="setMainImage(0)">
-                    <img src="images/.jpeg" alt="Thumb 1">
+                    <img src="images/aerial1.jpeg" alt="Thumb 1">
                 </div>
                 <div class="thumb-box" onclick="setMainImage(1)">
-                    <img src="images/.jpeg" alt="Thumb 2">
+                    <img src="images/aerial2.jpeg" alt="Thumb 2">
                 </div>
                 <div class="thumb-box" onclick="setMainImage(2)">
-                    <img src="images/.jpeg" alt="Thumb 3">
+                    <img src="images/aerial3.jpeg" alt="Thumb 3">
                 </div>
                 <div class="thumb-box" onclick="setMainImage(3)">
-                    <img src="images/.jpeg" alt="Thumb 4">
+                    <img src="images/aerial4.jpeg" alt="Thumb 4">
                 </div>
                 <div class="thumb-box" onclick="setMainImage(4)">
-                    <img src="images/.jpeg" alt="Thumb 5">
+                    <img src="images/aerial5.jpeg" alt="Thumb 5">
                 </div>
             </div>
 
             <div class="main-image-stage">
-                <img id="main-display-img" src="images/.jpeg" alt="Product Main Image">
+                <img id="main-display-img" src="images/aerial6.jpeg" alt="Product Main Image">
                 
                 <button class="nav-arrow left" onclick="prevImage()">&#10094;</button>
                 <button class="nav-arrow right" onclick="nextImage()">&#10095;</button>
@@ -522,11 +527,12 @@
 <script>
     // Array collecting all the images you insert into the thumb-boxes above
     const images = [
-        "images/.jpeg",
-        "images/.jpeg",
-        "images/.jpeg",
-        "images/.jpeg",
-        "images/.jpeg",
+		"images/aerial6.jpeg",
+        "images/aerial1.jpeg",
+        "images/aerial2.jpeg",
+        "images/aerial3.jpeg",
+        "images/aerial4.jpeg",
+        "images/aerial5.jpeg",
     ];
     
     let currentIndex = 0;
