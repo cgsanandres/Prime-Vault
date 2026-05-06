@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personnel Management | PrimeVault Super Admin</title>
+    <style>
+        :root {
+            --bg-color: #090a0c;
+            --sidebar-color: #121417;
+            --runner-grey: #464a4e;
+            --plastic-red: #cc0000;
+            --safety-yellow: #f9d71c;
+            --neon-blue: #00d4ff;
+            --text-main: #ffffff;
+            --text-sub: #88929e;
+            --panel-bg: #0d0f12;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-color);
+            border-right: 2px solid var(--neon-blue);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .clearance-badge {
+            position: absolute;
+            top: 0; right: 0;
+            background: var(--neon-blue);
+            color: #000;
+            font-size: 9px;
+            font-weight: 900;
+            padding: 2px 6px;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-logo {
+            font-size: 22px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+        .sidebar-logo span { color: var(--neon-blue); }
+
+        .nav-link {
+            padding: 15px 30px;
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-link.active {
+            background: rgba(0, 212, 255, 0.05);
+            color: var(--neon-blue);
+            border-left: 4px solid var(--neon-blue);
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .btn-primary {
+            background: var(--neon-blue);
+            border: none;
+            color: #000;
+            padding: 12px 25px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        /* --- ROSTER TABLE --- */
+        .roster-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--runner-grey);
+            padding: 0;
+            flex-grow: 1;
+        }
+
+        .panel-title {
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--neon-blue);
+            padding: 20px 25px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            text-align: left;
+            padding: 15px 25px;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            font-size: 11px;
+            background: rgba(255,255,255,0.02);
+            border-bottom: 1px solid #333;
+        }
+
+        td {
+            padding: 18px 25px;
+            border-bottom: 1px solid #1a1d21;
+        }
+
+        tr:hover { background: rgba(0, 212, 255, 0.02); }
+
+        .staff-id { font-family: monospace; color: var(--text-sub); }
+        .staff-name { font-weight: bold; color: var(--text-main); display: block; }
+        .staff-email { font-size: 11px; color: var(--text-sub); }
+
+        /* Clearance Tags */
+        .tag {
+            padding: 4px 8px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+        }
+        .tag-omega { color: var(--neon-blue); border-color: var(--neon-blue); background: rgba(0, 212, 255, 0.1); }
+        .tag-admin { color: var(--safety-yellow); border-color: var(--safety-yellow); background: rgba(249, 215, 28, 0.1); }
+        .tag-staff { color: #fff; border-color: var(--runner-grey); }
+
+        .status-dot {
+            height: 8px;
+            width: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .status-online { background-color: #00ff88; box-shadow: 0 0 8px #00ff88; }
+        .status-offline { background-color: var(--runner-grey); }
+
+        .action-link {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        .action-link:hover { color: var(--neon-blue); }
+        .link-danger:hover { color: var(--plastic-red); }
+
+        /* Search Filter */
+        .search-bar {
+            background: #000;
+            border: 1px solid var(--runner-grey);
+            color: white;
+            padding: 10px 15px;
+            width: 300px;
+            margin: 20px 25px;
+            font-size: 12px;
+            outline: none;
+        }
+        .search-bar:focus { border-color: var(--neon-blue); }
+
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="clearance-badge">LEVEL: OMEGA</div>
+        <div class="sidebar-logo">Prime<span>Vault</span></div>
+        <a href="super-analytics.html" class="nav-link">Global Analytics</a>
+        <a href="super-staff.html" class="nav-link active">Staff Management</a>
+        <a href="super-settings.html" class="nav-link">Platform Settings</a>
+        <a href="dashboard.html" class="nav-link" style="margin-top: auto; border-top: 1px solid #333; color: var(--text-sub);">Return to Admin Base</a>
+    </nav>
+
+    <main class="main-content">
+        <div class="header-flex">
+            <div>
+                <h1 style="text-transform: uppercase; letter-spacing: 2px; margin: 0 0 10px 0;">Personnel Roster</h1>
+                <p style="color: var(--neon-blue); font-family: monospace; font-size: 12px;">> MANIPULATING PERSONNEL_DATABASE.DB</p>
+            </div>
+            <button class="btn-primary" onclick="alert('Initializing recruitment protocol...')">Recruit New Operator</button>
+        </div>
+
+        <div class="roster-panel">
+            <div class="panel-title">Active Security Assets</div>
+            
+            <input type="text" class="search-bar" placeholder="Search by name, ID, or clearance...">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operator ID</th>
+                        <th>Personnel Details</th>
+                        <th>Clearance</th>
+                        <th>Last Uplink</th>
+                        <th>Status</th>
+                        <th style="text-align: right;">Directives</th>
+                    </tr>
+                </thead>
+                <tbody id="staff-table">
+                    <tr>
+                        <td class="staff-id">#PV-9901</td>
+                        <td>
+                            <span class="staff-name">JESTER</span>
+                            <span class="staff-email">j.jester@primevault.logistics</span>
+                        </td>
+                        <td><span class="tag tag-staff">Staff</span></td>
+                        <td>07-MAY-2026 07:12</td>
+                        <td><span class="status-dot status-online"></span>Online</td>
+                        <td style="text-align: right;">
+                            <span class="action-link">Configure</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="staff-id">#PV-0422</td>
+                        <td>
+                            <span class="staff-name">Kei</span>
+                            <span class="staff-email">kei.v@primevault.logistics</span>
+                        </td>
+                        <td><span class="tag tag-admin">Admin</span></td>
+                        <td>06-MAY-2026 14:30</td>
+                        <td><span class="status-dot status-online"></span>Online</td>
+                        <td style="text-align: right;">
+                            <span class="action-link">Configure</span>
+                            <span class="action-link link-danger">Revoke</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="staff-id">#PV-0885</td>
+                        <td>
+                            <span class="staff-name">BROGZ</span>
+                            <span class="staff-email">brogz.ops@primevault.logistics</span>
+                        </td>
+                        <td><span class="tag tag-staff">Staff</span></td>
+                        <td>05-MAY-2026 09:15</td>
+                        <td><span class="status-dot status-offline"></span>Offline</td>
+                        <td style="text-align: right;">
+                            <span class="action-link">Configure</span>
+                            <span class="action-link link-danger">Revoke</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</body>
+</html>

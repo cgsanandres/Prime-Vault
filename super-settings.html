@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Settings | PrimeVault Super Admin</title>
+    <style>
+        :root {
+            --bg-color: #090a0c;
+            --sidebar-color: #121417;
+            --runner-grey: #464a4e;
+            --plastic-red: #cc0000;
+            --safety-yellow: #f9d71c;
+            --neon-blue: #00d4ff;
+            --text-main: #ffffff;
+            --text-sub: #88929e;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* --- SIDEBAR (Consistent with Super Admin) --- */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-color);
+            border-right: 2px solid var(--neon-blue);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .clearance-badge {
+            position: absolute;
+            top: 0; right: 0;
+            background: var(--neon-blue);
+            color: #000;
+            font-size: 9px;
+            font-weight: 900;
+            padding: 2px 6px;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-logo {
+            font-size: 22px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+        .sidebar-logo span { color: var(--neon-blue); }
+
+        .nav-link {
+            padding: 15px 30px;
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-link.active {
+            background: rgba(0, 212, 255, 0.05);
+            color: var(--neon-blue);
+            border-left: 4px solid var(--neon-blue);
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .settings-panel {
+            background: #0d0f12;
+            border: 1px solid var(--runner-grey);
+            padding: 25px;
+        }
+
+        .panel-title {
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--neon-blue);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .panel-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: #333;
+        }
+
+        .setting-row {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        .desc {
+            display: block;
+            font-size: 10px;
+            color: var(--text-sub);
+            margin-top: 4px;
+        }
+
+        input[type="text"], input[type="number"], select {
+            background: #000;
+            border: 1px solid var(--runner-grey);
+            color: white;
+            padding: 8px;
+            font-family: monospace;
+            width: 150px;
+        }
+
+        /* Tactical Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #333;
+            transition: .4s;
+            border: 1px solid var(--runner-grey);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 12px; width: 12px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked + .slider { background-color: var(--neon-blue); }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        .save-bar {
+            position: sticky;
+            bottom: -40px;
+            background: #000;
+            margin: 40px -40px -40px -40px;
+            padding: 20px 40px;
+            border-top: 1px solid var(--neon-blue);
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .btn-ghost { background: transparent; border: 1px solid var(--runner-grey); color: var(--text-sub); padding: 10px 20px; cursor: pointer; text-transform: uppercase; font-size: 11px; }
+        .btn-primary { background: var(--neon-blue); border: none; color: #000; padding: 10px 30px; cursor: pointer; text-transform: uppercase; font-size: 11px; font-weight: 900; }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="clearance-badge">LEVEL: OMEGA</div>
+        <div class="sidebar-logo">Prime<span>Vault</span></div>
+        <a href="super-analytics.html" class="nav-link">Global Analytics</a>
+        <a href="super-staff.html" class="nav-link">Staff Management</a>
+        <a href="super-settings.html" class="nav-link active">Platform Settings</a>
+        <a href="dashboard.html" class="nav-link" style="margin-top: auto; border-top: 1px solid #333; color: var(--text-sub);">Return to Admin Base</a>
+    </nav>
+
+    <main class="main-content">
+        <h1 style="text-transform: uppercase; letter-spacing: 2px; margin: 0 0 10px 0;">System Configuration</h1>
+        <p style="color: var(--neon-blue); font-family: monospace; font-size: 12px; margin-bottom: 40px;">> ACCESSING CORE_LOGIC_PRESETS.JSON</p>
+
+        <div class="settings-grid">
+            
+            <div class="settings-panel">
+                <div class="panel-title">Global Protocols</div>
+                
+                <div class="setting-row">
+                    <div>
+                        <label>Maintenance Mode</label>
+                        <span class="desc">Redirect all traffic to "Under Construction" page.</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div>
+                        <label>Public Registration</label>
+                        <span class="desc">Allow new pilots to create accounts.</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div>
+                        <label>Global Discount Rate (%)</label>
+                        <span class="desc">Applied to all kits in the vault.</span>
+                    </div>
+                    <input type="number" value="0" min="0" max="100">
+                </div>
+            </div>
+
+            <div class="settings-panel">
+                <div class="panel-title">Logistics & Currency</div>
+                
+                <div class="setting-row">
+                    <div>
+                        <label>Default Currency</label>
+                        <span class="desc">Base currency for all transactions.</span>
+                    </div>
+                    <select>
+                        <option>PHP (₱)</option>
+                        <option>USD ($)</option>
+                        <option>JPY (¥)</option>
+                    </select>
+                </div>
+
+                <div class="setting-row">
+                    <div>
+                        <label>Base Shipping (NCR)</label>
+                        <span class="desc">Fixed rate for Metro Manila deliveries.</span>
+                    </div>
+                    <input type="text" value="₱150.00">
+                </div>
+
+                <div class="setting-row">
+                    <div>
+                        <label>Provincial Multiplier</label>
+                        <span class="desc">Added cost for Visayas/Mindanao sectors.</span>
+                    </div>
+                    <input type="text" value="1.5x">
+                </div>
+            </div>
+
+            <div class="settings-panel">
+                <div class="panel-title">Security & API</div>
+                
+                <div class="setting-row">
+                    <div>
+                        <label>Admin Session Timeout</label>
+                        <span class="desc">Minutes before auto-logout.</span>
+                    </div>
+                    <input type="number" value="60">
+                </div>
+
+                <div class="setting-row">
+                    <div>
+                        <label>Vault Encryption Node</label>
+                        <span class="desc">Secure server ID for data traffic.</span>
+                    </div>
+                    <input type="text" value="PH-MAIN-01" readonly style="color: #666; border-style: dashed;">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="save-bar">
+            <button class="btn-ghost" onclick="location.reload()">Discard Changes</button>
+            <button class="btn-primary" onclick="saveSettings()">Deploy Core Settings</button>
+        </div>
+    </main>
+
+    <script>
+        function saveSettings() {
+            alert("MAINFRAME UPDATE: Core settings have been successfully pushed to the PrimeVault database.");
+        }
+    </script>
+</body>
+</html>
