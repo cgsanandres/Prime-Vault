@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeVault | Hangar Command Contact</title>
+    <style>
+
+:root {
+    --bg-color: #0d0e10;
+    --runner-grey: #464a4e;
+    --plastic-red: #cc0000;
+    --safety-yellow: #f9d71c;
+    --gundam-blue: #0055aa;
+    --panel-dark: #16181b;
+    --panel-light: #1e2126;
+    --pure-white: #ffffff;
+    --text-main: #ffffff;
+    --text-dark: #222222;
+    --text-sub: #b0b0b0;
+    --ui-glow: rgba(0, 213, 255, 0.4);
+    --red-glow: rgba(204, 0, 0, 0.4);
+    --yellow-glow: rgba(249, 215, 28, 0.4);
+    --border-bevel: inset 2px 2px 0px rgba(255,255,255,0.1), inset -2px -2px 0px rgba(0,0,0,0.5);
+    --border-bevel-red: inset 2px 2px 0px rgba(255,100,100,0.1), inset -2px -2px 0px rgba(0,0,0,0.5);
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: 
+        linear-gradient(rgba(13, 14, 16, 0.92), rgba(13, 14, 16, 0.92)),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.02) 3px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 255, 255, 0.01) 3px);
+    color: var(--text-main);
+    font-family: 'Orbitron', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 60px 40px;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+    letter-spacing: 0.3px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.command-container {
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+}
+
+.command-container::before,
+.command-container::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    opacity: 0.6;
+}
+
+.command-container::before {
+    top: -15px;
+    left: -15px;
+    border-top: 2px solid var(--safety-yellow);
+    border-left: 2px solid var(--safety-yellow);
+}
+
+.command-container::after {
+    bottom: -15px;
+    right: -15px;
+    border-bottom: 2px solid var(--safety-yellow);
+    border-right: 2px solid var(--safety-yellow);
+}
+
+.tactical-header {
+    border-bottom: 3px solid var(--runner-grey);
+    padding-bottom: 25px;
+    margin-bottom: 50px;
+    position: relative;
+    background: var(--panel-dark);
+    padding: 25px 30px;
+    clip-path: polygon(2% 0, 100% 0, 98% 100%, 0% 100%);
+    box-shadow: var(--border-bevel);
+    background-image: radial-gradient(var(--runner-grey) 0.5px, transparent 0.5px);
+    background-size: 20px 20px;
+}
+
+.tactical-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--safety-yellow),
+        var(--safety-yellow) 10px,
+        #000 10px,
+        #000 20px
+    );
+    opacity: 0.4;
+}
+
+.tactical-header h1 {
+    margin: 0;
+    font-size: 2.8rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px var(--ui-glow);
+}
+
+.tactical-header h1 span {
+    color: var(--plastic-red);
+    text-shadow: 0 0 10px var(--red-glow);
+}
+
+.tactical-header p {
+    color: var(--text-sub);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+/* Desktop First Grid Setup */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+}
+
+.support-info, .form-container {
+    background-color: var(--panel-dark);
+    background-image: linear-gradient(145deg, var(--panel-dark), #1a1c20);
+    padding: 40px;
+    border: 2px solid var(--runner-grey);
+    box-shadow: var(--border-bevel), 0 8px 20px rgba(0,0,0,0.4);
+    clip-path: polygon(2% 0, 100% 0, 98% 100%, 0 100%);
+    position: relative;
+}
+
+.support-info::before,
+.form-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--gundam-blue),
+        var(--gundam-blue) 10px,
+        transparent 10px,
+        transparent 20px
+    );
+    opacity: 0.3;
+}
+
+.support-info h2 {
+    margin-top: 0;
+    color: var(--safety-yellow);
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    font-weight: 900;
+    border-bottom: 2px solid transparent;
+    border-left: 5px solid var(--plastic-red);
+    padding: 8px 12px;
+    text-shadow: 0 0 6px var(--yellow-glow);
+    background: rgba(255,255,255,0.02);
+    box-shadow: var(--border-bevel);
+}
+
+.support-info p {
+    line-height: 1.8;
+    color: var(--text-sub);
+    font-size: 0.95rem;
+}
+
+.support-info ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 25px;
+}
+
+.support-info li {
+    margin-bottom: 18px;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    position: relative;
+    padding-left: 18px;
+}
+
+.support-info li::before {
+    content: "▸";
+    color: var(--gundam-blue);
+    position: absolute;
+    left: 0;
+    transition: transform 0.2s ease;
+}
+
+.support-info li:hover::before {
+    transform: translateX(4px);
+}
+
+.support-info strong {
+    color: var(--safety-yellow);
+    display: inline-block;
+    width: 130px;
+    font-weight: 700;
+    text-shadow: 0 0 4px var(--yellow-glow);
+}
+
+.form-group {
+    margin-bottom: 28px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    background-color: #000;
+    border: 2px solid var(--runner-grey);
+    color: var(--pure-white);
+    padding: 14px 16px;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    box-shadow: var(--border-bevel);
+    clip-path: polygon(2% 0, 100% 0, 98% 100%, 0 100%);
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--gundam-blue);
+    box-shadow: 0 0 12px var(--ui-glow), var(--border-bevel);
+    background-color: #050505;
+}
+
+.form-group textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+/* Submit Button Style */
+button[type="submit"] {
+    background: var(--panel-dark);
+    border: 2px solid var(--plastic-red);
+    color: var(--pure-white);
+    padding: 12px 30px;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--border-bevel-red);
+    clip-path: polygon(2% 0, 100% 0, 98% 100%, 0 100%);
+    background-image: radial-gradient(var(--runner-grey) 0.5px, transparent 0.5px);
+    background-size: 20px 20px;
+}
+
+button[type="submit"]:hover {
+    background: #000;
+    border-color: var(--safety-yellow);
+    color: var(--safety-yellow);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(249, 215, 28, 0.2), var(--border-bevel-red);
+    text-shadow: 0 0 6px var(--yellow-glow);
+}
+
+.submit-btn {
+    background-color: transparent;
+    color: var(--safety-yellow);
+    border: 2px solid var(--safety-yellow);
+    padding: 14px 30px;
+    font-family: 'Orbitron', 'Segoe UI', Roboto, sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    width: 100%;
+    border-radius: 0;
+    box-shadow: var(--border-bevel);
+    clip-path: polygon(3% 0, 100% 0, 97% 100%, 0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn:hover {
+    background-color: var(--safety-yellow);
+    color: var(--bg-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(249, 215, 28, 0.25), var(--border-bevel);
+    text-shadow: none;
+}
+
+.submit-btn:disabled {
+    border-color: var(--runner-grey);
+    color: var(--text-sub);
+    cursor: not-allowed;
+    background-color: transparent;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.status-banner {
+    margin-top: 25px;
+    padding: 18px 22px;
+    border-left: 6px solid;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.9rem;
+    background: var(--panel-dark);
+    clip-path: polygon(2% 0, 100% 0, 98% 100%, 0 100%);
+    box-shadow: var(--border-bevel);
+    position: relative;
+}
+
+.status-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: repeating-linear-gradient(
+        90deg,
+        currentColor,
+        currentColor 10px,
+        transparent 10px,
+        transparent 20px
+    );
+    opacity: 0.2;
+}
+
+.status-banner.success {
+    border-color: #4caf50;
+    background-color: rgba(76, 175, 80, 0.08);
+    color: #81c784;
+    text-shadow: 0 0 4px rgba(76, 175, 80, 0.3);
+}
+
+.status-banner.error {
+    border-color: var(--plastic-red);
+    background-color: rgba(204, 0, 0, 0.08);
+    color: #ef5350;
+    text-shadow: 0 0 4px var(--red-glow);
+}
+
+.status-banner.info {
+    border-color: var(--gundam-blue);
+    background-color: rgba(0, 85, 170, 0.08);
+    color: #64b5f6;
+    text-shadow: 0 0 4px var(--ui-glow);
+}
+
+</style>
+</head>
+<body>
+    <main class="command-container">
+        <header class="tactical-header">
+            <h1>PRIME<span>VAULT</span></h1>
+            <p>Hangar Command & Dispatch Support</p>
+        </header>
+
+        <section class="contact-grid">
+            <aside class="support-info">
+                <h2>Direct Dispatch</h2>
+                <p>Require immediate assistance with your unit deployment or hangar inventory? Open a channel with our support operatives.</p>
+                <ul>
+                    <li><strong>Comms Channel:</strong> support@primevault.com</li>
+                    <li><strong>Direct Line:</strong> +1 (800) 555-MECH</li>
+                    <li><strong>HQ Coordinates:</strong> Sector 7G, Industrial District</li>
+                </ul>
+            </aside>
+
+            <div class="form-container">
+                <form id="contactForm" class="tactical-form">
+                    <div class="form-group">
+                        <label for="pilotName">Pilot Designation (Name)</label>
+                        <input type="text" id="pilotName" required placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="pilotEmail">Comms Link (Email)</label>
+                        <input type="email" id="pilotEmail" required placeholder="Enter your email address">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Dispatch Subject</label>
+                        <select id="subject" required>
+                            <option value="" disabled selected>Select transmission category...</option>
+                            <option value="order">Order Status / Deployment</option>
+                            <option value="inventory">Hangar Inventory Inquiry</option>
+                            <option value="returns">Unit Return / Defect</option>
+                            <option value="other">General Comms</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Transmission</label>
+                        <textarea id="message" rows="6" required placeholder="Detail your technical inquiry..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">Send Transmission</button>
+                </form>
+                
+                <div id="statusMessage" class="status-banner hidden"></div>
+            </div>
+        </section>
+    </main>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusBanner = document.getElementById('statusMessage');
+
+    contactForm.addEventListener('submit', function(e) {
+        // Prevent default page reload
+        e.preventDefault();
+
+        // Retrieve field values
+        const pilotName = document.getElementById('pilotName').value.trim();
+        const pilotEmail = document.getElementById('pilotEmail').value.trim();
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value.trim();
+
+        // Basic validation logic
+        if (pilotName && pilotEmail && subject && message) {
+            
+            // UI State: Transmitting
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Transmitting...';
+            submitBtn.disabled = true;
+            statusBanner.classList.add('hidden');
+
+            // Simulate server request delay
+            setTimeout(() => {
+                // Reset UI and clear form
+                contactForm.reset();
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+
+                // Deploy success banner
+                statusBanner.textContent = 'Transmission successful. Hangar command will respond shortly.';
+                statusBanner.classList.remove('hidden');
+                statusBanner.classList.add('success');
+                
+                // Retract success banner after 6 seconds
+                setTimeout(() => {
+                    statusBanner.classList.add('hidden');
+                    statusBanner.classList.remove('success');
+                }, 6000);
+
+            }, 1800); // 1.8 second simulated delay for industrial feel
+        }
+    });
+});
+
+
+</script>
+</body>
+</html>

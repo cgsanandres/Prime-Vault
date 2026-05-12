@@ -1,0 +1,565 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Arrivals | PrimeVault</title>
+    <style>
+        :root {
+    --bg-color: #0d0e10;
+    --runner-grey: #464a4e;
+    --plastic-red: #cc0000;
+    --safety-yellow: #f9d71c;
+    --gundam-blue: #0055aa;
+    --panel-dark: #16181b;
+    --pure-white: #ffffff;
+    --text-main: #ffffff;
+    --text-dark: #222222;
+    --text-sub: #b0b0b0;
+    --ui-glow: rgba(0, 213, 255, 0.4);
+    --border-bevel: inset 2px 2px 0px rgba(255,255,255,0.1), inset -2px -2px 0px rgba(0,0,0,0.5);
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: 
+        linear-gradient(rgba(13, 14, 16, 0.9), rgba(13, 14, 16, 0.9)),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.02) 3px);
+    color: var(--text-main);
+    font-family: 'Orbitron', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+header {
+    background: var(--panel-dark);
+    border-bottom: 5px solid var(--runner-grey);
+    border-left: 8px solid var(--gundam-blue);
+    border-right: 8px solid var(--plastic-red);
+    position: relative;
+    z-index: 1000;
+    background-image: radial-gradient(var(--runner-grey) 0.5px, transparent 0.5px);
+    background-size: 25px 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.top-bar::before,
+.top-bar::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+}
+
+.top-bar::before {
+    top: 5px;
+    left: 5px;
+    border-top: 2px solid var(--safety-yellow);
+    border-left: 2px solid var(--safety-yellow);
+}
+
+.top-bar::after {
+    bottom: 5px;
+    right: 5px;
+    border-bottom: 2px solid var(--safety-yellow);
+    border-right: 2px solid var(--safety-yellow);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-decoration: none;
+    color: var(--pure-white);
+    text-shadow: 0 0 10px var(--ui-glow);
+    transition: transform 0.3s ease;
+}
+
+.logo span {
+    color: var(--plastic-red);
+    background: var(--safety-yellow);
+    padding: 2px 8px;
+    transform: skewX(-15deg);
+    display: inline-block;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.search-container {
+    flex-grow: 1;
+    max-width: 650px;
+    margin: 0 40px;
+    position: relative;
+}
+
+.search-bar {
+    width: 100%;
+    background: #000;
+    border: 2px solid var(--runner-grey);
+    padding: 12px 15px;
+    color: var(--pure-white);
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    box-shadow: var(--border-bevel);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-bar:focus {
+    border-color: var(--gundam-blue);
+    box-shadow: 0 0 12px var(--ui-glow), var(--border-bevel);
+}
+
+.user-actions {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.icon-link {
+    color: var(--pure-white);
+    text-decoration: none;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    filter: drop-shadow(0 0 2px transparent);
+}
+
+.icon-link:hover {
+    color: var(--safety-yellow);
+    transform: scale(1.15) rotate(5deg);
+    filter: drop-shadow(0 0 6px var(--safety-yellow));
+}
+
+.nav-strip {
+    display: flex;
+    padding: 0 40px;
+    background: var(--panel-dark);
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.nav-item {
+    color: var(--pure-white);
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 15px 25px;
+    display: block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    position: relative;
+}
+
+.nav-item:hover {
+    color: var(--safety-yellow);
+    background: #000;
+    border-left: 3px solid var(--gundam-blue);
+    letter-spacing: 2px;
+}
+
+.has-dropdown {
+    position: static;
+}
+
+.mega-panel {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--panel-dark);
+    border-bottom: 5px solid var(--plastic-red);
+    border-top: 2px solid var(--runner-grey);
+    padding: 30px 40px;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.8), inset 0 2px 10px rgba(0,0,0,0.3);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    z-index: 2000;
+    background-image: linear-gradient(rgba(22, 24, 27, 0.96), rgba(22, 24, 27, 0.96)), repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(70, 74, 78, 0.02) 10px, rgba(70, 74, 78, 0.02) 20px);
+    clip-path: polygon(0 0, 100% 0, 98% 100%, 2% 100%);
+}
+
+.has-dropdown:hover .mega-panel {
+    display: grid;
+}
+
+.mega-col h3 {
+    color: var(--safety-yellow);
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 2px;
+    border-bottom: 2px solid var(--runner-grey);
+    padding-bottom: 8px;
+    text-shadow: 0 0 4px rgba(249, 215, 28, 0.2);
+}
+
+.mega-col a {
+    display: block;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    padding: 6px 8px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.mega-col a:hover {
+    color: var(--plastic-red);
+    padding-left: 12px;
+    background: rgba(204, 0, 0, 0.08);
+    border-left: 3px solid var(--plastic-red);
+    text-shadow: 0 0 4px rgba(204, 0, 0, 0.3);
+}
+	   .page-container {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 40px;
+    min-height: 50vh;
+    position: relative;
+}
+
+.page-container::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 40px;
+    height: 40px;
+    border-top: 2px solid var(--safety-yellow);
+    border-left: 2px solid var(--safety-yellow);
+    opacity: 0.6;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--pure-white);
+    text-shadow: 0 0 10px var(--ui-glow);
+    border-bottom: 3px solid var(--runner-grey);
+    border-left: 8px solid var(--plastic-red);
+    border-right: 8px solid var(--gundam-blue);
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    clip-path: polygon(3% 0, 100% 0, 97% 100%, 0 100%);
+}
+
+.banner-zone {
+    width: 100%;
+    background: var(--panel-dark);
+    border: 3px solid var(--runner-grey);
+    border-left: 5px solid var(--gundam-blue);
+    border-right: 5px solid var(--plastic-red);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+    margin-bottom: 60px;
+    transition: all 0.3s ease;
+    background-image: radial-gradient(var(--runner-grey) 0.5px, transparent 0.5px);
+    background-size: 30px 30px;
+    box-shadow: var(--border-bevel);
+    clip-path: polygon(2% 0, 100% 0, 98% 100%, 0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-zone::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 45%, rgba(249, 215, 28, 0.03) 45%, rgba(249, 215, 28, 0.03) 55%, transparent 55%);
+    pointer-events: none;
+}
+
+.banner-zone:hover {
+    border-color: var(--safety-yellow);
+    background: #1a1c1f;
+    transform: translateY(-4px);
+    box-shadow: 0 0 20px rgba(0, 85, 170, 0.3), var(--border-bevel);
+}
+
+.banner-zone h2 {
+    color: var(--safety-yellow);
+    font-size: 28px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 900;
+    text-shadow: 0 0 8px rgba(249, 215, 28, 0.3);
+}
+
+.banner-zone p {
+    color: var(--text-sub);
+    font-size: 16px;
+    max-width: 600px;
+    text-align: center;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+}
+
+.banner-zone img.inserted-banner {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid var(--runner-grey);
+    display: block;
+    box-shadow: var(--border-bevel);
+    transition: all 0.3s ease;
+    filter: grayscale(20%) contrast(110%);
+}
+
+.banner-zone img.inserted-banner:hover {
+    border-color: var(--gundam-blue);
+    filter: grayscale(0%) contrast(100%);
+    box-shadow: 0 0 15px var(--ui-glow), var(--border-bevel);
+}
+
+footer {
+    background-color: var(--panel-dark);
+    border-top: 10px solid var(--runner-grey);
+    background-image: 
+        linear-gradient(rgba(22, 24, 27, 0.97), rgba(22, 24, 27, 0.97)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 50px);
+    padding: 80px 40px;
+    margin-top: auto;
+    position: relative;
+}
+
+footer::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 10%;
+    width: 80%;
+    height: 4px;
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--safety-yellow),
+        var(--safety-yellow) 10px,
+        #000 10px,
+        #000 20px
+    );
+}
+
+.footer-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    gap: 60px;
+}
+
+.footer-col h3 {
+    color: var(--safety-yellow);
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-shadow: 0 0 6px rgba(249, 215, 28, 0.2);
+}
+
+.footer-col h4 {
+    font-size: 15px;
+    margin-bottom: 25px;
+    border-left: 6px solid var(--plastic-red);
+    padding-left: 12px;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    background: rgba(255,255,255,0.03);
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.footer-col p,
+.footer-col li {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-sub);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.footer-col a {
+    color: var(--text-sub);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 0;
+}
+
+.footer-col a:hover {
+    color: var(--safety-yellow);
+    padding-left: 8px;
+    text-shadow: 0 0 4px var(--ui-glow);
+}
+
+.warning-box {
+    border: 2px solid var(--pure-white);
+    padding: 25px;
+    background-color: #000;
+    margin-bottom: 20px;
+    box-shadow: var(--border-bevel);
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 95% 100%, 0 100%);
+    position: relative;
+}
+
+.warning-box::after {
+    content: "UC-0079";
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    background: var(--plastic-red);
+    color: var(--pure-white);
+    font-size: 9px;
+    padding: 2px 6px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.warning-title {
+    color: var(--plastic-red);
+    font-size: 18px;
+    font-weight: 900;
+    text-align: center;
+    margin: 0 0 12px 0;
+    letter-spacing: 2px;
+    text-shadow: 0 0 6px rgba(204, 0, 0, 0.3);
+}
+
+.warning-text {
+    font-size: 11px;
+    line-height: 1.5;
+    text-align: justify;
+    margin: 0;
+    text-transform: uppercase;
+    color: #888;
+    letter-spacing: 0.5px;
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="top-bar">
+        <a href="index.html" class="logo">Prime<span>Vault</span></a>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="What are you looking for?">
+        </div>
+        <div class="user-actions">
+            <a href="account.html" class="icon-link">👤<a>
+            <a href="cart.html" class="icon-link">🛒</a>
+        </div>
+    </div>
+    
+    <div class="nav-strip">
+        <a href="pre-order.html" class="nav-item">Pre-Orders</a>
+        <a href="new-arrivals.html" class="nav-item" style="color: var(--safety-yellow); border-bottom: 3px solid var(--safety-yellow);">New Arrivals</a>
+        <a href="sale-items.html" class="nav-item">On Sale</a>
+		
+        
+        
+</header>
+
+<main class="page-container">
+    
+    <h1 class="page-title">Incoming Dispatch</h1>
+
+    <div class="banner-zone">
+        <h2>[ Estimated Arrival Dates ]</h2>
+        <p></p>
+        
+        </div>
+
+</main>
+
+<footer>
+    <div class="footer-grid">
+        <div style="display: flex; flex-direction: column;">
+            <h3 style="color: var(--safety-yellow); font-size: 20px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; font-weight: 900;">PrimeVault Logistics</h3>
+            <p style="font-size: 13px; line-height: 1.8; color: var(--text-sub); margin-bottom: 20px;">
+                Your tactical hangar for the finest precision-engineered plastic models. We distribute authentic Japanese and international hobby kits globally.
+            </p>
+            <p style="font-size: 12px; font-weight: bold; color: var(--pure-white); text-transform: uppercase; letter-spacing: 1px;">
+                OPERATIONAL STATUS: <span style="color: #00ff00;">READY</span>
+            </p>
+        </div>
+
+        <div>
+            <h4 style="font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid var(--plastic-red); padding-left: 12px; font-weight: 700;">Support Hangar</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 2;">
+                <li><a href="shipping.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Shipping Protocols</a></li>
+                <li><a href="returns.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Returns & Exchanges</a></li>
+                
+            </ul>
+        </div>
+
+        <div>
+            <h4 style="font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid var(--plastic-red); padding-left: 12px; font-weight: 700;">Quick Access</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 2;">
+                <li><a href="about.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">About PrimeVault</a></li>
+               
+                <li><a href="contact.html" style="color: var(--text-sub); text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b0b0b0'">Contact Dispatch</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <div class="warning-box">
+                <h4 class="warning-title">⚠ WARNING</h4>
+                <p class="warning-text">
+                    CHOKING HAZARD: SMALL PARTS. FUNCTIONAL SHARP POINTS. THIS PRODUCT IS NOT A TOY. DESIGNED FOR ADULT HOBBYISTS. NOT FOR CHILDREN UNDER 15 YEARS. HANDLE WITH EXTREME CAUTION.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright-bar">
+        <div style="max-width: 70%;">
+            © 2026 PrimeVault Philippines. Model photography is for illustrative purposes only. All brands are property of their respective owners.
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
